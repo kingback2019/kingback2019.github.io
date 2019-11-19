@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>超详细的gnuplot使用教程【2】 | 王延凯的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@TOC 1.gnuplot参数介绍及演示1.1首先来解释一下会用到的各类参数以及其解释   命令 缩写 意义    With w with后边跟需要指定的样式   Line l 用线l显示   Point p 用点显示   LinePoints lp 用线和点画，对数据绘图时有用   LineType lt 线的样式（0代表虚线，1-7代表实线,颜色分别为紫、蓝、绿、橙、黄、靛、红。超过7以后颜">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超详细的gnuplot使用教程【2】">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84gnuplot%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%902%E3%80%91&#x2F;index.html">
+<meta property="og:site_name" content="王延凯的博客">
+<meta property="og:description" content="@TOC 1.gnuplot参数介绍及演示1.1首先来解释一下会用到的各类参数以及其解释   命令 缩写 意义    With w with后边跟需要指定的样式   Line l 用线l显示   Point p 用点显示   LinePoints lp 用线和点画，对数据绘图时有用   LineType lt 线的样式（0代表虚线，1-7代表实线,颜色分别为紫、蓝、绿、橙、黄、靛、红。超过7以后颜">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920160153918.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920161057593.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920161010753.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920160735752.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920160839952.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920161257971.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920162128303.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920162321667.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920162840218.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019092016304359.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920164811487.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920170828421.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920194230103.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920203757755.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920171358263.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920171518832.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920195359322.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_60#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920200240285.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920200806563.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920201216642.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920201549513.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920202433729.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920204413633.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920204545846.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920212747179.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920220255315.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920220659444.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920220837819.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920221004407.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920221127740.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920221253818.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190921162344681.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190921163220948.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190921165002556.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190921170213773.gif#pic_center">
+<meta property="og:updated_time" content="2019-11-19T01:04:59.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920160153918.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+  
+    <link rel="alternate" href="/atom.xml" title="王延凯的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">王延凯的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-超详细的gnuplot使用教程【2】" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/19/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84gnuplot%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%902%E3%80%91/" class="article-date">
+  <time datetime="2019-11-19T01:04:52.332Z" itemprop="datePublished">2019-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      超详细的gnuplot使用教程【2】
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="超详细的gnuplot使用教程">TOC</a></p>
+<h1 id="1-gnuplot参数介绍及演示"><a href="#1-gnuplot参数介绍及演示" class="headerlink" title="1.gnuplot参数介绍及演示"></a>1.gnuplot参数介绍及演示</h1><h2 id="1-1首先来解释一下会用到的各类参数以及其解释"><a href="#1-1首先来解释一下会用到的各类参数以及其解释" class="headerlink" title="1.1首先来解释一下会用到的各类参数以及其解释"></a>1.1首先来解释一下会用到的各类参数以及其解释</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>缩写</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>With</td>
+<td>w</td>
+<td>with后边跟需要指定的样式</td>
+</tr>
+<tr>
+<td>Line</td>
+<td>l</td>
+<td>用线l显示</td>
+</tr>
+<tr>
+<td>Point</td>
+<td>p</td>
+<td>用点显示</td>
+</tr>
+<tr>
+<td>LinePoints</td>
+<td>lp</td>
+<td>用线和点画，对数据绘图时有用</td>
+</tr>
+<tr>
+<td>LineType</td>
+<td>lt</td>
+<td>线的样式（0代表虚线，1-7代表实线,颜色分别为紫、蓝、绿、橙、黄、靛、红。超过7以后颜色依次循环）</td>
+</tr>
+<tr>
+<td>LineWidth</td>
+<td>lw</td>
+<td>线的宽度（level从0开始，默认为1）</td>
+</tr>
+<tr>
+<td>PointType</td>
+<td>pt</td>
+<td>点的样式（level从0开始，默认为1）</td>
+</tr>
+<tr>
+<td>PointSize</td>
+<td>ps</td>
+<td>点的宽度（level从0开始，默认为1）</td>
+</tr>
+<tr>
+<td>## 1.2 画图实际测试</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>为了显示出不同的差别，此处我谨以sinx函数或者cos函数来进行显示：</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//当没有设置其格式时，调用默认的设置</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920160153918.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w p</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用点画</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920161057593.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w l</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用线画</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920161010753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w lp</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用点和线画</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190920160735752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w lp lt 0</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用点和线画，线的种类为0</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190920160839952.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w l lt 1</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用线画，线的种类为1</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190920161257971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w l lt 7</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用线画，线的种类为7</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190920162128303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w l lt 1 lw 4</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用线画，线的种类为1，线的宽度为4</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190920162321667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w p pt 4</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用点画，点的种类为4</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190920162840218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w p pt 4 ps 2</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用点画。点的种类为4，点的大小为2</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/2019092016304359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="1-3-其它参数介绍（约定范围、坐标轴设定）"><a href="#1-3-其它参数介绍（约定范围、坐标轴设定）" class="headerlink" title="1.3 其它参数介绍（约定范围、坐标轴设定）"></a>1.3 其它参数介绍（约定范围、坐标轴设定）</h2><h3 id="1-3-1-约束画图范围"><a href="#1-3-1-约束画图范围" class="headerlink" title="1.3.1 约束画图范围"></a>1.3.1 约束画图范围</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot [<span class="number">-5</span>:<span class="number">5</span>] [<span class="number">-1.2</span>:<span class="number">1.2</span>] <span class="built_in">sin</span>(x)</span><br><span class="line"><span class="comment">//表示x取值范围为[-5,5],y的取值范围为[-1.2,1.2]</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190920164811487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="1-3-2-关于坐标轴的设定"><a href="#1-3-2-关于坐标轴的设定" class="headerlink" title="1.3.2 关于坐标轴的设定"></a>1.3.2 关于坐标轴的设定</h3><p>在对于坐标轴的设定，要注意的一点就是，在画图之前执行命令。<br>命令     | 含义<br>———— | ———-<br>set xlabel ‘x’ |x轴标为‘x’<br>set ylabel ‘y’ | y轴标为’y’<br>set ylabel ‘DOS’ tc lt 3 | ‘DOS’的颜色用第三种颜色<br>set xtics 1.0|x轴的主刻度的宽度为1.0，同样可以为y轴定义ytics<br>set mxtics 3|x轴上每个主刻度中画3个分刻度，同样可以为y轴定义mytics<br>set border 3|设为第三种边界，同样可以为上边的x轴（称为x2）和右边y（称为y2）轴进行设置，即x2tics，mx2tics，y2tics，my2tics。<br>set xtics nomirror|去掉上边x的刻度，同样可以为ytics设置<br>unset x2tics|去掉上边x的标度，同样可以为y2tics设置<br>下面我们就来验证一下上边的图吧。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; set title 'kmust team'</span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> xlabel <span class="string">'x'</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> ylabel <span class="string">'y'</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> xtics <span class="number">1.0</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> mxtics <span class="number">3</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> border <span class="number">3</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line">gnuplot&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190920170828421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="1-3-3-图例"><a href="#1-3-3-图例" class="headerlink" title="1.3.3 图例"></a>1.3.3 图例</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set key left</td>
+<td>放在左边，有left 和right两个选项</td>
+</tr>
+<tr>
+<td>set key bottom</td>
+<td>放在下边，只有这一个选项；默认在上边</td>
+</tr>
+<tr>
+<td>set key outside</td>
+<td>放在外边，但只能在右面的外边</td>
+</tr>
+<tr>
+<td>set key left bottom</td>
+<td>表示放在左下边</td>
+</tr>
+<tr>
+<td>代码示例：</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> key right bottom</span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> title <span class="string">"kmust"</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//将图例放在右下角</span></span></span><br><span class="line"><span class="function"><span class="comment">//设置标题为“kmust”</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920194230103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>### 1.3.4 在图中任意位置插入文字</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; set label 'I Love Kmust!' at 2.5,0.5</span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//在坐标（2.5，0.5）处插入文字</span></span></span><br><span class="line"><span class="function"><span class="comment">//如果想要删除文字就使用 unset label 1(此处数字代表要删除label的序号)</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920203757755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>## 1.4 同时画出多条曲线</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot sin(x),cos(x)</span><br><span class="line"><span class="comment">//注意连个函数之间要使用逗号分隔开</span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920171358263.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>当然两个函数之间也可以单独约束</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot sin(x) title 'sin(x)' w l lt 0 lw 2, cos(x) title 'cos(x)' w l lt 2 lw 2</span><br><span class="line"><span class="comment">//注意连个函数之间要使用逗号分隔开，每个函数的绘画要求紧跟着对应的函数</span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920171518832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>## 1.5 x轴时间设置</td>
+<td></td>
+</tr>
+<tr>
+<td>命令</td>
+<td>含义</td>
+</tr>
+<tr>
+<td>——–</td>
+<td>—–</td>
+</tr>
+<tr>
+<td>set xdata time</td>
+<td>X轴设置为时间格式</td>
+</tr>
+<tr>
+<td>set timefmt “%Y-%m-%d”</td>
+<td>文件中时间格式</td>
+</tr>
+<tr>
+<td>set format x “%m/%d”</td>
+<td>目标时间格式~</td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> xdata time</span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> timefmt <span class="string">"%Y-%m-%d"</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//设置x轴为时间格式，并且其显示形式为年-月-日</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920195359322.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_60#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>## 1.6 在图中添加直线和箭头</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> arrow from <span class="number">0.0</span>,<span class="number">0.0</span> to <span class="number">2.0</span>,<span class="number">0.0</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//在图的中心点（0，0）向（2，0）画一条射线</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920200240285.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> arrow from <span class="number">0.0</span>,<span class="number">0.0</span> to <span class="number">0.0</span>,<span class="number">-0.4</span> nohead</span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//只画一条直线的话，在画箭头的语句上方添加nohead标签</span></span></span><br><span class="line"><span class="function"><span class="comment">//从中心点（0，0）到（0，-0.4）画一条直线</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920200806563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>除此之外我们还可以进行颜色调制</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> arrow from <span class="number">0.0</span>,<span class="number">0.0</span> to <span class="number">-2.0</span>,<span class="number">0.4</span> lt <span class="number">2</span> lw <span class="number">2</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//从中心点（0，0）到（-2.0，0.4）画一条绿色射线，线条粗细等级为2</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920201216642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>如果我们不小心画错了一个图形，我们又该如何删除呢，很简单，一句话就搞定了。</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; unset arrow <span class="number">3</span></span><br><span class="line">gnuplot&gt; unset arrow <span class="number">2</span></span><br><span class="line">gnuplot&gt; unset arrow <span class="number">1</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//如果我们发现第几个值线画错了，就可以使用语句unset删除对应的直线即可</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920201549513.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>## 1.7 读取dat、txt文件进行画图</td>
+<td></td>
+</tr>
+<tr>
+<td>在用c语言进行程序设计的时候，有时就需要画图任务，这时gnuplot可以读取dat、txt文件内的内容，并再进行绘画。</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> arrow from <span class="number">-16.0</span>,<span class="number">0.0</span> to <span class="number">16.0</span>,<span class="number">0.0</span> nohead</span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> arrow from <span class="number">-0.3</span>,<span class="number">0.0</span> to <span class="number">1.0</span>,<span class="number">0.0</span></span><br><span class="line">gnuplot&gt; plot [<span class="number">-16</span>:<span class="number">16</span>] [<span class="number">-0.3</span>:<span class="number">1</span>] <span class="string">"sinc.bat"</span>  u <span class="number">1</span>:<span class="number">2</span> w l lt <span class="number">1</span> lw <span class="number">1</span></span><br><span class="line"><span class="comment">//从（-16，0）到（16，0）画一条直线</span></span><br><span class="line"><span class="comment">//从（-0.3，0）到（1.0，0）画一条带箭头射线</span></span><br><span class="line"><span class="comment">//读取“sinc.bat”文件内的数据，并用其内的第一列和第二列作图，，并且设置线条颜色和粗细。</span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920202433729.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>## 1.8 设定图的大小和位置</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//长宽均为默认宽度的一半，建议用这个取值，尤其是画成ps或eps图形的时候</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920204413633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> origin <span class="number">0.0</span>,<span class="number">0.5</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//设定图的最左下角的那一点在图形面板中的位置。这里图将出现在左上角。</span></span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920204545846.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>## 1.9 画多个图</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> multiplot</span><br><span class="line"><span class="comment">//设置为多图模式</span></span><br><span class="line">multiplot&gt; <span class="built_in">set</span> origin <span class="number">0.0</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置第一个图的原点的位置</span></span><br><span class="line">multiplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置第一个图的大小，长和宽均为整个图的一半</span></span><br><span class="line">multiplot&gt; <span class="function">plot <span class="title">tan</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//开始绘制第一个图</span></span></span><br><span class="line">multiplot&gt; set origin 0.5,0.5</span><br><span class="line"><span class="comment">//设置第2个图的原点的位置</span></span><br><span class="line">multiplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置第2个图的大小，长和宽均为整个图的一半</span></span><br><span class="line">multiplot&gt; <span class="function">plot  <span class="title">cos</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//开始绘制第2个图</span></span></span><br><span class="line">multiplot&gt; set origin 0.0,0.0</span><br><span class="line"><span class="comment">//设置第3个图的原点的位置</span></span><br><span class="line">multiplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置第3个图的大小，长和宽均为整个图的一半</span></span><br><span class="line">multiplot&gt; <span class="function">plot  <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//开始绘制第3个图</span></span></span><br><span class="line">multiplot&gt; set origin 0.5,0.0</span><br><span class="line"><span class="comment">//设置第4个图的原点的位置</span></span><br><span class="line">multiplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置第4个图的大小，长和宽均为整个图的一半</span></span><br><span class="line">multiplot&gt; plot <span class="number">1</span>/x</span><br><span class="line"><span class="comment">//开始绘制第4个图</span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td>绘制完成之后就会出现这个四合一的图，当然我们还可以 为每个图设置自己的特有属性，比如颜色、标题等。</td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920212747179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td># 2.gnuplot进阶</td>
+<td></td>
+</tr>
+<tr>
+<td>## 2.1 使两坐标轴的单位长度等长</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt;  <span class="built_in">set</span> <span class="built_in">size</span> square</span><br><span class="line"><span class="comment">//设置形状为方形</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置图形的大小各为一半</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> xrange[<span class="number">-10</span>:<span class="number">10</span>]</span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> yrange[<span class="number">-10</span>:<span class="number">10</span>]</span><br><span class="line"><span class="comment">//设置x,y的范围相同</span></span><br><span class="line">gnuplot&gt; plot x+<span class="number">2</span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920220255315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>## 2.2 在同一张图里利用左右两边的y轴分别画图</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> xtics nomirror</span><br><span class="line"><span class="comment">//去掉上边坐标轴x2的刻度</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> ytics nomirror</span><br><span class="line"><span class="comment">//去掉上边坐标轴y2的刻度</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> x2tics</span><br><span class="line"><span class="comment">//让上面坐标轴x2刻度自动产生</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> y2tics</span><br><span class="line"><span class="comment">//让上面坐标轴y2刻度自动产生</span></span><br><span class="line">gnuplot&gt; plot sin(x),cos(x) axes x1y2</span><br><span class="line"><span class="comment">//用x1y2坐标，axes x1y2表示用x1y2坐标轴</span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920220659444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; plot sin(x),cos(x) axes x2y2</span><br><span class="line"><span class="comment">//用x2y2坐标，axes x2y2表示用x2y2坐标轴</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> x2range[<span class="number">-20</span>:<span class="number">20</span>]</span><br><span class="line"><span class="comment">//设定x2坐标的范围</span></span><br><span class="line">gnuplot&gt; report</span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920220837819.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> xrange[<span class="number">-5</span>:<span class="number">5</span>]</span><br><span class="line"><span class="comment">//设定x的范围</span></span><br><span class="line">gnuplot&gt; replot</span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920221004407.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> xlabel <span class="string">'x'</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> x2label <span class="string">'t'</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> ylabel <span class="string">'y'</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> y2label <span class="string">'s'</span></span><br><span class="line"><span class="comment">//为图形的上下左右分别起标</span></span><br><span class="line">gnuplot&gt; replot</span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920221127740.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; set title 'The figure'</span><br><span class="line"><span class="comment">//设置标题</span></span><br><span class="line">gnuplot&gt; replot</span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190920221253818.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>## 2.3画漂亮的pm3D图</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> pm3d</span><br><span class="line"><span class="comment">//设置pm3d模式</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> isosamples <span class="number">50</span>,<span class="number">50</span></span><br><span class="line"><span class="comment">//设置网格点为50x50</span></span><br><span class="line">gnuplot&gt; splot x**<span class="number">2</span>+y**<span class="number">2</span></span><br><span class="line"><span class="comment">//画三维图像</span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190921162344681.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+<tr>
+<td>## 2.4 画等高线</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> dgrid3d <span class="number">100</span>,<span class="number">100</span></span><br><span class="line"><span class="comment">//设置三维表面的网格书目</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> contour</span><br><span class="line"><span class="comment">//设置画等高线</span></span><br><span class="line">gnuplot&gt; splot x**<span class="number">2</span>+y**<span class="number">2</span></span><br><span class="line"><span class="comment">//画图像</span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td><img src="https://img-blog.csdnimg.cn/20190921163220948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="2-5-利用脚本文件避免重复输入"><a href="#2-5-利用脚本文件避免重复输入" class="headerlink" title="2.5 利用脚本文件避免重复输入"></a>2.5 利用脚本文件避免重复输入</h2><p>我在文件夹下创建了一个 try.plt文件，其内容如下所示</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">reset</span><br><span class="line"><span class="comment">//重置画图属性</span></span><br><span class="line"><span class="built_in">set</span> pm3d</span><br><span class="line"><span class="comment">//设置为pm3d模式</span></span><br><span class="line">unset ztics</span><br><span class="line"><span class="comment">//取消z轴标题</span></span><br><span class="line"><span class="built_in">set</span> isosamples <span class="number">200</span>,<span class="number">200</span></span><br><span class="line"><span class="comment">//设置网格属性为200x200</span></span><br><span class="line">splot x**<span class="number">2</span>+y**<span class="number">2</span> w pm3d</span><br><span class="line"><span class="comment">//开始画图并且设置为pm3d模式</span></span><br></pre></td></tr></table></figure>
+<p>然后只需在gnuplot命令界面输入</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">load 'try.plt'</span><br><span class="line"><span class="comment">//加载plt文件，执行画图任务</span></span><br></pre></td></tr></table></figure>
+<p>其结果如下所示：<br><img src="https://img-blog.csdnimg.cn/20190921165002556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="2-6-gnuplot画GIF动图"><a href="#2-6-gnuplot画GIF动图" class="headerlink" title="2.6 gnuplot画GIF动图"></a>2.6 gnuplot画GIF动图</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> term gif animate</span><br><span class="line"><span class="comment">//设置可以画动画</span></span><br><span class="line"><span class="built_in">set</span> output <span class="string">"e1.gif"</span></span><br><span class="line"><span class="comment">//设置输出的文件路径</span></span><br><span class="line"><span class="built_in">set</span> xrange [<span class="number">0</span>:<span class="number">4</span>*pi]</span><br><span class="line"><span class="built_in">set</span> yrange [<span class="number">-1</span>:<span class="number">1</span>]</span><br><span class="line"><span class="comment">//设置x,y范围</span></span><br><span class="line"><span class="keyword">do</span> <span class="keyword">for</span> [i=<span class="number">0</span>:<span class="number">40</span>]&#123;</span><br><span class="line">  plot <span class="built_in">sin</span>(x+i*pi/<span class="number">40</span>) lw <span class="number">1.5</span> title <span class="built_in">sprintf</span>(<span class="string">"t=%i"</span>,i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//循环输出图像</span></span><br><span class="line"><span class="built_in">set</span> output</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20190921170213773.gif#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="3-参考文章"><a href="#3-参考文章" class="headerlink" title="3.参考文章"></a>3.参考文章</h1><blockquote>
+<p>gnuplot使用: <a href="https://www.cnblogs.com/waterystone/p/5085801.html" target="_blank" rel="noopener">https://www.cnblogs.com/waterystone/p/5085801.html</a><br>gnuplot生成gif动图：<a href="https://blog.csdn.net/weixin_34187862/article/details/85648365" target="_blank" rel="noopener">https://blog.csdn.net/weixin_34187862/article/details/85648365</a><br>gnuplot三维绘图;<a href="https://blog.csdn.net/ouening/article/details/72141345" target="_blank" rel="noopener">https://blog.csdn.net/ouening/article/details/72141345</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/19/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84gnuplot%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%902%E3%80%91/" data-id="ck355v6xi000b60o67hb207r1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/19/window%E4%B8%8Agnuplot%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E3%80%901%E3%80%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          window上gnuplot的安装和使用【1】
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/19/matlab%E5%92%8Cc%E8%AF%AD%E8%A8%80%E5%9C%A8%E4%B8%8D%E8%B0%83%E7%94%A8%E5%8C%85%EF%BC%88%E5%BA%93%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%AE%9E%E7%8E%B0%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">matlab和c语言在不调用包（库）的情况下实现时域卷积</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/19/window%E4%B8%8Agnuplot%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E3%80%901%E3%80%91/">window上gnuplot的安装和使用【1】</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84gnuplot%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%902%E3%80%91/">超详细的gnuplot使用教程【2】</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/matlab%E5%92%8Cc%E8%AF%AD%E8%A8%80%E5%9C%A8%E4%B8%8D%E8%B0%83%E7%94%A8%E5%8C%85%EF%BC%88%E5%BA%93%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%AE%9E%E7%8E%B0%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF/">matlab和c语言在不调用包（库）的情况下实现时域卷积</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%901%E3%80%91%E5%BC%B9/">数字信号处理matlab训练第【1】弹</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%902%E3%80%91%E5%BC%B9--%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%88DTFT%EF%BC%89/">数字信号处理matlab训练第【2】弹--离散时间序列的傅里叶变换（DTFT）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 王延凯的博客<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

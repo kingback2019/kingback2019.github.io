@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>window上gnuplot的安装和使用【1】 | 王延凯的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="@toc 1.gnuplot的原理及用途$\qquad$它是一个小巧实用的数据处理工具，主要用来绘制2D&#x2F;3D的数据或者函数图像，但是也包含数学计算、拟合等功能。虽然它的名字里边有个“gnu”,但是它和大名鼎鼎的GNU没有什么关系，使用的授权协议也不是GNU GPL,所以这里的“gnu”是小写，全名应该读作“new plot”。所有主流的Linux版本都包含gnuplot,因此在Linux上安装很">
+<meta property="og:type" content="article">
+<meta property="og:title" content="window上gnuplot的安装和使用【1】">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;window%E4%B8%8Agnuplot%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E3%80%901%E3%80%91&#x2F;index.html">
+<meta property="og:site_name" content="王延凯的博客">
+<meta property="og:description" content="@toc 1.gnuplot的原理及用途$\qquad$它是一个小巧实用的数据处理工具，主要用来绘制2D&#x2F;3D的数据或者函数图像，但是也包含数学计算、拟合等功能。虽然它的名字里边有个“gnu”,但是它和大名鼎鼎的GNU没有什么关系，使用的授权协议也不是GNU GPL,所以这里的“gnu”是小写，全名应该读作“new plot”。所有主流的Linux版本都包含gnuplot,因此在Linux上安装很">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920151746978.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920151852296.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920151914519.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152029658.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152115895.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152140951.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152336186.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152428672.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152543860.gif">
+<meta property="og:updated_time" content="2019-11-19T01:05:14.002Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920151746978.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+  
+    <link rel="alternate" href="/atom.xml" title="王延凯的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">王延凯的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-window上gnuplot的安装和使用【1】" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/19/window%E4%B8%8Agnuplot%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E3%80%901%E3%80%91/" class="article-date">
+  <time datetime="2019-11-19T01:05:10.930Z" itemprop="datePublished">2019-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      window上gnuplot的安装和使用【1】
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="gunplot的安装以及使用">toc</a></p>
+<h2 id="1-gnuplot的原理及用途"><a href="#1-gnuplot的原理及用途" class="headerlink" title="1.gnuplot的原理及用途"></a>1.gnuplot的原理及用途</h2><p>$\qquad$它是一个小巧实用的数据处理工具，主要用来绘制2D/3D的数据或者函数图像，但是也包含数学计算、拟合等功能。虽然它的名字里边有个“gnu”,但是它和大名鼎鼎的<a href="http://www.gnu.org/" target="_blank" rel="noopener">GNU</a>没有什么关系，使用的授权协议也不是GNU GPL,所以这里的“gnu”是小写，全名应该读作“new plot”。<br>所有主流的Linux版本都包含gnuplot,因此在Linux上安装很简单，只要用各相应发行版的软件安装工具直接安装就可以了。<br>$\qquad$在苹果电脑的安装也并不复杂，<a href="https://www.macports.org/" target="_blank" rel="noopener">MacPorts</a>项目把很多Linux上的应用程序移植到了苹果系统上，其中就包括gnuplot.只要在苹果电脑上安装MacPorts,之后就可以使用port命令进行安装了。<br>$\qquad$在windows下，可以直接到<a href="http://www.gnuplot.info/" target="_blank" rel="noopener">gnuplot</a>在<a href="https://sourceforge.net/projects/gnuplot/files/gnuplot/" target="_blank" rel="noopener">sourceforge</a>的下载页面进行下载，解压之后，直接安装即可使用了。</p>
+<h2 id="2-gnuplot的下载及安装"><a href="#2-gnuplot的下载及安装" class="headerlink" title="2.gnuplot的下载及安装"></a>2.gnuplot的下载及安装</h2><p>$\qquad$首先在官网下载gnuplot的最新版本，<a href="https://www.typora.io/#windows" target="_blank" rel="noopener">下载地址</a>，之后按照提示，更改安装位置即可。<br><img src="https://img-blog.csdnimg.cn/20190920151746978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$之后在软件安装页面找到并运行  <strong>gnuplot 5.2 patchlevel 7</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20190920151852296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$在这里我们不妨先实验一下画图效果，以下我们显示画出<strong>sinx</strong>和<strong>cosx</strong>的图像</p>
+<p><img src="https://img-blog.csdnimg.cn/20190920151914519.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190920152029658.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$到这里我们的gnuplot的安装大功告成了。</p>
+<h2 id="3-使用gcc编译c语言程序"><a href="#3-使用gcc编译c语言程序" class="headerlink" title="3.使用gcc编译c语言程序"></a>3.使用gcc编译c语言程序</h2><p>$\qquad$在编译之前，我们先创建一个c语言文件，主要实现生成画图所需要的离散变量数组。以下我们以产生<strong>sinc</strong>函数为例，并将该函数命名为<strong>test.c</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.1415926</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	 <span class="comment">//获取负半轴部分数据</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1600</span>; i &gt;<span class="number">0</span>; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">double</span> t;</span><br><span class="line">		t=i/<span class="number">16.0</span>;<span class="comment">//设置采集时间=采样点数/采样频率</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%.2f %.2f\n"</span>,(<span class="keyword">float</span>)(-t),(<span class="built_in">sin</span>(t)/t));</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//获取正半轴部分数据</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">1600</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">double</span> t;</span><br><span class="line">		t=i/<span class="number">16.0</span>;<span class="comment">//设置采集时间=采样点数/采样频率</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%.2f %.2f\n"</span>,(<span class="keyword">float</span>)(t),(<span class="built_in">sin</span>(t)/t));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对其使用<strong>gcc</strong>进行编译则有:<br><img src="https://img-blog.csdnimg.cn/20190920152115895.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>编译完成之后,我们就会发现多了一个<strong>test.exe</strong>文件，接下来我们要运行该可执行文件，并且将它<strong>printf</strong>的结果重定向到<strong>sinc.bat</strong>文件。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190920152140951.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>如果我们此时使用记事本打开sinc.bat文件我们就会发现，整个函数的输出结果全被保存到这里。<br><img src="https://img-blog.csdnimg.cn/20190920152336186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="4-使用gnuplot调用c语言程序所产生的数据并且画出图像"><a href="#4-使用gnuplot调用c语言程序所产生的数据并且画出图像" class="headerlink" title="4.使用gnuplot调用c语言程序所产生的数据并且画出图像"></a>4.使用gnuplot调用c语言程序所产生的数据并且画出图像</h2><p>$\qquad$在做这一步之前我们需要做的一点就是，需要先将<strong>gnuplot.exe</strong>所在的路径，存入环境变量<strong>path</strong>中，这里我的路径是：<br><img src="https://img-blog.csdnimg.cn/20190920152428672.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$添加完成之后点击确定即可。然后在含有<strong>sinc.bat</strong>文件的文件夹下进入cmd命令行窗口,之后输入<strong>gnuplot</strong>,调用该画图函数。然后再在新出来的窗口输入命令.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot [<span class="number">-16</span>:<span class="number">16</span>] [<span class="number">-0.3</span>:<span class="number">1</span>] <span class="string">"sinc.bat"</span>  u <span class="number">1</span>:<span class="number">2</span> w l lt <span class="number">1</span> lw <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>$\qquad$具体操作以及结果如下所示：<br><img src="https://img-blog.csdnimg.cn/20190920152543860.gif" alt="在这里插入图片描述"></p>
+<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><blockquote>
+<p>史上最完美的Typora快捷键大全：<a href="https://blog.csdn.net/cris_zz/article/details/82919401" target="_blank" rel="noopener">https://blog.csdn.net/cris_zz/article/details/82919401</a></p>
+<p>c语言及gnuplot任意波形产生以及作图-三角波：<a href="https://blog.csdn.net/shaoyubin999/article/details/82819974" target="_blank" rel="noopener">https://blog.csdn.net/shaoyubin999/article/details/82819974</a></p>
+<p>gnuplot使用说明：<a href="https://www.cnblogs.com/waterystone/p/5085801.html" target="_blank" rel="noopener">https://www.cnblogs.com/waterystone/p/5085801.html</a></p>
+<p>gnuplot介绍：<a href="https://www.xuebuyuan.com/572269.html" target="_blank" rel="noopener">https://www.xuebuyuan.com/572269.html</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/19/window%E4%B8%8Agnuplot%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E3%80%901%E3%80%91/" data-id="ck355v6w4000160o6bhukfk4z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/19/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84gnuplot%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%902%E3%80%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">超详细的gnuplot使用教程【2】</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/19/window%E4%B8%8Agnuplot%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E3%80%901%E3%80%91/">window上gnuplot的安装和使用【1】</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84gnuplot%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%902%E3%80%91/">超详细的gnuplot使用教程【2】</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/matlab%E5%92%8Cc%E8%AF%AD%E8%A8%80%E5%9C%A8%E4%B8%8D%E8%B0%83%E7%94%A8%E5%8C%85%EF%BC%88%E5%BA%93%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%AE%9E%E7%8E%B0%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF/">matlab和c语言在不调用包（库）的情况下实现时域卷积</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%901%E3%80%91%E5%BC%B9/">数字信号处理matlab训练第【1】弹</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%902%E3%80%91%E5%BC%B9--%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%88DTFT%EF%BC%89/">数字信号处理matlab训练第【2】弹--离散时间序列的傅里叶变换（DTFT）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 王延凯的博客<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
