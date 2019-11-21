@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="@TOC 1.FFT介绍$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为： $$\quad\quad\quad \quad X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,1,2,…,N-1,W_N=e^{-j\frac{2\pi}{N}}\ \quad \x(n)">
+<meta name="description" content="title: 深入理解快速傅里叶变换categories: 数字信号处理  1.FFT介绍$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为： $$\quad\quad\quad \quad X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,1,2,…,N-1,W_N">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解快速傅里叶变换FFT">
 <meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2FFT&#x2F;index.html">
 <meta property="og:site_name" content="王延凯的博客">
-<meta property="og:description" content="@TOC 1.FFT介绍$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为： $$\quad\quad\quad \quad X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,1,2,…,N-1,W_N=e^{-j\frac{2\pi}{N}}\ \quad \x(n)">
+<meta property="og:description" content="title: 深入理解快速傅里叶变换categories: 数字信号处理  1.FFT介绍$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为： $$\quad\quad\quad \quad X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,1,2,…,N-1,W_N">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191012214106777.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191013193006106.png#pic_center">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191013184409530.png#pic_center">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191015110834328.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:updated_time" content="2019-11-19T01:03:04.677Z">
+<meta property="og:updated_time" content="2019-11-21T07:20:58.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191012214106777.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
 
@@ -184,21 +184,11 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            About
           </a>
         </li>
       
@@ -214,21 +204,11 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/%20" rel="section">
+          <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
           </a>
         </li>
       
@@ -366,11 +346,12 @@
       
 
       
-        <p>@<a href="深入理解快速傅里叶变换FFT">TOC</a></p>
+        <hr>
+<p>title: 深入理解快速傅里叶变换<br>categories: 数字信号处理</p>
+<hr>
 <h1 id="1-FFT介绍"><a href="#1-FFT介绍" class="headerlink" title="1.FFT介绍"></a>1.FFT介绍</h1><p>$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为：</p>
 <p>$$<br>\quad\quad\quad \quad X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,1,2,…,N-1,W_N=e^{-j\frac{2\pi}{N}}\ \quad \<br>x(n)=\frac1N\sum_{k=0}^{N-1}X(k)W_N^{-nk} \quad\quad n=0,1,…,N-1<br>$$<br>首先解释一下，这里的$W_N=e^{-j\frac{2\pi}{N}}$是一个复数运算，其取得过程如下所示：<br><img src="https://img-blog.csdnimg.cn/20191012214106777.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>在上图中我们可以知道，这里的$W_N$是经过截短了的。<br>$\qquad$另外在上边的公式中，我们可以看出，由于$W_N$是个复数，又因为k的取值范围在0到N-1，共有N个不同的选择，而对于每一个选定$k$值的式子，其$n$的取值范围又从0到N-1，由此可以算出，这$N$个点$X(k)$需要$N^2$次复数运算和$N(N-1)$次复数加法。再由欧拉公式：<br>$$<br>e^{jw}=cosw+jsinw\ \quad \<br>e^{-jw}=cosw-jsinw<br>$$<br>将欧拉公式带入$W_N$则有：<br>$$W_N=e^{-j\frac{\pi}{2}}=cos(\frac{\pi}{2})-jsin(\frac{\pi}{2})=-j<br>$$<br>由以上公式则也可以分别求得$W_N^{nk}$,当N等于4时，其表格如下所示：<br>$W_N^{nk}$ 取N=4    | Value<br>——– | —–<br>$W_N^0$  | $1$<br>$W_N^1$  | $-j$<br>$W_N^2$ | $-1$<br>$W_N^3$  | $j$<br>$W_N^4$ | $1$<br>$W_N^6$  | $-1$<br>$W_N^9$  | $-j$<br>在上边的运算中我们可以看到，虽然要运行的运算次数有很多，但是结果却是有一定规律的：<br>$$<br>W_N^0=W_N^4=1\ \quad \<br>W_N^1=W_N^9=-j \ \quad \<br>W_N^2=W_N^6=-1\ \quad \<br>W_N^3=j<br>$$<br>$\qquad$到了这里，我们或许就看出来了一些规律，此处我们取的N=4,我们发现其结果也是以4为周期的。那么我们现在给出其一般性规律，也就是我们后边的进行快速FFT的基础。<br>$$<br>W_N^0=1\ \quad \<br>W_N^{N/2}=-1\ \quad \<br>W_N^{N+r}=W_N^r\ \quad \<br>W_N^{(N/2)+r}=-W_N^r<br>$$<br>$\qquad$有了上边的规律，我们接下来就以4点DFT来测试一下，根据$X(k)$的计算公式直接计算的话，我们则需要进行$4^2=16$次的复数运算，所以我们根据以上得到的规律写成以下矩阵形式：<br>$$<br>\left[\begin{matrix} X(0)\ X(1)\X(2)\X(3)\end{matrix}\right]=<br>\left[ \begin{matrix} 1 &amp; 1 &amp; 1 &amp; 1 \ 1 &amp; -j &amp; -1 &amp; j \ 1 &amp; -1&amp; 1 &amp; -1  \ 1 &amp; j &amp; -1 &amp; -j  \end{matrix} \right]<br>\left[\begin{matrix} x(0)\ x(1)\x(2)\x(3)\end{matrix}\right]<br>$$<br>$\qquad$接下来我们就要对上边的矩阵进行一下初等变换，使得其结果仍然等于等式左侧（这里的对右边两个矩阵进行初等变换的目的是为了更加直观的显示出蝶形运算）。<br>为方便表示，我接下来分别将等式右边的矩阵定义为矩阵A和矩阵B,其形式如下：<br>$$<br>A=\left[ \begin{matrix} 1 &amp; 1 &amp; 1 &amp; 1 \ 1 &amp; -j &amp; -1 &amp; j \ 1 &amp; -1&amp; 1 &amp; -1  \ 1 &amp; j &amp; -1 &amp; -j  \end{matrix} \right] \qquad\qquad<br>B=\left[\begin{matrix} x(0)\ x(1)\x(2)\x(3)\end{matrix}\right]<br>$$<br>因为矩阵$AB=AEB$,则上边的$X(k)$的矩阵即可表示成：<br>$$<br>\left[\begin{matrix} X(0)\ X(1)\X(2)\X(3)\end{matrix}\right]=A\left[ \begin{matrix} 1 &amp; 0&amp; 0 &amp; 0 \ 0 &amp; 1 &amp; 0 &amp; 0 \ 0 &amp; 0&amp; 1 &amp; 0  \ 0 &amp; 0 &amp; 0 &amp; 1  \end{matrix} \right]B<br>\ \quad \\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad<br>=A\left[ \begin{matrix} 1 &amp; 0&amp; 0 &amp; 0 \ 0 &amp; 0 &amp; 1 &amp; 0 \ 0 &amp; 1&amp; 0 &amp; 0  \ 0 &amp; 0 &amp; 0 &amp; 1  \end{matrix} \right]\left[ \begin{matrix} 1 &amp; 0&amp; 0 &amp; 0 \ 0 &amp; 0 &amp; 1 &amp; 0 \ 0 &amp; 1&amp; 0 &amp; 0  \ 0 &amp; 0 &amp; 0 &amp; 1  \end{matrix} \right]B<br>\ \quad \\quad\quad\quad\quad\quad\quad\quad\quad<br>=\left[ \begin{matrix} 1 &amp; 1 &amp; 1 &amp; 1 \ 1 &amp; -1 &amp; -j &amp; j \ 1 &amp; 1&amp; -1 &amp; -1  \ 1 &amp; -1 &amp; j &amp; -j  \end{matrix} \right]<br>\left[\begin{matrix} x(0)\ x(2)\x(1)\x(3)\end{matrix}\right]<br>$$<br>$\qquad$在上式中，我们对于矩阵A的第二列和第三列互换，将矩阵B的第二行和第三行互换，其结果不变。根据此结果，我们就可以的得出，如下等式：<br>$$<br>X(0)=[x(0)+x(2)]+[x(1)+x(3)] \ \quad \<br>X(1)=[x(0)-x(2)]-[x(1)-x(3)]j\ \quad \<br>X(2)=[x(0)+x(2)]-[x(1)+x(3)]\ \quad \<br>X(3)=[x(0)-x(2)]+[x(1)-x(3)]j<br>$$<br>$\qquad$这样，四点DFT实际上只需要进行一次复数乘法，也就是只需要进行计算$[x(1)-x(3)]j$即可，其实该问题的关键就是如何巧妙的利用W因子的周期性以及对称性，导出一个高效的快速算法。<br>$\qquad$在上边的推导中，我们也可以看到在应用了快速傅里叶变换算法（FFT）后，使得N点的DFT算法的乘法计算量由$N^2$次运算降为$\frac{N}{2}log_2N$次，大大加快了计算速度。</p>
-<h1 id="2-时间抽取（DIT）基2-FFT算法"><a href="#2-时间抽取（DIT）基2-FFT算法" class="headerlink" title="2.时间抽取（DIT）基2  FFT算法"></a>2.时间抽取（DIT）基2  FFT算法</h1><p>在介绍这个之前，我先介绍一下FFT的核心思想：<br><img src="https://img-blog.csdnimg.cn/20191013193006106.png#pic_center" alt="在这里插入图片描述"><br>对于N点的DFT算法，我们习惯上使用$N=2^M$来进行计算，根据DFT正变换的公式:</p>
-<p>$$<br>X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,1,2,…,N-1,W_N=e^{-j\frac{2\pi}{N}}<br>$$<br>中我们将$x(n)$分为奇、偶两部分，也就是令$n=2r 、n=2r+1 \qquad r=0.1,…, \frac{N}{2}-1$于是上式也就可以改写为：<br>$$<br>X(k)=\sum_{r=0}^{N/2-1}x(2r)W_N^{2rk}+ \sum_{r=0}^{N/2-1}x(2r+1)W_N^{(2r+1)k}\ \quad \\quad\quad\quad<br>=\sum_{r=0}^{N/2-1}x(2r)W_{N/2}^{2rk}+ \sum_{r=0}^{N/2-1}x(2r+1)W_{N/2}^{(2r+1)k}<br>$$<br>式中$W_{N/2}=e^{-j\frac{2\pi}{N/2}}=e^{-j\pi}$<br>现在令$A(k)、B(k)$：分别代表$X(k)$的偶数项和奇数项：<br>$$<br>A(k)=\sum_{r=0}^{N/2-1}x(2r)W_{N/2}^{2rk} \qquad k=0,1,…,\frac N2-1 \ \quad \\quad\quad\quad<br>B(k)=\sum_{r=0}^{N/2-1}x(2r+1)W_{N/2}^{(2r+1)k}\qquad k=0,1,…,\frac N2-1 \ \quad \<br>$$<br>那么，$X(k)$则可以表示为：<br>$$<br>X(k)=A(k)+W_N^kB(k),\qquad k=0,1,…,\frac N2-1<br>$$<br>$\qquad$但是此时我们仅可以根据该式子，算出来一半的$X(k)$,也就是$X(0)、X(1)$,而其余两项该式是无法求出的。具体的想要求出其余两项则需要公式：<br>$$<br>X(k+\frac N2)=A(k+\frac N2)+W_N^{k+\frac N2}B(k+\frac N2)\ \quad \\quad\quad\quad\quad<br>=A(k+\frac N2)-W_N^{k}B(k+\frac N2)\ \quad \\quad\quad\quad\quad\quad\quad\quad\quad<br>= A(k)-W_N^{k}B(k)\quad  ,k=0,1,…,\frac N2-1<br>$$<br>$\qquad$此处的$A(k+\frac N2)$可以理解为偶数项的下一个周期，所以此处可以直接看为$A(k)$。<br>所以用$A(k)、B(k)$可以完整的表示$X(k)$,当N=4时，$A(k)、B(k)$以及$X(k)$的关系如下所示：<br><img src="https://img-blog.csdnimg.cn/20191013184409530.png#pic_center" alt="在这里插入图片描述"><br>$\qquad$这里我只展示了当N=4的时候，当N=8的时候，则我们需要继续将$A(k)$分为偶数项$C(k)$与奇数项$D(k)$之和，将$B(k)$分为偶数项$E(k)$与奇数项$F(k)$之和,其$k$值取值范围为$k=0,1,…,\frac N4-1$。<br>$\qquad$若N=16，或者更高的幂，可以按照这样的方法继续分下去，直到分到两点的DFT为止。<br>介绍到这里，相信大家都已经很明白了，该算法是将时间$n$按照奇、偶分开，所以被称为<strong>时间抽取算法</strong>。</p>
+<h1 id="2-时间抽取（DIT）基2-FFT算法"><a href="#2-时间抽取（DIT）基2-FFT算法" class="headerlink" title="2.时间抽取（DIT）基2  FFT算法"></a>2.时间抽取（DIT）基2  FFT算法</h1><p>在介绍这个之前，我先介绍一下FFT的核心思想：<br><img src="https://img-blog.csdnimg.cn/20191013193006106.png#pic_center" alt="在这里插入图片描述"><br>对于N点的DFT算法，我们习惯上使用$N=2^M$来进行计算，根据DFT正变换的公式:<br>$$<br>X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,1,2,…,N-1,W_N=e^{-j\frac{2\pi}{N}}<br>$$<br>中我们将$x(n)$分为奇、偶两部分，也就是令$n=2r 、n=2r+1 \qquad r=0.1,…, \frac{N}{2}-1$于是上式也就可以改写为：<br>$$<br>X(k)=\sum_{r=0}^{N/2-1}x(2r)W_N^{2rk}+ \sum_{r=0}^{N/2-1}x(2r+1)W_N^{(2r+1)k}\ \quad \\quad\quad\quad<br>=\sum_{r=0}^{N/2-1}x(2r)W_{N/2}^{2rk}+ \sum_{r=0}^{N/2-1}x(2r+1)W_{N/2}^{(2r+1)k}<br>$$<br>式中$W_{N/2}=e^{-j\frac{2\pi}{N/2}}=e^{-j\pi}$<br>现在令$A(k)、B(k)$：分别代表$X(k)$的偶数项和奇数项：<br>$$<br>A(k)=\sum_{r=0}^{N/2-1}x(2r)W_{N/2}^{2rk} \qquad k=0,1,…,\frac N2-1 \ \quad \\quad\quad\quad<br>B(k)=\sum_{r=0}^{N/2-1}x(2r+1)W_{N/2}^{(2r+1)k}\qquad k=0,1,…,\frac N2-1 \ \quad \<br>$$<br>那么，$X(k)$则可以表示为：<br>$$<br>X(k)=A(k)+W_N^kB(k),\qquad k=0,1,…,\frac N2-1<br>$$<br>$\qquad$但是此时我们仅可以根据该式子，算出来一半的$X(k)$,也就是$X(0)、X(1)$,而其余两项该式是无法求出的。具体的想要求出其余两项则需要公式：<br>$$<br>X(k+\frac N2)=A(k+\frac N2)+W_N^{k+\frac N2}B(k+\frac N2)\ \quad \\quad\quad\quad\quad<br>=A(k+\frac N2)-W_N^{k}B(k+\frac N2)\ \quad \\quad\quad\quad\quad\quad\quad\quad\quad<br>= A(k)-W_N^{k}B(k)\quad  ,k=0,1,…,\frac N2-1<br>$$<br>$\qquad$此处的$A(k+\frac N2)$可以理解为偶数项的下一个周期，所以此处可以直接看为$A(k)$。<br>所以用$A(k)、B(k)$可以完整的表示$X(k)$,当N=4时，$A(k)、B(k)$以及$X(k)$的关系如下所示：<br><img src="https://img-blog.csdnimg.cn/20191013184409530.png#pic_center" alt="在这里插入图片描述"><br>$\qquad$这里我只展示了当N=4的时候，当N=8的时候，则我们需要继续将$A(k)$分为偶数项$C(k)$与奇数项$D(k)$之和，将$B(k)$分为偶数项$E(k)$与奇数项$F(k)$之和,其$k$值取值范围为$k=0,1,…,\frac N4-1$。<br>$\qquad$若N=16，或者更高的幂，可以按照这样的方法继续分下去，直到分到两点的DFT为止。<br>介绍到这里，相信大家都已经很明白了，该算法是将时间$n$按照奇、偶分开，所以被称为<strong>时间抽取算法</strong>。</p>
 <h1 id="3-FFT算法的一般规律"><a href="#3-FFT算法的一般规律" class="headerlink" title="3.FFT算法的一般规律"></a>3.FFT算法的一般规律</h1><p>$\qquad$我们知道，对于进行FFT快速傅里叶变换，找到W因子的周期性以及对称性是非常关键的。比如当N=4的时候，$x(0)、x(1)、x(2)、x(3)$的排列顺序为$x(0)、x(2)、x(1)、x(3)$。如果这个顺序让我们自己取记忆的话，如果当N值小的时候或许还可以记住，但是如果当N大的时候，这样单纯记忆就显得不切实际。为此，我们能否找到它的排列规律显得尤为重要，以下我将分别以N=4和N=8来介绍这一方法：<br>当N=4时其表格如下：<br>$n$     | $x(n)$|$X(k)$|$k$<br>——– | —–|——–|——-<br>0| 00|000|0<br>2| 10|001|1<br>1 | 01|010|2<br>3| 11|011|3<br>当N=8时其表格如下：<br>$n$     | $x(n)$|$X(k)$|$k$<br>——– | —–|——–|——-<br>0| 000|000|0<br>4| 100|001|1<br>2 | 010|010|2<br>6| 110|011|3<br>1| 001|100|4<br>5 | 101|101|5<br>3| 011|110|6<br>7| 111|111|7</p>
 <p>仔细观看的话，我们或许会<strong>发现$x(n)$的取值顺序也是按照二进制加法，但是这个加法是在左侧加</strong>,而$X(k)$则是在右侧加。也就是说是$X(k)$的对称。有了这个规律，那么不管$N=2^M$的值取多大，我们都可以快速的排列出其顺序，这对于加快运算速度是有很大帮助的。</p>
 <p>因为$M=log_2N$所以将N点DFT可以分成M级，当N等于8时，M=3,从左到右可以分为$m=0,m=1,m=2$三级。接下来我将展示8点DFT时间抽取算法的信号流图：<br><img src="https://img-blog.csdnimg.cn/20191015110834328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>这里我们或许就会看到如下现象：</p>
@@ -491,7 +472,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives">
               
                   <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
@@ -499,6 +480,15 @@
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
             
 
             

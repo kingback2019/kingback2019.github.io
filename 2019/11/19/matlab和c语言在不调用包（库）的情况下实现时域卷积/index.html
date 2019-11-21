@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="@TOC 1.实验要求，matlab实现卷积运算（不调用函数和方法）1.1 卷积原理讲解$$y[n]=\sum_{k=-\infty}^{\infty}{x[k]h[n-k]}=x[n]h[n]\s(t)=f_1(t)f_2(t)=\int_{-\infty}^tf_1(\tau)f_1(t-\tau)d\tau$$$\qquad$上述两式分别为离散卷积运算和连续卷积运算。实际上我们的电脑要进行卷">
+<meta name="description" content="title: matlab和c语言在不调包的情况下实现时域卷积categories: 数字信号处理  1.实验要求，matlab实现卷积运算（不调用函数和方法）1.1 卷积原理讲解$$y[n]=\sum_{k=-\infty}^{\infty}{x[k]h[n-k]}=x[n]h[n]\s(t)=f_1(t)f_2(t)=\int_{-\infty}^tf_1(\tau)f_1(t-\tau)d">
 <meta property="og:type" content="article">
 <meta property="og:title" content="matlab和c语言在不调用包（库）的情况下实现时域卷积">
 <meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;19&#x2F;matlab%E5%92%8Cc%E8%AF%AD%E8%A8%80%E5%9C%A8%E4%B8%8D%E8%B0%83%E7%94%A8%E5%8C%85%EF%BC%88%E5%BA%93%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%AE%9E%E7%8E%B0%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF&#x2F;index.html">
 <meta property="og:site_name" content="王延凯的博客">
-<meta property="og:description" content="@TOC 1.实验要求，matlab实现卷积运算（不调用函数和方法）1.1 卷积原理讲解$$y[n]=\sum_{k=-\infty}^{\infty}{x[k]h[n-k]}=x[n]h[n]\s(t)=f_1(t)f_2(t)=\int_{-\infty}^tf_1(\tau)f_1(t-\tau)d\tau$$$\qquad$上述两式分别为离散卷积运算和连续卷积运算。实际上我们的电脑要进行卷">
+<meta property="og:description" content="title: matlab和c语言在不调包的情况下实现时域卷积categories: 数字信号处理  1.实验要求，matlab实现卷积运算（不调用函数和方法）1.1 卷积原理讲解$$y[n]=\sum_{k=-\infty}^{\infty}{x[k]h[n-k]}=x[n]h[n]\s(t)=f_1(t)f_2(t)=\int_{-\infty}^tf_1(\tau)f_1(t-\tau)d">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190928213950692.jpg?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190928233201406.jpg?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
@@ -95,7 +95,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190929201444175.gif#pic_center">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019092920172674.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_50#pic_center">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190929202045488.jpg?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_50#pic_center">
-<meta property="og:updated_time" content="2019-11-19T01:04:34.847Z">
+<meta property="og:updated_time" content="2019-11-21T07:30:43.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190928213950692.jpg?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
 
@@ -189,21 +189,11 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            About
           </a>
         </li>
       
@@ -219,21 +209,11 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/%20" rel="section">
+          <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
           </a>
         </li>
       
@@ -371,7 +351,9 @@
       
 
       
-        <p>@<a href="matlab不调用conv函数实现卷积运算并用C语言进行卷积计算">TOC</a></p>
+        <hr>
+<p>title: matlab和c语言在不调包的情况下实现时域卷积<br>categories: 数字信号处理</p>
+<hr>
 <h1 id="1-实验要求，matlab实现卷积运算（不调用函数和方法）"><a href="#1-实验要求，matlab实现卷积运算（不调用函数和方法）" class="headerlink" title="1.实验要求，matlab实现卷积运算（不调用函数和方法）"></a>1.实验要求，matlab实现卷积运算（不调用函数和方法）</h1><h2 id="1-1-卷积原理讲解"><a href="#1-1-卷积原理讲解" class="headerlink" title="1.1 卷积原理讲解"></a>1.1 卷积原理讲解</h2><p>$$<br>y[n]=\sum_{k=-\infty}^{\infty}{x[k]h[n-k]}=x[n]<em>h[n]\s(t)=f_1(t)</em>f_2(t)=\int_{-\infty}^tf_1(\tau)f_1(t-\tau)d\tau<br>$$<br>$\qquad$上述两式分别为离散卷积运算和连续卷积运算。实际上我们的电脑要进行卷积运算就是将连续的函数离散化，再来进行离散的卷积计算。</p>
 <h2 id="1-2-卷积计算步骤（图解法）"><a href="#1-2-卷积计算步骤（图解法）" class="headerlink" title="1.2 卷积计算步骤（图解法）"></a>1.2 卷积计算步骤（图解法）</h2><blockquote>
 <p><strong>1.翻折</strong>  先在坐标轴上画出$x(m)$和$h(m)$,将$h(m)$以纵坐标为坐标轴折叠成$h(-m)$。<br><strong>2.移位</strong> 将$h(-m)$移位$n$,得到$h(n-m)$[或将$f_1(-\tau)$移位$t$,得到$f_1(t-\tau)$],当n或t为正数时右移n或t,当n或t为负数时左移n或t。<br><strong>3.相乘</strong> 将$h(n-m)$[或$f_1(t-\tau)$]与$x(m)$[或$f_1(\tau)$]的对应序列值[(数值)]对应相乘<br><strong>4.相加</strong> 将所有的乘机累加[(积分)]起来，就得到了$y(n)$[或$s(t)$]</p>
@@ -430,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%901%E3%80%91%E5%BC%B9/" rel="next" title="数字信号处理matlab训练第【1】弹">
-                <i class="fa fa-chevron-left"></i> 数字信号处理matlab训练第【1】弹
+              <a href="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%903%E3%80%91%E5%BC%B9--%E6%B1%82%E5%8F%96%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BE%93%E5%87%BA/" rel="next" title="数字信号处理matlab训练第【3】弹">
+                <i class="fa fa-chevron-left"></i> 数字信号处理matlab训练第【3】弹
               </a>
             
           </div>
@@ -517,7 +499,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives">
               
                   <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
@@ -525,6 +507,15 @@
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
             
 
             
