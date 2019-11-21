@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="1.LSI系统的转移函数对于一个线性时不变离散时间系统（如下图所示），我们在之前就已经接触到了4种不同的描述方法。  1.1 频率响应$$H(e^{j\omega})=\sum_{n=0}^{\infty}h(n)e^{-j\omega n}$$ 1.2 转移函数$$H(z)=\sum_{n=0}^{\infty}h(n)z^{-n}$$ 1.3 差分方程$$y(n)=-\sum_{k=1}^Na">
+<meta name="description" content="1.LSI系统的转移函数对于一个线性时不变离散时间系统（如下图所示），我们在之前就已经接触到了4种不同的描述方法。  1.1 频率响应 H(e^{j\omega})=\sum_{n=0}^{\infty}h(n)e^{-j\omega n}1.2 转移函数 H(z)=\sum_{n=0}^{\infty}h(n)z^{-n}1.3 差分方程 y(n)=-\sum_{k=1}^Na(k)y(n-k)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数字信号处理matlab训练第【3】弹">
 <meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%903%E3%80%91%E5%BC%B9--%E6%B1%82%E5%8F%96%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BE%93%E5%87%BA&#x2F;index.html">
 <meta property="og:site_name" content="王延凯的博客">
-<meta property="og:description" content="1.LSI系统的转移函数对于一个线性时不变离散时间系统（如下图所示），我们在之前就已经接触到了4种不同的描述方法。  1.1 频率响应$$H(e^{j\omega})=\sum_{n=0}^{\infty}h(n)e^{-j\omega n}$$ 1.2 转移函数$$H(z)=\sum_{n=0}^{\infty}h(n)z^{-n}$$ 1.3 差分方程$$y(n)=-\sum_{k=1}^Na">
+<meta property="og:description" content="1.LSI系统的转移函数对于一个线性时不变离散时间系统（如下图所示），我们在之前就已经接触到了4种不同的描述方法。  1.1 频率响应 H(e^{j\omega})=\sum_{n=0}^{\infty}h(n)e^{-j\omega n}1.2 转移函数 H(z)=\sum_{n=0}^{\infty}h(n)z^{-n}1.3 差分方程 y(n)=-\sum_{k=1}^Na(k)y(n-k)">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191006213039910.png#pic_center">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019100621033464.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
@@ -100,7 +100,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -194,9 +194,9 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/%20" rel="section">
+          <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Tags
           </a>
@@ -282,9 +282,9 @@
     <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%903%E3%80%91%E5%BC%B9--%E6%B1%82%E5%8F%96%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BE%93%E5%87%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
+      <meta itemprop="name" content="kingback">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/isme.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -350,6 +350,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
           
 
@@ -370,18 +375,24 @@
       
         <h1 id="1-LSI系统的转移函数"><a href="#1-LSI系统的转移函数" class="headerlink" title="1.LSI系统的转移函数"></a>1.LSI系统的转移函数</h1><p>对于一个线性时不变离散时间系统（如下图所示），我们在之前就已经接触到了4种不同的描述方法。</p>
 <p><img src="https://img-blog.csdnimg.cn/20191006213039910.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="1-1-频率响应"><a href="#1-1-频率响应" class="headerlink" title="1.1 频率响应"></a>1.1 频率响应</h2><p>$$<br>H(e^{j\omega})=\sum_{n=0}^{\infty}h(n)e^{-j\omega n}<br>$$</p>
-<h2 id="1-2-转移函数"><a href="#1-2-转移函数" class="headerlink" title="1.2 转移函数"></a>1.2 转移函数</h2><p>$$<br>H(z)=\sum_{n=0}^{\infty}h(n)z^{-n}<br>$$</p>
-<h2 id="1-3-差分方程"><a href="#1-3-差分方程" class="headerlink" title="1.3 差分方程"></a>1.3 差分方程</h2><p>$$<br>y(n)=-\sum_{k=1}^Na(k)y(n-k)+\sum_{r=0}^Mb(r)x(n-r)<br>$$</p>
-<h2 id="1-4-卷积关系"><a href="#1-4-卷积关系" class="headerlink" title="1.4 卷积关系"></a>1.4 卷积关系</h2><p>$$<br>y(n)=x(n)*h(n)=\sum_{k=-\infty}^\infty x(k)h(n-k)<br>$$<br>上边的4种方法从不同的角度描述了一个LSI系统的物理特性，他们之间有着密切的联系，其联系的纽带就是系统的单位冲激响应$h(n)$</p>
-<h2 id="1-5-系统的转移函数-H-Z"><a href="#1-5-系统的转移函数-H-Z" class="headerlink" title="1.5 系统的转移函数$H(Z)$"></a>1.5 系统的转移函数$H(Z)$</h2><p>对上边的第三式两边取Z变换，得<br>$$<br>Y(z)=-Y(z)\sum_{k=1}^Na(k)z^{-k}+X(z)\sum_{r=0}^Mb(r)z^{-r}\ \quad \Y(z)[1+\sum_{k=1}^Na(k)z^{-k}]=X(z)[b(0)+\sum_{r=1}^Mb(r)z^{-r}]<br>$$<br>对上边的式子进行整理可得<br>$$<br>H(z)=\frac{Y(z)}{X(z)}=\frac{\sum_{r=0}^Mb(r)z^{-r}}{1+\sum_{k=1}^Na(k)z^{-k}}<br>$$<br>上式$H(z)$就被称为系统的转移函数。它即可以定义为系统单位抽样响应$h(n)$的z变换，也可以 定义为系统的输出、输入Z变换之比。</p>
-<h1 id="2-matlab编程训练，求系统的阶跃响应"><a href="#2-matlab编程训练，求系统的阶跃响应" class="headerlink" title="2.matlab编程训练，求系统的阶跃响应"></a>2.matlab编程训练，求系统的阶跃响应</h1><p>我们之前学过的，如果已经知道系统的$h(n)$,由于$y(n)=x(n)*h(n)$,则我们可以轻松的使用conv函数将其求得，但是如果我们不知道$h(n)$,已知$Y(z)$、$X(z)$,需要求$y(n)$，则我们可以根据公式，<br>$$<br>y(n)=-\sum_{k=1}^Na(k)y(n-k)+\sum_{r=0}^Mb(r)x(n-r)\ \quad<br>\=b(1)x(n)+b(2)x(n-1)+…+b(n_b+1)x(n-n_b)\ \quad \-a(2)y(n-1)-…-a(n_a+1)y(n-n_a)<br>$$<br>求取我们的$y(n)$,使用matlab内的一个函数$y=filter(b,a,x)$其中$x、y、a和b$都是向量。</p>
-<h2 id="2-1-编程实训"><a href="#2-1-编程实训" class="headerlink" title="2.1 编程实训"></a>2.1 编程实训</h2><p>已知一个系统的转移函数如下所示：<br>$$<br>H(z)=\frac{0.001836+0.007344z^{-1}+0.011016z^{-2}+0.007374z^{-3}+0.001836z^{-4}}{1-3.0544z^{-1}+3.8291z^{-2}-2.2925z^{-3}+0.55075z^{-4}}<br>$$<br>求该系统的阶跃响应。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">%%转移函数</span><br><span class="line">clc;</span><br><span class="line"><span class="built_in">clear</span>;</span><br><span class="line">x=ones(<span class="number">100</span>,<span class="number">1</span>);</span><br><span class="line">%定义阶跃输入</span><br><span class="line">t=<span class="number">1</span>:<span class="number">100</span>;</span><br><span class="line">b=[<span class="number">0.001836</span>,<span class="number">0.007344</span>,<span class="number">0.011016</span>,<span class="number">0.007374</span>,<span class="number">0.001836</span>];</span><br><span class="line">%定义向量b</span><br><span class="line">a=[<span class="number">1</span>,<span class="number">-3.0544</span>,<span class="number">3.8291</span>,<span class="number">-2.2925</span>,<span class="number">0.55075</span>];</span><br><span class="line">%定义向量a</span><br><span class="line">y=filter(b,a,x);</span><br><span class="line">%得到y(n)</span><br><span class="line">hold on</span><br><span class="line">h1=plot(t,x,<span class="string">'b'</span>);</span><br><span class="line">h2=plot(t,y,<span class="string">'r'</span>);</span><br><span class="line">hold off</span><br><span class="line">%画图结束</span><br><span class="line">legend([h1,h2],'阶跃输入','阶跃响应');</span><br><span class="line">%添加标注</span><br></pre></td></tr></table></figure>
-<p>其运行结果为：<br><img src="https://img-blog.csdnimg.cn/2019100621033464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="2-2-求取系统的单位抽样响应h-n"><a href="#2-2-求取系统的单位抽样响应h-n" class="headerlink" title="2.2 求取系统的单位抽样响应h(n)"></a>2.2 求取系统的单位抽样响应h(n)</h2><p>在我们得到上边的情况下，如果我们想要得到该系统的单位抽样响应，编辑mtalab代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[h,t]=impz(b,a,<span class="number">40</span>);</span><br><span class="line">%令h(n)的长度为N=<span class="number">40</span></span><br><span class="line">stem(t,h,<span class="string">'.'</span>);</span><br><span class="line">%绘制离散的h(n)</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure>
-<p>其显示结果如下所示：<br><img src="https://img-blog.csdnimg.cn/20191006211418743.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="1-1-频率响应"><a href="#1-1-频率响应" class="headerlink" title="1.1 频率响应"></a>1.1 频率响应</h2><script type="math/tex; mode=display">
+H(e^{j\omega})=\sum_{n=0}^{\infty}h(n)e^{-j\omega n}</script><h2 id="1-2-转移函数"><a href="#1-2-转移函数" class="headerlink" title="1.2 转移函数"></a>1.2 转移函数</h2><script type="math/tex; mode=display">
+H(z)=\sum_{n=0}^{\infty}h(n)z^{-n}</script><h2 id="1-3-差分方程"><a href="#1-3-差分方程" class="headerlink" title="1.3 差分方程"></a>1.3 差分方程</h2><script type="math/tex; mode=display">
+y(n)=-\sum_{k=1}^Na(k)y(n-k)+\sum_{r=0}^Mb(r)x(n-r)</script><h2 id="1-4-卷积关系"><a href="#1-4-卷积关系" class="headerlink" title="1.4 卷积关系"></a>1.4 卷积关系</h2><script type="math/tex; mode=display">
+y(n)=x(n)*h(n)=\sum_{k=-\infty}^\infty x(k)h(n-k)</script><p>上边的4种方法从不同的角度描述了一个LSI系统的物理特性，他们之间有着密切的联系，其联系的纽带就是系统的单位冲激响应$h(n)$</p>
+<h2 id="1-5-系统的转移函数-H-Z"><a href="#1-5-系统的转移函数-H-Z" class="headerlink" title="1.5 系统的转移函数$H(Z)$"></a>1.5 系统的转移函数$H(Z)$</h2><p>对上边的第三式两边取Z变换，得</p>
+<script type="math/tex; mode=display">
+Y(z)=-Y(z)\sum_{k=1}^Na(k)z^{-k}+X(z)\sum_{r=0}^Mb(r)z^{-r}\\ \quad \\Y(z)[1+\sum_{k=1}^Na(k)z^{-k}]=X(z)[b(0)+\sum_{r=1}^Mb(r)z^{-r}]</script><p>对上边的式子进行整理可得</p>
+<script type="math/tex; mode=display">
+H(z)=\frac{Y(z)}{X(z)}=\frac{\sum_{r=0}^Mb(r)z^{-r}}{1+\sum_{k=1}^Na(k)z^{-k}}</script><p>上式$H(z)$就被称为系统的转移函数。它即可以定义为系统单位抽样响应$h(n)$的z变换，也可以 定义为系统的输出、输入Z变换之比。</p>
+<h1 id="2-matlab编程训练，求系统的阶跃响应"><a href="#2-matlab编程训练，求系统的阶跃响应" class="headerlink" title="2.matlab编程训练，求系统的阶跃响应"></a>2.matlab编程训练，求系统的阶跃响应</h1><p>我们之前学过的，如果已经知道系统的$h(n)$,由于$y(n)=x(n)*h(n)$,则我们可以轻松的使用conv函数将其求得，但是如果我们不知道$h(n)$,已知$Y(z)$、$X(z)$,需要求$y(n)$，则我们可以根据公式，</p>
+<script type="math/tex; mode=display">
+y(n)=-\sum_{k=1}^Na(k)y(n-k)+\sum_{r=0}^Mb(r)x(n-r)\\ \quad
+\\=b(1)x(n)+b(2)x(n-1)+...+b(n_b+1)x(n-n_b)\\ \quad \\-a(2)y(n-1)-...-a(n_a+1)y(n-n_a)</script><p>求取我们的$y(n)$,使用matlab内的一个函数$y=filter(b,a,x)$其中$x、y、a和b$都是向量。</p>
+<h2 id="2-1-编程实训"><a href="#2-1-编程实训" class="headerlink" title="2.1 编程实训"></a>2.1 编程实训</h2><p>已知一个系统的转移函数如下所示：</p>
+<script type="math/tex; mode=display">
+H(z)=\frac{0.001836+0.007344z^{-1}+0.011016z^{-2}+0.007374z^{-3}+0.001836z^{-4}}{1-3.0544z^{-1}+3.8291z^{-2}-2.2925z^{-3}+0.55075z^{-4}}</script><p>求该系统的阶跃响应。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">%%转移函数</span><br><span class="line">clc;</span><br><span class="line"><span class="built_in">clear</span>;</span><br><span class="line">x=ones(<span class="number">100</span>,<span class="number">1</span>);</span><br><span class="line">%定义阶跃输入</span><br><span class="line">t=<span class="number">1</span>:<span class="number">100</span>;</span><br><span class="line">b=[<span class="number">0.001836</span>,<span class="number">0.007344</span>,<span class="number">0.011016</span>,<span class="number">0.007374</span>,<span class="number">0.001836</span>];</span><br><span class="line">%定义向量b</span><br><span class="line">a=[<span class="number">1</span>,<span class="number">-3.0544</span>,<span class="number">3.8291</span>,<span class="number">-2.2925</span>,<span class="number">0.55075</span>];</span><br><span class="line">%定义向量a</span><br><span class="line">y=filter(b,a,x);</span><br><span class="line">%得到y(n)</span><br><span class="line">hold on</span><br><span class="line">h1=plot(t,x,<span class="string">'b'</span>);</span><br><span class="line">h2=plot(t,y,<span class="string">'r'</span>);</span><br><span class="line">hold off</span><br><span class="line">%画图结束</span><br><span class="line">legend([h1,h2],'阶跃输入','阶跃响应');</span><br><span class="line">%添加标注</span><br></pre></td></tr></table></figure><br>其运行结果为：<br><img src="https://img-blog.csdnimg.cn/2019100621033464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="2-2-求取系统的单位抽样响应h-n"><a href="#2-2-求取系统的单位抽样响应h-n" class="headerlink" title="2.2 求取系统的单位抽样响应h(n)"></a>2.2 求取系统的单位抽样响应h(n)</h2><p>在我们得到上边的情况下，如果我们想要得到该系统的单位抽样响应，编辑mtalab代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[h,t]=impz(b,a,<span class="number">40</span>);</span><br><span class="line">%令h(n)的长度为N=<span class="number">40</span></span><br><span class="line">stem(t,h,<span class="string">'.'</span>);</span><br><span class="line">%绘制离散的h(n)</span><br><span class="line">grid on;</span><br></pre></td></tr></table></figure><br>其显示结果如下所示：<br><img src="https://img-blog.csdnimg.cn/20191006211418743.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="2-3-求上述系统的频率响应"><a href="#2-3-求上述系统的频率响应" class="headerlink" title="2.3 求上述系统的频率响应"></a>2.3 求上述系统的频率响应</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">%%得到系统的频率响应</span><br><span class="line">[H,w]=freqz(b,a,256,'whole',1);</span><br><span class="line">%whole 指定计算的频率范围是<span class="number">0</span>-Fs,此处我们设置Fs=<span class="number">1</span></span><br><span class="line">Hr=<span class="built_in">abs</span>(H);</span><br><span class="line">%得到绝对值，也就是幅度值</span><br><span class="line">plot(w,Hr,'r','linewidth',2);</span><br><span class="line">%绘制图形，并且设置颜色和线宽</span><br><span class="line">grid on;</span><br><span class="line">%显示方格</span><br><span class="line">xlabel('\omega /2\pi');</span><br><span class="line">ylabel('|H(e^&#123;j\omega&#125;)|');</span><br><span class="line">title('幅频响应')</span><br><span class="line">%坐标轴设置</span><br></pre></td></tr></table></figure>
 <p>输出图像如下所示：<br><img src="https://img-blog.csdnimg.cn/20191006212615264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h1 id="3-参考文章"><a href="#3-参考文章" class="headerlink" title="3.参考文章"></a>3.参考文章</h1><blockquote>
@@ -390,6 +401,15 @@
 
       
     </div>
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #636363;font-size:14px;letter-spacing: 10px">本文结束啦<i class="fa fa-bell"></i>感谢您的阅读</div>
+    
+</div>
+		
+	</div>
     
     
     
@@ -421,8 +441,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/19/matlab%E5%92%8Cc%E8%AF%AD%E8%A8%80%E5%9C%A8%E4%B8%8D%E8%B0%83%E7%94%A8%E5%8C%85%EF%BC%88%E5%BA%93%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%AE%9E%E7%8E%B0%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF/" rel="prev" title="matlab和c语言在不调用包（库）的情况下实现时域卷积">
-                matlab和c语言在不调用包（库）的情况下实现时域卷积 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/19/matlab%E5%92%8Cc%E8%AF%AD%E8%A8%80%E5%9C%A8%E4%B8%8D%E8%B0%83%E7%94%A8%E5%8C%85%EF%BC%88%E5%BA%93%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%AE%9E%E7%8E%B0%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF/" rel="prev" title="matlab和c语言在不调包的情况下实现时域卷积">
+                matlab和c语言在不调包的情况下实现时域卷积 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -489,8 +509,12 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <img class="site-author-image" itemprop="image"
+                src="/images/isme.jpeg"
+                alt="kingback" />
+            
+              <p class="site-author-name" itemprop="name">kingback</p>
+              <p class="site-description motion-element" itemprop="description">昆明理工大学无线通信团队成员</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -511,7 +535,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -523,6 +547,28 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kingback2019/kingback2019.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2020465823@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/weixin_38468077" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -570,7 +616,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">kingback</span>
 
   
 </div>
@@ -584,12 +630,32 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>总访客
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
 
 
 
@@ -1070,6 +1136,8 @@
   
 
   
+  
+
 
   
 
