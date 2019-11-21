@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="title: 深入理解快速傅里叶变换categories: 数字信号处理  1.FFT介绍$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为：  \quad\quad\quad \quad X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,1,2,...,N-1,W_">
+<meta name="description" content="title: 深入理解快速傅里叶变换categories: 数字信号处理 mathjax: true  1.FFT介绍$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为：  \quad\quad\quad \quad X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解快速傅里叶变换FFT">
 <meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2FFT&#x2F;index.html">
 <meta property="og:site_name" content="王延凯的博客">
-<meta property="og:description" content="title: 深入理解快速傅里叶变换categories: 数字信号处理  1.FFT介绍$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为：  \quad\quad\quad \quad X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,1,2,...,N-1,W_">
+<meta property="og:description" content="title: 深入理解快速傅里叶变换categories: 数字信号处理 mathjax: true  1.FFT介绍$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为：  \quad\quad\quad \quad X(k)=\sum_{n=0}^{N-1}x(n)W_N^{nk} \quad\quad k=0,">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191012214106777.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191013193006106.png#pic_center">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191013184409530.png#pic_center">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191015110834328.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:updated_time" content="2019-11-21T07:20:58.718Z">
+<meta property="og:updated_time" content="2019-11-21T10:54:34.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191012214106777.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
 
@@ -353,6 +353,7 @@
       
         <hr>
 <p>title: 深入理解快速傅里叶变换<br>categories: 数字信号处理</p>
+<p>mathjax: true</p>
 <hr>
 <h1 id="1-FFT介绍"><a href="#1-FFT介绍" class="headerlink" title="1.FFT介绍"></a>1.FFT介绍</h1><p>$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为：</p>
 <script type="math/tex; mode=display">

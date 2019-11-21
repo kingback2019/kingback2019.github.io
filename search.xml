@@ -308,6 +308,7 @@ H(z)=\frac{0.001836+0.007344z^{-1}+0.011016z^{-2}+0.007374z^{-3}+0.001836z^{-4}}
     <url>/2019/11/19/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2FFT/</url>
     <content><![CDATA[<hr>
 <p>title: 深入理解快速傅里叶变换<br>categories: 数字信号处理</p>
+<p>mathjax: true</p>
 <hr>
 <h1 id="1-FFT介绍"><a href="#1-FFT介绍" class="headerlink" title="1.FFT介绍"></a>1.FFT介绍</h1><p>$\qquad$离散傅里叶变换（DFT）和卷积是信号处理中两个最基本也是最常用的运算，对于N点序列$x(n)$,其DFT变换对定义为：</p>
 <script type="math/tex; mode=display">
@@ -442,14 +443,14 @@ i=1，2，3，...,301 \quad; \quad j=1,2,3...,13</script><p>按照上边的公�
       </categories>
   </entry>
   <entry>
-    <title>IDM的安装 (1)</title>
+    <title>IDM的安装</title>
     <url>/2019/11/18/IDM%E7%9A%84%E5%AE%89%E8%A3%85%20(1)/</url>
-    <content><![CDATA[<hr>
-<p>title: IDM的安装<br>categories: 工具类</p>
-<hr>
-<h1 id="1-下载IDM并且安装"><a href="#1-下载IDM并且安装" class="headerlink" title="1.下载IDM并且安装"></a>1.下载IDM并且安装</h1><p><a href="https://pan.baidu.com/s/137pe08DLglCUqnZ0e0TTzA" target="_blank" rel="noopener">网盘链接：</a><br>链接：<a href="https://pan.baidu.com/s/137pe08DLglCUqnZ0e0TTzA" target="_blank" rel="noopener">https://pan.baidu.com/s/137pe08DLglCUqnZ0e0TTzA</a><br>提取码：zwm8<br>1.运行该文件，并且进行安装<br><img src="https://img-blog.csdnimg.cn/20191028194014891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2.安装完成之后，进入标中的文件夹<br>运行该文件<br><img src="https://img-blog.csdnimg.cn/20191028194141729.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>运行注册机<br><img src="https://img-blog.csdnimg.cn/20191028194226862.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择是<br><img src="https://img-blog.csdnimg.cn/20191028194257996.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后找到刚刚idm安装的那个路径，我的是安装在 下<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">C:\Program Files (x86)\Internet Download Manager</span><br></pre></td></tr></table></figure><br>然后选择IDMan.exe,之后会提示你输入一个first name 和Last name ，那里随便输入几个字母就可以了。之后即可完成激活<br><img src="https://img-blog.csdnimg.cn/20191028194358483.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+    <content><![CDATA[<h1 id="1-下载IDM并且安装"><a href="#1-下载IDM并且安装" class="headerlink" title="1.下载IDM并且安装"></a>1.下载IDM并且安装</h1><p><a href="https://pan.baidu.com/s/137pe08DLglCUqnZ0e0TTzA" target="_blank" rel="noopener">网盘链接：</a><br>链接：<a href="https://pan.baidu.com/s/137pe08DLglCUqnZ0e0TTzA" target="_blank" rel="noopener">https://pan.baidu.com/s/137pe08DLglCUqnZ0e0TTzA</a><br>提取码：zwm8<br>1.运行该文件，并且进行安装<br><img src="https://img-blog.csdnimg.cn/20191028194014891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2.安装完成之后，进入标中的文件夹<br>运行该文件<br><img src="https://img-blog.csdnimg.cn/20191028194141729.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>运行注册机<br><img src="https://img-blog.csdnimg.cn/20191028194226862.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择是<br><img src="https://img-blog.csdnimg.cn/20191028194257996.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后找到刚刚idm安装的那个路径，我的是安装在 下<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">C:\Program Files (x86)\Internet Download Manager</span><br></pre></td></tr></table></figure><br>然后选择IDMan.exe,之后会提示你输入一个first name 和Last name ，那里随便输入几个字母就可以了。之后即可完成激活<br><img src="https://img-blog.csdnimg.cn/20191028194358483.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h1 id="2-chrome浏览器安装IDM-Integration-Module"><a href="#2-chrome浏览器安装IDM-Integration-Module" class="headerlink" title="2.chrome浏览器安装IDM Integration Module"></a>2.chrome浏览器安装IDM Integration Module</h1><p>其链接地址<br><a href="https://pan.baidu.com/s/17pLGOBHcUoPrzvVuv0Xb-g" target="_blank" rel="noopener">地址：</a><br>链接：<a href="https://pan.baidu.com/s/17pLGOBHcUoPrzvVuv0Xb-g" target="_blank" rel="noopener">https://pan.baidu.com/s/17pLGOBHcUoPrzvVuv0Xb-g</a><br>提取码：g4gh<br>之后将其拖入Chrome的扩展程序中即可。<br>好了，到了这里IDM以及部署完毕辣。尽情享受吧。</p>
 ]]></content>
+      <categories>
+        <category>工具类</category>
+      </categories>
   </entry>
   <entry>
     <title>Hello</title>
