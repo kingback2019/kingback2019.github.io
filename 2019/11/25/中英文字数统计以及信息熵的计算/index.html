@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、实验要求 使用Java对任意一部中英文小说进行字符统计，中文小说统计各个中文字符使用的频率，并且计算出中文小说西游记中共使用了多少个汉字。  英文小说统计26个英文字母的使用频率。 计算中文小说西游记的各个汉字的信息熵。 计算英文小说26个英文字母各自的信息熵。二、功能实现2.1实验环境 java 1.8.0._171 idea 2017.22.2统计中文小说的使用频率2.2.1代码部分123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java统计中英文的字数和信息熵">
+<meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;25&#x2F;%E4%B8%AD%E8%8B%B1%E6%96%87%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%BB%A5%E5%8F%8A%E4%BF%A1%E6%81%AF%E7%86%B5%E7%9A%84%E8%AE%A1%E7%AE%97&#x2F;index.html">
+<meta property="og:site_name" content="王延凯的博客">
+<meta property="og:description" content="一、实验要求 使用Java对任意一部中英文小说进行字符统计，中文小说统计各个中文字符使用的频率，并且计算出中文小说西游记中共使用了多少个汉字。  英文小说统计26个英文字母的使用频率。 计算中文小说西游记的各个汉字的信息熵。 计算英文小说26个英文字母各自的信息熵。二、功能实现2.1实验环境 java 1.8.0._171 idea 2017.22.2统计中文小说的使用频率2.2.1代码部分123">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190903215203335.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019090321514050.png#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190903215124732.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190903215110410.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190903220530788.gif#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019090322062517.gif#pic_center">
+<meta property="og:updated_time" content="2019-11-25T09:20:13.693Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190903215203335.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kingback2019.github.io/2019/11/25/中英文字数统计以及信息熵的计算/"/>
+
+
+
+
+
+  <title>Java统计中英文的字数和信息熵 | 王延凯的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王延凯的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/25/%E4%B8%AD%E8%8B%B1%E6%96%87%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%BB%A5%E5%8F%8A%E4%BF%A1%E6%81%AF%E7%86%B5%E7%9A%84%E8%AE%A1%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java统计中英文的字数和信息熵</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-25T17:17:05+08:00">
+                2019-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、实验要求"><a href="#一、实验要求" class="headerlink" title="一、实验要求"></a>一、实验要求</h1><ol>
+<li>使用Java对任意一部中英文小说进行字符统计，中文小说统计各个中文字符使用的频率，并且计算出中文小说西游记中共使用了多少个汉字。 </li>
+<li>英文小说统计26个英文字母的使用频率。</li>
+<li>计算中文小说西游记的各个汉字的信息熵。</li>
+<li>计算英文小说26个英文字母各自的信息熵。<h1 id="二、功能实现"><a href="#二、功能实现" class="headerlink" title="二、功能实现"></a>二、功能实现</h1><h2 id="2-1实验环境"><a href="#2-1实验环境" class="headerlink" title="2.1实验环境"></a>2.1实验环境</h2></li>
+<li>java 1.8.0._171</li>
+<li>idea 2017.2<h2 id="2-2统计中文小说的使用频率"><a href="#2-2统计中文小说的使用频率" class="headerlink" title="2.2统计中文小说的使用频率"></a>2.2统计中文小说的使用频率</h2><h3 id="2-2-1代码部分"><a href="#2-2-1代码部分" class="headerlink" title="2.2.1代码部分"></a>2.2.1代码部分</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">package main.java.demo;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created with IntelliJ IDEA.</span></span><br><span class="line"><span class="comment"> * User: kingback</span></span><br><span class="line"><span class="comment"> * Author:king@王延凯</span></span><br><span class="line"><span class="comment"> * Date: 2019/7/5</span></span><br><span class="line"><span class="comment"> * Time: 23:28</span></span><br><span class="line"><span class="comment"> * Description: No Description</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> java.io.*;<span class="comment">//导入java.io包中的所有类</span></span><br><span class="line"><span class="keyword">import</span> java.util.*;<span class="comment">//导入java.util包中的所有类</span></span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Journey_to_West</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;<span class="comment">//try代码块，当发生异常时会转到catch代码块中</span></span><br><span class="line">            <span class="comment">//所要查询的中文txt文件路径</span></span><br><span class="line">            <span class="built_in">String</span> input=<span class="string">"C:\\Users\\kingback\\Desktop\\龙华老师资料\\上交资料\\第九次上交材料\\西游记\\西游记中文版.txt"</span>;</span><br><span class="line">            <span class="comment">//创建类进行文件的读取，并指定编码格式为utf-8</span></span><br><span class="line">            InputStreamReader read = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(input),<span class="string">"GBK"</span>);</span><br><span class="line">            BufferedReader <span class="keyword">in</span> = <span class="keyword">new</span> BufferedReader(read);<span class="comment">//可用于读取指定文件</span></span><br><span class="line">            StringBuffer b = <span class="keyword">new</span> StringBuffer();<span class="comment">//定义一个字符串变量b，便于后续进行内容追加的操作</span></span><br><span class="line">            <span class="built_in">String</span> str = <span class="literal">null</span>;<span class="comment">//定义一个字符串类型变量str</span></span><br><span class="line">            int i = <span class="number">0</span>;<span class="comment">//定义一个整型变量，用于统计字符串的出现次数</span></span><br><span class="line">            <span class="keyword">while</span>((str = <span class="keyword">in</span>.readLine()) != <span class="literal">null</span>) &#123;<span class="comment">//readLine()方法, 用于读取一行,只要读取内容不为空就一直执行</span></span><br><span class="line">                b.append(str);<span class="comment">//将该行内容追加到字符串b的后面</span></span><br><span class="line">            &#125;</span><br><span class="line">            TreeMap&lt;Character,Integer&gt;tm =Pross(b.toString());<span class="comment">//调用TreeMap函数</span></span><br><span class="line">            List&lt;<span class="built_in">Map</span>.Entry&lt;Character,Integer&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;<span class="built_in">Map</span>.Entry&lt;Character,Integer&gt;&gt;(tm.entrySet());<span class="comment">//将map转换为list便于进行排序</span></span><br><span class="line">            <span class="comment">/* 写入Txt文件 */</span></span><br><span class="line">            <span class="comment">//所要存储结果的文件路径</span></span><br><span class="line">            File writename = <span class="keyword">new</span> File(<span class="string">"C:\\Users\\kingback\\Desktop\\龙华老师资料\\上交资料\\第九次上交材料\\西游记\\result.txt"</span>); <span class="comment">// 相对路径，如果没有则要建立一个新的output。txt文件</span></span><br><span class="line">            writename.createNewFile(); <span class="comment">// 创建新文件</span></span><br><span class="line">            BufferedWriter out = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(writename));</span><br><span class="line"></span><br><span class="line">            <span class="built_in">String</span> hh=tm.toString();</span><br><span class="line">            <span class="built_in">String</span>[] sourceStrArray = hh.split(<span class="string">"\\,|\\&#123;|\\&#125;"</span>);<span class="comment">//分割出来的字符数组,多字符分割</span></span><br><span class="line">            <span class="keyword">for</span> (int ii = <span class="number">0</span>; ii &lt; sourceStrArray.length; ii++) &#123;</span><br><span class="line">                System.out.println(sourceStrArray[ii]);<span class="comment">//屏幕输出，查看结果</span></span><br><span class="line">                out.write(sourceStrArray[ii]+<span class="string">"\n"</span>);<span class="comment">//写入txt文件</span></span><br><span class="line">                out.flush(); <span class="comment">// 把缓存区内容压入文件</span></span><br><span class="line">            &#125;</span><br><span class="line">            out.close(); <span class="comment">// 最后记得关闭文件</span></span><br><span class="line">            Iterator&lt;Integer&gt;it = tm.values().iterator();<span class="comment">//获取tm中value值并迭代</span></span><br><span class="line">            <span class="keyword">while</span>(it.hasNext()) &#123;<span class="comment">//检查序列中是否含有元素，若有则为true</span></span><br><span class="line">                Integer j=(Integer)it.next();<span class="comment">//定义变量获取元素</span></span><br><span class="line">                i+=j;<span class="comment">//迭代求总字符数</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">in</span>.close();<span class="comment">//关闭流</span></span><br><span class="line">            System.out.println(<span class="string">"总汉字数为"</span>+i);<span class="comment">//输出总的汉字数</span></span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;<span class="comment">//当try代码块有异常时转到catch代码块</span></span><br><span class="line">            e.printStackTrace();<span class="comment">//printStackTrace()方法是打印异常信息在程序中出错的位置及原因</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public <span class="keyword">static</span> TreeMap&lt;Character,Integer&gt;Pross(<span class="built_in">String</span> str) &#123;<span class="comment">//构造TreeMap统计方法</span></span><br><span class="line">        <span class="built_in">String</span> d = <span class="literal">null</span>;<span class="comment">//定义一个字符串类型变量</span></span><br><span class="line">        char[] charArray = str.toCharArray();<span class="comment">//将字符串转换为字符数组</span></span><br><span class="line">        TreeMap&lt;Character,Integer&gt; tm = <span class="keyword">new</span> TreeMap&lt;Character,Integer&gt;();<span class="comment">//定义一个TreeMap集合</span></span><br><span class="line">        <span class="keyword">for</span>(int x = <span class="number">0</span>;x &lt; charArray.length;x++) &#123;<span class="comment">//循环遍历字符数组</span></span><br><span class="line">            d=Character.toString(charArray[x]);<span class="comment">//返回一个字符串对象</span></span><br><span class="line">            <span class="keyword">if</span> (d.matches(<span class="string">"[\\u4e00-\\u9fa5]"</span>)) &#123;<span class="comment">//if语句的条件，判断是否为汉字</span></span><br><span class="line">                <span class="keyword">if</span>(!tm.containsKey(charArray[x])) &#123;<span class="comment">//if语句的条件，判断该汉字是否在tem中</span></span><br><span class="line">                    tm.put(charArray[x], <span class="number">1</span>);<span class="comment">//若该汉字不在tem中则初始化其value值为1</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;<span class="comment">//若该汉字在tem中</span></span><br><span class="line">                    int count = tm.get(charArray[x])+<span class="number">1</span>;<span class="comment">//其出现次数增加1</span></span><br><span class="line">                    tm.put(charArray[x],count);<span class="comment">//若汉字在tem中则其value值为count</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tm;<span class="comment">//返回</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-2运行结果"><a href="#2-2-2运行结果" class="headerlink" title="2.2.2运行结果"></a>2.2.2运行结果</h3><img src="https://img-blog.csdnimg.cn/20190903215203335.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><h2 id="2-3统计英文小说26个英文字母的使用频率"><a href="#2-3统计英文小说26个英文字母的使用频率" class="headerlink" title="2.3统计英文小说26个英文字母的使用频率"></a>2.3统计英文小说26个英文字母的使用频率</h2><h3 id="2-3-1代码部分"><a href="#2-3-1代码部分" class="headerlink" title="2.3.1代码部分"></a>2.3.1代码部分</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">package main.java.demo;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created with IntelliJ IDEA.</span></span><br><span class="line"><span class="comment"> * User: kingback</span></span><br><span class="line"><span class="comment"> * Author:king@王延凯</span></span><br><span class="line"><span class="comment"> * Date: 2019/7/6</span></span><br><span class="line"><span class="comment"> * Time: 9:49</span></span><br><span class="line"><span class="comment"> * Description: No Description</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Jane_Eyre</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 该程序主要完成从硬盘上读取一个文件里的内容，然后统计26个英文字母分别出现的频率</span></span><br><span class="line"><span class="comment">         * 首先需要读取我们存放在桌面的英文小说Jane_Eyre.txt文件，里面限定只能输入小写的字母，接着运行程序即可看到结果</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="built_in">String</span> Filename=<span class="string">"C:\\Users\\kingback\\Desktop\\龙华老师资料\\上交资料\\第九次上交材料\\简爱英文版\\Jane_Eyre_048\\Jane Eyre - Charlotte Bronte.txt"</span>;</span><br><span class="line">        File file = <span class="keyword">new</span> File(Filename);</span><br><span class="line">        InputStream ips = <span class="literal">null</span>;</span><br><span class="line">        ArrayList&lt;Integer&gt; arr = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        char[] lower = &#123; <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>, <span class="string">'k'</span>, <span class="string">'l'</span>, <span class="string">'m'</span>, <span class="string">'n'</span>, <span class="string">'o'</span>, <span class="string">'p'</span>, <span class="string">'q'</span>, <span class="string">'r'</span>, <span class="string">'s'</span>, <span class="string">'t'</span>, <span class="string">'u'</span>, <span class="string">'v'</span>, <span class="string">'w'</span>,</span><br><span class="line">                <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span> &#125;;<span class="comment">//存放26个英文字母</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//System.out.println("以字节为单位读取文件内容，一次读一个字节：");</span></span><br><span class="line">            ips = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            int tempbyte;</span><br><span class="line">            <span class="keyword">while</span> ((tempbyte = ips.read()) != <span class="number">-1</span>) &#123;</span><br><span class="line">                arr.add(tempbyte);</span><br><span class="line">            &#125;</span><br><span class="line">            ips.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"从文件读出的内容，按照从a到z的字母出现频率如下："</span>);</span><br><span class="line">        int nums=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(int arr1:tongjipinlv(arr,lower))&#123;</span><br><span class="line">            System.out.print(arr1+<span class="string">","</span>);</span><br><span class="line">            nums+=arr1;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\n该小说中所有小写字母的个数为："</span>+nums);</span><br><span class="line">        int[] result=tongjipinlv(arr,lower);<span class="comment">//用来获取英文字母的个数</span></span><br><span class="line">        <span class="comment">//计算英文字母的信息熵</span></span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</span><br><span class="line">            double p = (double)result[i]/nums;<span class="comment">//定义一个double型变量,计算该汉字在文章中的出现概率</span></span><br><span class="line">            double H = -p * (<span class="built_in">Math</span>.log(p) / <span class="built_in">Math</span>.log(<span class="number">2</span>));<span class="comment">//定义一个double型变量,计算该汉字的信息熵</span></span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"字母"</span>+lower[i]+<span class="string">"    "</span>+<span class="string">"个数为："</span>+result[i]+<span class="string">"     信息熵为："</span>+H);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//统计字母出现频率</span></span><br><span class="line">    public <span class="keyword">static</span> int[] tongjipinlv(ArrayList&lt;Integer&gt; arr,char[] lower) &#123;</span><br><span class="line"></span><br><span class="line">        int[] count =&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="comment">//遍历查询出结果</span></span><br><span class="line">        <span class="keyword">for</span> (int i=<span class="number">0</span>;i&lt;lower.length;i++)</span><br><span class="line">            <span class="keyword">for</span>(int j=<span class="number">0</span>;j&lt;arr.size();j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (arr.get(j) == lower[i]) &#123;</span><br><span class="line">                    ++count[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">return</span> count;<span class="comment">//返回26个字母的结果</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-2运行结果"><a href="#2-3-2运行结果" class="headerlink" title="2.3.2运行结果"></a>2.3.2运行结果</h3><img src="https://img-blog.csdnimg.cn/2019090321514050.png#pic_center" alt="在这里插入图片描述"><h2 id="2-4计算中文小说西游记的各个汉字的信息熵"><a href="#2-4计算中文小说西游记的各个汉字的信息熵" class="headerlink" title="2.4计算中文小说西游记的各个汉字的信息熵"></a>2.4计算中文小说西游记的各个汉字的信息熵</h2>对于汉字信息熵的求解是在上边求出各个汉字的使用频率后继续进行的计算。以下为该计算实现的代码部分：<h3 id="2-4-1代码部分"><a href="#2-4-1代码部分" class="headerlink" title="2.4.1代码部分"></a>2.4.1代码部分</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//            计算信息熵</span></span><br><span class="line"><span class="comment">//            根据数学公式来进行计算</span></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">Map</span>.Entry&lt;Character,Integer&gt; mapping:list) &#123;<span class="comment">//遍历list</span></span><br><span class="line">    int f = mapping.getValue();</span><br><span class="line">    double p = (double)f/i;<span class="comment">//定义一个double型变量,计算该汉字在文章中的出现概率</span></span><br><span class="line">    double H = -p * (<span class="built_in">Math</span>.log(p) / <span class="built_in">Math</span>.log(<span class="number">2</span>));<span class="comment">//定义一个double型变量,计算该汉字的信息熵</span></span><br><span class="line">    System.out.println(mapping.getKey()+<span class="string">"："</span>+mapping.getValue()+<span class="string">"   信息熵为："</span>+H+<span class="string">"比特/符号"</span>); <span class="comment">//输出降序排序的结果</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-2运行结果"><a href="#2-4-2运行结果" class="headerlink" title="2.4.2运行结果"></a>2.4.2运行结果</h3><img src="https://img-blog.csdnimg.cn/20190903215124732.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><h2 id="2-5计算英文小说26个字母各自的信息熵"><a href="#2-5计算英文小说26个字母各自的信息熵" class="headerlink" title="2.5计算英文小说26个字母各自的信息熵"></a>2.5计算英文小说26个字母各自的信息熵</h2><h3 id="2-5-1代码部分"><a href="#2-5-1代码部分" class="headerlink" title="2.5.1代码部分"></a>2.5.1代码部分</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int[] result=tongjipinlv(arr,lower);<span class="comment">//用来获取英文字母的个数</span></span><br><span class="line"><span class="comment">//计算英文字母的信息熵</span></span><br><span class="line"><span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</span><br><span class="line">    double p = (double)result[i]/nums;<span class="comment">//定义一个double型变量,计算该汉字在文章中的出现概率</span></span><br><span class="line">    double H = -p * (<span class="built_in">Math</span>.log(p) / <span class="built_in">Math</span>.log(<span class="number">2</span>));<span class="comment">//定义一个double型变量,计算该汉字的信息熵</span></span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"字母"</span>+lower[i]+<span class="string">"    "</span>+<span class="string">"个数为："</span>+result[i]+<span class="string">"     信息熵为："</span>+H);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-2运行结果"><a href="#2-5-2运行结果" class="headerlink" title="2.5.2运行结果"></a>2.5.2运行结果</h3><img src="https://img-blog.csdnimg.cn/20190903215110410.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><h2 id="2-6-过程截图"><a href="#2-6-过程截图" class="headerlink" title="2.6 过程截图"></a>2.6 过程截图</h2><h3 id="2-6-1-英文字母的"><a href="#2-6-1-英文字母的" class="headerlink" title="2.6.1 英文字母的"></a>2.6.1 英文字母的</h3><img src="https://img-blog.csdnimg.cn/20190903220530788.gif#pic_center" alt="在这里插入图片描述"><h3 id="2-6-2-中文小说的"><a href="#2-6-2-中文小说的" class="headerlink" title="2.6.2 中文小说的"></a>2.6.2 中文小说的</h3><img src="https://img-blog.csdnimg.cn/2019090322062517.gif#pic_center" alt="在这里插入图片描述"><h2 id="2-7-实验总结"><a href="#2-7-实验总结" class="headerlink" title="2.7 实验总结"></a>2.7 实验总结</h2>该实验主要考察了使用Java对于文本的写入和读取，以及对于信息熵概念的理解。最后说明一下，如果有人需要实验中所用到的《西游记》和《简爱》的txt版本，可以给我留言，看到必免费赠送。</li>
+</ol>
+
+      
+    </div>
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #636363;font-size:14px;letter-spacing: 10px">本文结束啦<i class="fa fa-bell"></i>感谢您的阅读</div>
+    
+</div>
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/25/java%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E7%BB%83%E4%B9%A0/" rel="next" title="Java加密解密练习">
+                <i class="fa fa-chevron-left"></i> Java加密解密练习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/25/%E8%AE%BA%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%A5%9D%E7%A6%8F%E8%80%81%E5%B8%88%E6%95%99%E5%B8%88%E8%8A%82%E5%BF%AB%E4%B9%90/" rel="prev" title="Python调用turtle包来祝老师教师节快乐">
+                Python调用turtle包来祝老师教师节快乐 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/isme.jpeg"
+                alt="kingback" />
+            
+              <p class="site-author-name" itemprop="name">kingback</p>
+              <p class="site-description motion-element" itemprop="description">昆明理工大学无线通信团队成员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kingback2019/kingback2019.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2020465823@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/weixin_38468077" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、实验要求"><span class="nav-number">1.</span> <span class="nav-text">一、实验要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、功能实现"><span class="nav-number">2.</span> <span class="nav-text">二、功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1实验环境"><span class="nav-number">2.1.</span> <span class="nav-text">2.1实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2统计中文小说的使用频率"><span class="nav-number">2.2.</span> <span class="nav-text">2.2统计中文小说的使用频率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1代码部分"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1代码部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2运行结果"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2运行结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3统计英文小说26个英文字母的使用频率"><span class="nav-number">2.3.</span> <span class="nav-text">2.3统计英文小说26个英文字母的使用频率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1代码部分"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1代码部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2运行结果"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.3.2运行结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4计算中文小说西游记的各个汉字的信息熵"><span class="nav-number">2.4.</span> <span class="nav-text">2.4计算中文小说西游记的各个汉字的信息熵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1代码部分"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.4.1代码部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2运行结果"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.4.2运行结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5计算英文小说26个字母各自的信息熵"><span class="nav-number">2.5.</span> <span class="nav-text">2.5计算英文小说26个字母各自的信息熵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1代码部分"><span class="nav-number">2.5.1.</span> <span class="nav-text">2.5.1代码部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-2运行结果"><span class="nav-number">2.5.2.</span> <span class="nav-text">2.5.2运行结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-过程截图"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 过程截图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-1-英文字母的"><span class="nav-number">2.6.1.</span> <span class="nav-text">2.6.1 英文字母的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-2-中文小说的"><span class="nav-number">2.6.2.</span> <span class="nav-text">2.6.2 中文小说的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-实验总结"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 实验总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kingback</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>总访客
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1.2,"jsonPath":"/live2d_models/assets/assets/hibiki.model.json"},"display":{"position":"right","width":200,"height":500},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+</html>
