@@ -1,3 +1,9 @@
+body {
+  background: url("https://source.unsplash.com/random/1600x900");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+}
 /* normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif; /* 1 */
@@ -445,7 +451,7 @@ body {
 .header-inner {
   margin: 0 auto;
   padding: 100px 0 70px;
-  width: calc(100% - 252px);
+  width: 1000px;
 }
 @media (min-width: 1600px) {
   .container .header-inner {
@@ -457,7 +463,7 @@ body {
 }
 .main-inner {
   margin: 0 auto;
-  width: calc(100% - 252px);
+  width: 1000px;
 }
 @media (min-width: 1600px) {
   .container .main-inner {
@@ -474,7 +480,7 @@ body {
 .footer-inner {
   box-sizing: border-box;
   margin: 20px auto;
-  width: calc(100% - 252px);
+  width: 1000px;
 }
 @media (min-width: 1600px) {
   .container .footer-inner {
@@ -1823,7 +1829,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff469e;
+  background: #c220bf;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2589,7 +2595,7 @@ pre .javascript .function {
 .header {
   position: relative;
   margin: 0 auto;
-  width: 75%;
+  width: 1300px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .header {
@@ -2649,7 +2655,7 @@ pre .javascript .function {
   }
 }
 .container .main-inner {
-  width: 75%;
+  width: 1300px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .container .main-inner {
@@ -2665,7 +2671,7 @@ pre .javascript .function {
   float: right;
   box-sizing: border-box;
   padding: 40px;
-  width: calc(100% - 252px);
+  width: 1000px;
   background: #fff;
   min-height: 700px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
@@ -2708,7 +2714,7 @@ pre .javascript .function {
   display: none;
 }
 .footer-inner {
-  width: 75%;
+  width: 1300px;
   padding-left: 260px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
