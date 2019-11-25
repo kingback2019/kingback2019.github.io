@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0.具体要求 要求建立大学四级、 六级词汇表（可从网上找来）放到 MYSQL 数据库中； 完善上周发布的网站，实现一个单词查询的页面，能够根据拼写、词性、难度范围（四级 or 六级）等信息查出所需要单词的释义。网页可参照金山词霸、汉典、有道等的风格； 反查：能依据释义内容，模糊查出对应的单词； 统计：实现对单词表中 a，b，c 到 z 开头单词个数的统计，结果以表格输出到网页上； 学习如何在网页上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsp+servelt+mysql+tomcat实现的四六级单词查询系统">
+<meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;25&#x2F;jsp+servelt+mysql+tomcat%20%E5%9B%9B%E5%85%AD%E7%BA%A7%E5%8D%95%E8%AF%8D%E6%9F%A5%E8%AF%A2%E7%B3%BB%E7%BB%9F&#x2F;index.html">
+<meta property="og:site_name" content="王延凯的博客">
+<meta property="og:description" content="0.具体要求 要求建立大学四级、 六级词汇表（可从网上找来）放到 MYSQL 数据库中； 完善上周发布的网站，实现一个单词查询的页面，能够根据拼写、词性、难度范围（四级 or 六级）等信息查出所需要单词的释义。网页可参照金山词霸、汉典、有道等的风格； 反查：能依据释义内容，模糊查出对应的单词； 统计：实现对单词表中 a，b，c 到 z 开头单词个数的统计，结果以表格输出到网页上； 学习如何在网页上">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190831172633882.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190831171422659.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190831185755693.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019083120444126.gif#pic_center">
+<meta property="og:updated_time" content="2019-11-25T08:56:41.686Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190831172633882.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kingback2019.github.io/2019/11/25/jsp+servelt+mysql+tomcat 四六级单词查询系统/"/>
+
+
+
+
+
+  <title>jsp+servelt+mysql+tomcat实现的四六级单词查询系统 | 王延凯的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王延凯的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/25/jsp+servelt+mysql+tomcat%20%E5%9B%9B%E5%85%AD%E7%BA%A7%E5%8D%95%E8%AF%8D%E6%9F%A5%E8%AF%A2%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">jsp+servelt+mysql+tomcat实现的四六级单词查询系统</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-25T16:48:06+08:00">
+                2019-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="0-具体要求"><a href="#0-具体要求" class="headerlink" title="0.具体要求"></a>0.具体要求</h1><ol>
+<li>要求建立大学四级、 六级词汇表（可从网上找来）放到 MYSQL 数据库中；</li>
+<li>完善上周发布的网站，实现一个单词查询的页面，能够根据拼写、词性、难度范围（四级 or 六级）等信息查出所需要单词的释义。网页可参照金山词霸、汉典、有道等的风格；</li>
+<li>反查：能依据释义内容，模糊查出对应的单词；</li>
+<li>统计：实现对单词表中 a，b，c 到 z 开头单词个数的统计，结果以表格输出到网页上；</li>
+<li>学习如何在网页上绘图：建议用 Jscharts 工具（从网上查吧，各位），将单词统计表作图， 成为单词统计曲线图或直方图；</li>
+<li>在网页上显示gif动图、视频、音频；</li>
+<li>将汉字字频表格查询出后显示在前端页面。</li>
+</ol>
+<h1 id="1-系统的工作流程以及原理"><a href="#1-系统的工作流程以及原理" class="headerlink" title="1. 系统的工作流程以及原理"></a>1. 系统的工作流程以及原理</h1><h2 id="1-1-Servelt介绍"><a href="#1-1-Servelt介绍" class="headerlink" title="1.1 Servelt介绍"></a>1.1 Servelt介绍</h2><p>首先简单介绍一下Servelt，它是运行在 Web 服务器或应用服务器上的程序，它是作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。这个关系我们可以再下边的图中展示。<br><img src="https://img-blog.csdnimg.cn/20190831172633882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><strong>再来说一下Servelt的作用以及任务吧</strong></p>
+<ol>
+<li>读取客户端（浏览器）发送的显式的数据。这包括网页上的 HTML 表单，或者也可以是来自 applet 或自定义的 HTTP 客户端程序的表单。</li>
+<li>读取客户端（浏览器）发送的隐式的 HTTP 请求数据。这包括 cookies、媒体类型和浏览器能理解的压缩格式等等。</li>
+<li>处理数据并生成结果。这个过程可能需要访问数据库，执行 RMI 或 CORBA 调用，调用 Web 服务，或者直接计算得出对应的响应。</li>
+<li>发送显式的数据（即文档）到客户端（浏览器）。该文档的格式可以是多种多样的，包括文本文件（HTML 或 XML）、二进制文件（GIF 图像）、Excel 等。</li>
+<li>发送隐式的 HTTP 响应到客户端（浏览器）。这包括告诉浏览器或其他客户端被返回的文档类型（例如 HTML），设置 cookies 和缓存参数，以及其他类似的任务。</li>
+</ol>
+<p><strong>另外，相比于CGL,servelt还有其以下几点优势：</strong></p>
+<ol>
+<li>性能明显更好。</li>
+<li>Servlet 在 Web 服务器的地址空间内执行。这样它就没有必要再创建一个单独的进程来处理每个客户端请求。</li>
+<li>Servlet 是独立于平台的，因为它们是用 Java 编写的。</li>
+<li>服务器上的 Java 安全管理器执行了一系列限制，以保护服务器计算机上的资源。因此，Servlet 是可信的。</li>
+<li>Java 类库的全部功能对 Servlet 来说都是可用的。它可以通过 sockets 和 RMI 机制与 applets、数据库或其他软件进行交互。<h2 id="1-2-jsp介绍"><a href="#1-2-jsp介绍" class="headerlink" title="1.2 jsp介绍"></a>1.2 jsp介绍</h2></li>
+<li>JSP（全称Java Server Pages）是由 Sun Microsystems 公司倡导和许多公司参与共同创建的一种使软件开发者可以响应客户端请求，而动态生成 HTML、XML 或其他格式文档的Web网页的技术标准。</li>
+<li>JSP 技术是以 Java 语言作为脚本语言的，JSP 网页为整个服务器端的 Java 库单元提供了一个接口来服务于HTTP的应用程序。JSP文件后缀名为 *.jsp 。</li>
+<li>JSP开发的WEB应用可以跨平台使用，既可以运行在 Linux 上也能运行在 Windows 上。</li>
+</ol>
+<p>正因为Jsp是以java语言作为脚本语言的，所以，在整个系统的前端部分，由jsp页面来担任。</p>
+<h2 id="1-3-Tomcat介绍"><a href="#1-3-Tomcat介绍" class="headerlink" title="1.3 Tomcat介绍"></a>1.3 Tomcat介绍</h2><p>$\qquad$开源小型web服务器 ，完全免费，主要用于中小型web项目，<strong>只支持Servlet和JSP 等少量javaee规范（就是JavaWeb编程接口）</strong>。也正因为tomcat对于java和servelt很好的嵌合，所以我们的此次系统选用了Tomcat服务器。</p>
+<h1 id="2-功能实现"><a href="#2-功能实现" class="headerlink" title="2.功能实现"></a>2.功能实现</h1><h2 id="2-1-建立四六级单词的MYSQL表格"><a href="#2-1-建立四六级单词的MYSQL表格" class="headerlink" title="2.1 建立四六级单词的MYSQL表格"></a>2.1 建立四六级单词的MYSQL表格</h2><p>写了一个<strong>python</strong>程序，来执行将四级单词的txt表格存入mysql数据库<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># @Time : 2019/6/21 15:29 </span><br><span class="line"># @Author : kingback</span><br><span class="line"># @File : CET4-MySQL.py </span><br><span class="line"># @Software: PyCharm</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"># 打开数据库连接</span><br><span class="line">db = pymysql.connect(host=<span class="string">"127.0.0.1"</span>,user=<span class="string">"root"</span>,  password=<span class="string">"123456"</span>,db=<span class="string">"words"</span>,charset = <span class="string">'utf8'</span>)</span><br><span class="line"></span><br><span class="line"># 使用 cursor() 方法创建一个游标对象 cursor</span><br><span class="line">cursor = db.cursor()</span><br><span class="line">filename = <span class="string">"C:/Users/kingback/Desktop/四六级但系/四级.txt"</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> open(filename, encoding=<span class="string">"utf-8"</span>):</span><br><span class="line">    hh = re.split(r<span class="string">"\t|\n"</span>, line)</span><br><span class="line">    english = hh[<span class="number">0</span>]</span><br><span class="line">    sent = hh[<span class="number">1</span>]</span><br><span class="line">    chinese = hh[<span class="number">2</span>]</span><br><span class="line">    level=<span class="string">"4"</span></span><br><span class="line">    #2、插入操作</span><br><span class="line">    sql=<span class="string">"insert into cet(english,chinese,sent,level) values('%s', '%s', '%s','%s')"</span></span><br><span class="line">    data=(english,chinese,sent,level)</span><br><span class="line">    cursor.execute(sql%data)   # execute也可以执行创建和修改库与表语句</span><br><span class="line">    print(<span class="string">"当前插入单词： "</span>,english)</span><br><span class="line">    db.commit()</span><br><span class="line"># 关闭数据库连接</span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure><br>为了区别四级单词和六级单词的区别，我又单独写了一个针对存取六级单词的<strong>Python</strong>文件，其内容如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># @Time : 2019/6/21 15:30 </span><br><span class="line"># @Author : kingback</span><br><span class="line"># @File : CET6-MySQL.py </span><br><span class="line"># @Software: PyCharm</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"># 打开数据库连接</span><br><span class="line">db = pymysql.connect(host=<span class="string">"127.0.0.1"</span>,user=<span class="string">"root"</span>,  password=<span class="string">"123456"</span>,db=<span class="string">"words"</span>,charset = <span class="string">'utf8'</span>)</span><br><span class="line"># 使用 cursor() 方法创建一个游标对象 cursor</span><br><span class="line">cursor = db.cursor()</span><br><span class="line">filename = <span class="string">"C:/Users/kingback/Desktop/四六级但系/六级.txt"</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> open(filename, encoding=<span class="string">"utf-8"</span>):</span><br><span class="line">    hh = re.split(r<span class="string">"\t|\n"</span>, line)</span><br><span class="line">    english = hh[<span class="number">0</span>]</span><br><span class="line">    sent = hh[<span class="number">1</span>]</span><br><span class="line">    chinese = hh[<span class="number">2</span>]</span><br><span class="line">    level=<span class="string">"6"</span></span><br><span class="line">    #2、插入操作</span><br><span class="line">    sql=<span class="string">"insert into cet(english,chinese,sent,level) values('%s', '%s', '%s','%s')"</span></span><br><span class="line">    data=(english,chinese,sent,level)</span><br><span class="line">    cursor.execute(sql%data)   # execute也可以执行创建和修改库与表语句</span><br><span class="line">    print(<span class="string">"当前插入单词： "</span>,english)</span><br><span class="line">    # db.commit()</span><br><span class="line"># 关闭数据库连接</span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure><br>接下来我展示一下四级单词存取的运行过程，<br><img src="https://img-blog.csdnimg.cn/20190831171422659.gif" alt="在这里插入图片描述"><br>因为六级的运行和四级的运行相差不多，于是我就仅展示了四级的。</p>
+<h2 id="2-2-功能实现"><a href="#2-2-功能实现" class="headerlink" title="2.2  功能实现"></a>2.2  功能实现</h2><h3 id="2-2-1-整个项目组成"><a href="#2-2-1-整个项目组成" class="headerlink" title="2.2.1 整个项目组成"></a>2.2.1 整个项目组成</h3><p>整个项目是由 </p>
+<ol>
+<li>index.jsp (登陆主界面)、Chinese.jsp 、pic.jsp (使用jscharts画图界面)、data.jsp四个jsp页面</li>
+<li>ChangeServelt (实际未使用)、DemoServelt (未用到，测试时使用)、TranslateServelt  (实现主体功能)三个servelt</li>
+<li>一个DBoper类(数据库操作类)、Chinese_Frequent类（用来存储词频）以及一个Word类（用来存储单词）</li>
+<li>一个Image文件夹(用来存放整个项目中用到的图片)</li>
+<li>一个js文件夹（用来存放js文件）</li>
+<li>一个video文件夹(用来存放动图、视频、音频)  组成。<br>整个的目录结构如下所示：<br><img src="https://img-blog.csdnimg.cn/20190831185755693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><h3 id="2-2-2-介绍一下index-jsp文件内容"><a href="#2-2-2-介绍一下index-jsp文件内容" class="headerlink" title="2.2.2 介绍一下index.jsp文件内容"></a>2.2.2 介绍一下index.jsp文件内容</h3>这是程序运行后首先展示的界面，也是我们用户进行操作的主界面。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">"java"</span> contentType=<span class="string">"text/html; charset=UTF-8"</span> pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br><span class="line">&lt;%@page <span class="keyword">import</span>=<span class="string">"java.lang.*,java.util.Enumeration"</span>%&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">"java.util.*"</span> %&gt;</span><br><span class="line"></span><br><span class="line">&lt;%@taglib prefix=<span class="string">"c"</span> uri=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> %&gt;</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;kingback首页&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;link href="https:/</span><span class="regexp">/shared.ydstatic.com/im</span>ages/favicon.ico<span class="string">" type="</span>image/x-icon<span class="string">" rel="</span>shortcut icon<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">&lt;div style="</span>text-align: center;<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;!-- gif --&gt;</span></span><br><span class="line"><span class="string">&lt;img src="</span>video/pkq.gif<span class="string">" width="</span><span class="number">320</span><span class="string">" height="</span><span class="number">240</span><span class="string">" alt="</span><span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;!-- audio --&gt;</span></span><br><span class="line"><span class="string">&lt;audio src="</span>video/xs.mp3<span class="string">" controls="</span>controls<span class="string">"&gt;&lt;/audio&gt;</span></span><br><span class="line"><span class="string">&lt;!-- video --&gt;</span></span><br><span class="line"><span class="string">&lt;video width="</span><span class="number">320</span><span class="string">" height="</span><span class="number">240</span><span class="string">" controls&gt;</span></span><br><span class="line"><span class="string">    &lt;source src="</span>video/tf.mp4<span class="string">" type="</span>video/mp4<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;source src="</span>video/tf.ogg<span class="string">" type="</span>video/ogg<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;source src="</span>video/tf.webm<span class="string">" type="</span>video/webm<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;object data="</span>video/tf.mp4<span class="string">" width="</span><span class="number">320</span><span class="string">" height="</span><span class="number">240</span><span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;embed src="</span>video/tf.swf<span class="string">" width="</span><span class="number">320</span><span class="string">" height="</span><span class="number">240</span><span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;/object&gt;</span></span><br><span class="line"><span class="string">&lt;/video&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/div&gt;&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;div id="</span>margin1<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;div id="</span>logo<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;div class="</span>logo<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;div id="</span>margin2<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;form action="</span>search<span class="string">" method="</span>post<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;div class="</span>border<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;select name="</span>type<span class="string">" id="</span>selectType<span class="string">"&gt;</span></span><br><span class="line"><span class="string">            &lt;option value="</span>四级<span class="string">"&gt;四级&lt;/option&gt;</span></span><br><span class="line"><span class="string">            &lt;option value="</span>六级<span class="string">" selected id="</span>type<span class="string">"&gt;六级&lt;/option&gt;	//预选设置</span></span><br><span class="line"><span class="string">            &lt;option value="</span>汉译英<span class="string">" &gt;汉译英&lt;/option&gt;</span></span><br><span class="line"><span class="string">            &lt;option value="</span>英译汉<span class="string">" &gt;英译汉&lt;/option&gt;</span></span><br><span class="line"><span class="string">            &lt;option value="</span>统计<span class="string">"&gt;统计&lt;/option&gt;</span></span><br><span class="line"><span class="string">            &lt;option value="</span>字频<span class="string">"&gt;字频&lt;/option&gt;</span></span><br><span class="line"><span class="string">        &lt;/select&gt;</span></span><br><span class="line"><span class="string">        &lt;input type="</span>text<span class="string">" name="</span>inputWord<span class="string">" placeholder="</span>请输入单词<span class="string">" id="</span>translateContent<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">        &lt;span id="</span>hnwBtn<span class="string">" class="</span>hand-write<span class="string">"&gt;&lt;/span&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;input type="</span>submit<span class="string">" value="</span>查 询<span class="string">" id="</span>btn<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;input type="</span>reset<span class="string">" value="</span>重 置<span class="string">" id="</span>btn1<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/form&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>$\qquad$很多人或许会想，前台用户输入的数据，后台是怎么获得的呢，因为jsp很好的嵌合了java以及servelt所以,在刚才的主界面中我们将需要传递给后台的数据放在这个 <strong>form</strong> 内，当用户点击查询按钮的时候，该动作就称之为 <strong>search</strong> ,并且将其中包括的内容传递给后台的 <strong>servelt</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=&quot;search&quot; method=&quot;post&quot;&gt;</span><br><span class="line">......</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-2-4-介绍TranslateServelt-java"><a href="#2-2-4-介绍TranslateServelt-java" class="headerlink" title="2.2.4 介绍TranslateServelt.java"></a>2.2.4 介绍TranslateServelt.java</h3><p>$\qquad$接下来我就来讲一下，前台提交过来的action <strong>search</strong>是怎么和后台配对的。请注意看该java文件的开头的这句话<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@WebServlet(<span class="string">"/search"</span>)</span><br></pre></td></tr></table></figure><br>$\qquad$我们会发现前台提交的<strong>search</strong>动作通过这句话找到了与它配对的servelt,也就是说前台用户输入的数据已经成功传到后台来处理。 然后再在这个java文件中执行查询数据库的操作。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.jws.WebService;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Array;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created with IntelliJ IDEA.</span></span><br><span class="line"><span class="comment"> * User: kingback</span></span><br><span class="line"><span class="comment"> * Author:king@王延凯</span></span><br><span class="line"><span class="comment"> * Date: 2019/6/17</span></span><br><span class="line"><span class="comment"> * Time: 14:14</span></span><br><span class="line"><span class="comment"> * Description: No Description</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">@WebServlet(<span class="string">"/search"</span>)</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TranslateServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="comment">//idea快速重写父类方法，使用快捷键ctrl+O选择需要重写的方法即可</span></span><br><span class="line">    @Override</span><br><span class="line">    protected <span class="keyword">void</span> doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line"><span class="comment">//        super.doPost(request, response);</span></span><br><span class="line">        <span class="comment">//设置编码格式</span></span><br><span class="line">        request.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line">        response.setContentType(<span class="string">"text/html;charset = utf-8"</span>);</span><br><span class="line">        <span class="comment">//获取选择的类别</span></span><br><span class="line">        <span class="built_in">String</span> type=request.getParameter(<span class="string">"type"</span>);</span><br><span class="line">        <span class="comment">//获取用户输入的单词或汉字</span></span><br><span class="line">        <span class="built_in">String</span> inputWord=request.getParameter(<span class="string">"inputWord"</span>);</span><br><span class="line">        <span class="comment">//验证输出</span></span><br><span class="line">        <span class="comment">// System.out.println(inputWord);</span></span><br><span class="line">        <span class="comment">// System.out.println("当前选项为："+type);</span></span><br><span class="line">        <span class="comment">// System.out.println(type.equals("六级"));</span></span><br><span class="line">        <span class="comment">//根据不同的type选择不同的sql语句</span></span><br><span class="line">        <span class="comment">//汉译英,支持模糊搜索</span></span><br><span class="line">        <span class="built_in">String</span> sql=<span class="string">"select * from cet where chinese like "</span>+<span class="string">"'%"</span>+inputWord+<span class="string">"%'"</span>;</span><br><span class="line">        <span class="comment">//英译汉</span></span><br><span class="line">        <span class="built_in">String</span> sql1=<span class="string">"select * from cet where english="</span>+<span class="string">"'"</span>+inputWord+<span class="string">"'"</span>;</span><br><span class="line">        <span class="comment">//四级</span></span><br><span class="line">        <span class="built_in">String</span> CET_4=<span class="string">"select * from cet where level="</span>+<span class="string">"'4'"</span>;</span><br><span class="line">        <span class="comment">//六级</span></span><br><span class="line">        <span class="built_in">String</span> CET_6=<span class="string">"select * from cet where level="</span>+<span class="string">"'6'"</span>;</span><br><span class="line">        <span class="comment">//统计</span></span><br><span class="line">        <span class="built_in">String</span> count=<span class="string">""</span>;</span><br><span class="line">        <span class="comment">//字频</span></span><br><span class="line">        <span class="built_in">String</span> sql_frequent=<span class="string">"select * from chinese_word where pin like "</span>+<span class="string">"'"</span>+inputWord+<span class="string">"%'"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化连接变量,用来存储数据</span></span><br><span class="line">        <span class="built_in">String</span> server=<span class="string">"localhost"</span>;</span><br><span class="line">        <span class="built_in">String</span> dbname=<span class="string">"words"</span>;</span><br><span class="line">        <span class="built_in">String</span> dbuser=<span class="string">"root"</span>;</span><br><span class="line">        <span class="built_in">String</span> dbpwd=<span class="string">"123456"</span>;</span><br><span class="line">        <span class="comment">//创建一个Word链表来承接数据库查询的数据</span></span><br><span class="line">        List&lt;Word&gt; wordList1=<span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="comment">//创建一个Chinese_Frequent链表来承接数据查询的数据</span></span><br><span class="line">        List&lt;Chinese_Frequent&gt; wordList2=<span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="comment">//实例化一个数据库连接类</span></span><br><span class="line">        DBoper dBoper=<span class="keyword">new</span> DBoper();</span><br><span class="line">        <span class="comment">//链接数据库</span></span><br><span class="line">        dBoper.getConn(server,dbname,dbuser,dbpwd);</span><br><span class="line">        <span class="comment">//初始化数据库结果参数</span></span><br><span class="line">        ResultSet rs = <span class="literal">null</span>;</span><br><span class="line">        <span class="comment">//执行sql查询</span></span><br><span class="line">        <span class="keyword">if</span>(type.equals(<span class="string">"四级"</span>))&#123;</span><br><span class="line">            <span class="comment">// System.out.println("当前执行到四级！");</span></span><br><span class="line">            <span class="comment">//执行sql语句</span></span><br><span class="line">            rs=dBoper.executeQuery(CET_4,<span class="literal">null</span>);</span><br><span class="line">            <span class="comment">//调用DataDeal方法，开始对数据进行操作</span></span><br><span class="line">            DataDeal(rs,wordList1,request,response,dBoper);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(type.equals(<span class="string">"六级"</span>))&#123;</span><br><span class="line">            <span class="comment">// System.out.println("当前执行到六级！");</span></span><br><span class="line">            <span class="comment">//执行sql语句</span></span><br><span class="line">            rs=dBoper.executeQuery(CET_6,<span class="literal">null</span>);</span><br><span class="line">            <span class="comment">//开始对数据进行操作</span></span><br><span class="line">            DataDeal(rs,wordList1,request,response,dBoper);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(type.equals(<span class="string">"英译汉"</span>))&#123;</span><br><span class="line">            <span class="comment">//执行sql语句</span></span><br><span class="line">            rs=dBoper.executeQuery(sql1,<span class="literal">null</span>);</span><br><span class="line">            <span class="comment">//开始对数据进行操作</span></span><br><span class="line">            DataDeal(rs,wordList1,request,response,dBoper);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//汉译英处理函数</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(type.equals(<span class="string">"汉译英"</span>)) &#123;</span><br><span class="line">            <span class="comment">//执行sql语句</span></span><br><span class="line">            rs=dBoper.executeQuery(sql,<span class="literal">null</span>);</span><br><span class="line">            <span class="comment">//开始对数据进行操作</span></span><br><span class="line">            DataDeal(rs,wordList1,request,response,dBoper);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//统计处理函数</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(type.equals(<span class="string">"统计"</span>)) &#123;</span><br><span class="line">            <span class="comment">//开始对数据进行操作</span></span><br><span class="line"></span><br><span class="line">            Account(request,response,dBoper);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (type.equals(<span class="string">"字频"</span>))&#123;</span><br><span class="line">            rs=dBoper.executeQuery(sql_frequent,<span class="literal">null</span>);</span><br><span class="line">            System.out.println(sql_frequent);</span><br><span class="line">            Frequent(wordList2,dBoper,request,response,rs);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected <span class="keyword">void</span> doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">        <span class="keyword">super</span>.doGet(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> DataDeal(ResultSet resultSet,List&lt;Word&gt; wordList1,HttpServletRequest request, HttpServletResponse response,DBoper dBoper)&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//将数据存入wordList1里边</span></span><br><span class="line">            <span class="keyword">while</span> (resultSet.next())&#123;</span><br><span class="line">                <span class="comment">//获取数据库中查询到的数据</span></span><br><span class="line">                <span class="built_in">String</span> type2=resultSet.getString(<span class="string">"english"</span>);</span><br><span class="line">                <span class="built_in">String</span> word2=resultSet.getString(<span class="string">"chinese"</span>);</span><br><span class="line">                <span class="built_in">String</span> sent2=resultSet.getString(<span class="string">"sent"</span>);</span><br><span class="line">                <span class="built_in">String</span> level2=resultSet.getString(<span class="string">"level"</span>);</span><br><span class="line">                Word word=<span class="keyword">new</span> Word(type2,word2,sent2,level2);</span><br><span class="line">                <span class="comment">//添加至wordList1列表</span></span><br><span class="line">                wordList1.add(word);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//调用数据库连接类的方法，关闭数据库连接</span></span><br><span class="line">            dBoper.closeAll();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//利用request将WordList传送到前端页面</span></span><br><span class="line">            <span class="keyword">if</span>(wordList1.size()==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="comment">//如果没有读取到数据，返回报错</span></span><br><span class="line">                response.sendRedirect(<span class="string">"success.jsp?error=yes"</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//使用request封装数据</span></span><br><span class="line">                request.setAttribute(<span class="string">"wordList"</span>, wordList1);</span><br><span class="line">                System.out.println(wordList1);</span><br><span class="line">                <span class="comment">//传送至前台jsp网页</span></span><br><span class="line">                request.getRequestDispatcher(<span class="string">"data.jsp"</span>).forward(request, response);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//异常处理</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ServletException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> Account(HttpServletRequest request, HttpServletResponse response,DBoper dBoper) &#123;</span><br><span class="line">        <span class="comment">//用来存储单词个数</span></span><br><span class="line">        int[] nums=<span class="keyword">new</span> int[<span class="number">26</span>];</span><br><span class="line">        <span class="built_in">String</span> character=<span class="string">"a.b.c.d.e.f.g.h.i.g.k.l.m.n.o.p.q.r.s.t.u.v.w.x.y.z"</span>;</span><br><span class="line">        <span class="comment">//拆分字符串</span></span><br><span class="line">        <span class="built_in">String</span> characters[] = character.split(<span class="string">" |\\."</span>);</span><br><span class="line">        ResultSet rs = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="built_in">String</span> sql=<span class="string">"select * from cet where english like "</span>+<span class="string">"'%"</span>+characters[i]+<span class="string">"%'"</span>;</span><br><span class="line"><span class="comment">//                System.out.println(sql);</span></span><br><span class="line">                rs=dBoper.executeQuery(sql,<span class="literal">null</span>);</span><br><span class="line">                <span class="comment">//将数据存入wordList1里边</span></span><br><span class="line">                <span class="keyword">while</span> (rs.next())&#123;</span><br><span class="line">                    nums[i]++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//调用数据库连接类的方法，关闭数据库连接</span></span><br><span class="line">        dBoper.closeAll();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//已经统计到数据</span></span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</span><br><span class="line">            characters[i]=characters[i]+<span class="string">","</span>+nums[i];</span><br><span class="line"><span class="comment">//            System.out.println(nums[i]);</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//使用request封装数据</span></span><br><span class="line">            request.setAttribute(<span class="string">"nums"</span>, nums);</span><br><span class="line">            request.setAttribute(<span class="string">"characters"</span>, characters);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//System.out.println(nums);</span></span><br><span class="line">            <span class="comment">//传送至前台jsp网页</span></span><br><span class="line">            request.getRequestDispatcher(<span class="string">"pic.jsp"</span>).forward(request, response);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ServletException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> Frequent(List&lt;Chinese_Frequent&gt; wordList2,DBoper dBoper,HttpServletRequest request, HttpServletResponse response,ResultSet rs)&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (rs.next()) &#123;</span><br><span class="line">                <span class="comment">//获取数据库中查询到的数据</span></span><br><span class="line">                <span class="built_in">String</span> chinese = rs.getString(<span class="string">"words"</span>);</span><br><span class="line">                <span class="built_in">String</span> counts = rs.getString(<span class="string">"counts"</span>);</span><br><span class="line">                <span class="built_in">String</span> pin = rs.getString(<span class="string">"pin"</span>);</span><br><span class="line">                Chinese_Frequent CF = <span class="keyword">new</span> Chinese_Frequent(chinese, counts, pin);</span><br><span class="line">                wordList2.add(CF);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//调用数据库连接类的方法，关闭数据库连接</span></span><br><span class="line">            dBoper.closeAll();</span><br><span class="line"></span><br><span class="line">                <span class="comment">//利用request将WordList传送到前端页面</span></span><br><span class="line">            <span class="keyword">if</span>(wordList2.size()==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="comment">//如果没有读取到数据，返回报错</span></span><br><span class="line">                response.sendRedirect(<span class="string">"success.jsp?error=yes"</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//使用request封装数据</span></span><br><span class="line">                request.setAttribute(<span class="string">"wordList2"</span>, wordList2);</span><br><span class="line">                System.out.println(wordList2);</span><br><span class="line">                <span class="comment">//传送至前台jsp网页</span></span><br><span class="line">                request.getRequestDispatcher(<span class="string">"chinese.jsp"</span>).forward(request, response);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ServletException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-2-5-后台数据返回前台"><a href="#2-2-5-后台数据返回前台" class="headerlink" title="2.2.5 后台数据返回前台"></a>2.2.5 后台数据返回前台</h3><p>$\qquad$执行完前边的步骤，我们或许会发现，虽然我们将数据传到了后台，并且进行了查询数据库等一系列操作，但是我们又如何将后台的数据传输到前台呢，这里我们需要注意一点就是，因为在这里可能会查询到很多结果，所以一条一条数据的往前台传显得不是那么显示，例如我们查询单词，每一个单词所涵盖的信息我们可以称之为一个<strong>Word 类</strong>实例化出来的对象，如果我们将这些一个一个的Word对象封装成一个集合<strong>WordList</strong>，传递给前台，那样岂不更容易一些呢。于是我们根据需要就构建了一个Word类，其代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created with IntelliJ IDEA.</span><br><span class="line"> * User: kingback</span><br><span class="line"> * Author:king@王延凯</span><br><span class="line"> * Date: 2019/6/15</span><br><span class="line"> * Time: 14:14</span><br><span class="line"> * Description: No Description</span><br><span class="line"> */</span><br><span class="line">public class Word &#123;</span><br><span class="line">    public String getEnglish() &#123;</span><br><span class="line">        return english;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setEnglish(String english) &#123;</span><br><span class="line">        this.english = english;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getChinese() &#123;</span><br><span class="line">        return chinese;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setChinese(String chinese) &#123;</span><br><span class="line">        this.chinese = chinese;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getSent() &#123;</span><br><span class="line">        return sent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSent(String sent) &#123;</span><br><span class="line">        this.sent = sent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getLevel() &#123;</span><br><span class="line">        return level;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setLevel(String level) &#123;</span><br><span class="line">        this.level = level;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //快捷键 Alt+Insert</span><br><span class="line">    //get set方法</span><br><span class="line"></span><br><span class="line">    private String english;</span><br><span class="line">    private String chinese;</span><br><span class="line">    private String sent;</span><br><span class="line">    private String level;</span><br><span class="line"></span><br><span class="line">    public Word(String english,String chinese,String sent,String level)&#123;</span><br><span class="line">    super();</span><br><span class="line">    this.english=english;</span><br><span class="line">    this.sent=sent;</span><br><span class="line">    this.chinese=chinese;</span><br><span class="line">    this.level=level;</span><br><span class="line">    &#125;</span><br><span class="line">    public Word()&#123;</span><br><span class="line">        super();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>$\qquad$接下来我们再来讨论将后台数据反传给前台的方法和策略，前边我们已经说到了封装为WordList，而前台又是怎么得到的呢，我们可以看到在前边讲到的 <strong>TranteServelt</strong> 里边的最后有这么几句代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用request封装数据</span></span><br><span class="line">      request.setAttribute(<span class="string">"wordList2"</span>, wordList2);</span><br><span class="line">      System.out.println(wordList2);</span><br><span class="line">      <span class="comment">//传送至前台jsp网页</span></span><br><span class="line">       request.getRequestDispatcher(<span class="string">"chinese.jsp"</span>).forward(request, response);</span><br></pre></td></tr></table></figure>
+<p>$\qquad$到了这里我们似乎一切都明白了，如果当程序执行到这部分代码的时候，他就会将它之前封装好的<strong>wordList</strong>数据传递到<strong>chinese.jsp</strong>页面。</p>
+<h3 id="2-2-6-前台接收后台的数据并处理，显示在前端页面。"><a href="#2-2-6-前台接收后台的数据并处理，显示在前端页面。" class="headerlink" title="2.2.6 前台接收后台的数据并处理，显示在前端页面。"></a>2.2.6 前台接收后台的数据并处理，显示在前端页面。</h3><p>$\qquad$在前边我们已经讲到了，传递到前台的<strong>WordLis</strong>t在对应的jsp界面里边是这样被识别并一个个拆解为Word的。下面我们就以<strong>chinese.jsp</strong>为例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--</span><br><span class="line">  Created by IntelliJ IDEA.</span><br><span class="line">  User: kingback</span><br><span class="line">  Date: 2019/8/4</span><br><span class="line">  Time: 22:20</span><br><span class="line">  To change this template use File | Settings | File Templates.</span><br><span class="line">--%&gt;</span><br><span class="line">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;</span><br><span class="line">&lt;%@taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;</span><br><span class="line">&lt;%@ taglib prefix=&quot;fn&quot; uri=&quot;http://java.sun.com/jsp/jstl/functions&quot;%&gt;</span><br><span class="line">&lt;%@ page isELIgnored=&quot;false&quot; %&gt;</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;词频查询&lt;/title&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;link href=&quot;https://shared.ydstatic.com/images/favicon.ico&quot; type=&quot;image/x-icon&quot; rel=&quot;shortcut icon&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;margin1&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;div id=&quot;logo&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;logo&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div id=&quot;margin2&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;form action=&quot;search&quot; method=&quot;post&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;border&quot;&gt;</span><br><span class="line">        &lt;select name=&quot;type&quot; id=&quot;selectType&quot;&gt;</span><br><span class="line">            &lt;option value=&quot;四级&quot;&gt;四级&lt;/option&gt;</span><br><span class="line">            &lt;option value=&quot;六级&quot; selected id=&quot;type&quot;&gt;六级&lt;/option&gt;	//预选设置</span><br><span class="line">            &lt;option value=&quot;汉译英&quot; &gt;汉译英&lt;/option&gt;</span><br><span class="line">            &lt;option value=&quot;英译汉&quot; &gt;英译汉&lt;/option&gt;</span><br><span class="line">            &lt;option value=&quot;统计&quot; &gt;统计&lt;/option&gt;</span><br><span class="line">            &lt;option value=&quot;字频&quot;&gt;字频&lt;/option&gt;</span><br><span class="line">        &lt;/select&gt;</span><br><span class="line">        &lt;input type=&quot;text&quot; name=&quot;inputWord&quot; placeholder=&quot;请输入单词或汉字&quot; id=&quot;translateContent&quot; /&gt;</span><br><span class="line">        &lt;span id=&quot;hnwBtn&quot; class=&quot;hand-write&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; value=&quot;查 询&quot; id=&quot;btn&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;reset&quot; value=&quot;重 置&quot; id=&quot;btn1&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;table class=&quot;hovertable&quot;&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;th&gt;汉字&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;个数&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;拼音&lt;/th&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;c:forEach items=&quot;$&#123;wordList2&#125;&quot; var=&quot;CH&quot;&gt;</span><br><span class="line">        &lt;form action=&quot;test1&quot; method=&quot;post&quot;&gt;</span><br><span class="line">            &lt;tr onmouseover=&quot;this.style.backgroundColor=&apos;#ffff66&apos;;&quot; onmouseout=&quot;this.style.backgroundColor=&apos;#d4e3e5&apos;;&quot;&gt;</span><br><span class="line">                &lt;td name=&quot;china&quot;&gt;&lt;c:out value=&quot;$&#123;CH.chinese&#125;&quot;/&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;c:out value=&quot;$&#123;CH.counts&#125;&quot;/&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;c:out value=&quot;$&#123;CH.pin&#125;&quot;/&gt;&lt;/td&gt;</span><br><span class="line">                &lt;%--&lt;td&gt;--%&gt;</span><br><span class="line">                    &lt;%--&lt;input type=&quot;submit&quot; value=&quot;修改&quot; id=&quot;btn2&quot; name=&quot;test&quot;&gt;--%&gt;</span><br><span class="line">                &lt;%--&lt;/td&gt;--%&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">    &lt;/c:forEach&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure><br>$\qquad$如果你观察仔细的话，或许会在以上代码的后半部分发现这句话：<strong><c:forEach items="${wordList2}" var="CH"></strong>，我们很容易就会想到我们是通过这句话来接收后台传过来的数据的，并将Wordlist拆解为一个个Word显示在页面。</p>
+<h3 id="2-2-7-其它文件"><a href="#2-2-7-其它文件" class="headerlink" title="2.2.7 其它文件"></a>2.2.7 其它文件</h3><p>$\qquad$到目前为止，主体流程我已经走完了，只是含有几个文件没有展示出来，一个是数据库操作类DBoper(这个类在我之前发布的博客中是有的，都是一样的内容)、一个就是Chinese_Frequent.java ,其实该文件和Word的作用差不多，都是为了承接在数据库中查询到的结果，然后封装成List类型的传递给前台。<br>以下我展示的代码内容为 <strong>Chinese_Frequent.java</strong> 的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created with IntelliJ IDEA.</span><br><span class="line"> * User: kingback</span><br><span class="line"> * Author:king@王延凯</span><br><span class="line"> * Date: 2019/8/4</span><br><span class="line"> * Time: 22:53</span><br><span class="line"> * Description: No Description</span><br><span class="line"> */</span><br><span class="line">public class Chinese_Frequent &#123;</span><br><span class="line">    public String getChinese() &#123;</span><br><span class="line">        return Chinese;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setChinese(String chinese) &#123;</span><br><span class="line">        Chinese = chinese;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getCounts() &#123;</span><br><span class="line">        return Counts;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCounts(String counts) &#123;</span><br><span class="line">        Counts = counts;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPin() &#123;</span><br><span class="line">        return Pin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setPin(String pin) &#123;</span><br><span class="line">        Pin = pin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String Chinese;</span><br><span class="line">    private String Counts;</span><br><span class="line">    private String Pin;</span><br><span class="line"></span><br><span class="line">    public Chinese_Frequent(String Chinese,String Counts,String Pin)&#123;</span><br><span class="line">        super();</span><br><span class="line">        this.Chinese=Chinese;</span><br><span class="line">        this.Counts=Counts;</span><br><span class="line">        this.Pin=Pin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>$\qquad$至于还有几个jsp页面的代码没有展示出来，我这么告诉你吧，其实这几个jsp页面的代码基本上都是也一样的。但如果你非得要全部的代码的话，可以私聊我，当我看到，我定会免费赠送所有资料。</p>
+<h1 id="3-运行结果"><a href="#3-运行结果" class="headerlink" title="3.运行结果"></a>3.运行结果</h1><p><img src="https://img-blog.csdnimg.cn/2019083120444126.gif#pic_center" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #636363;font-size:14px;letter-spacing: 10px">本文结束啦<i class="fa fa-bell"></i>感谢您的阅读</div>
+    
+</div>
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/24/%E6%91%86%E8%84%B1%E9%99%90%E5%88%B6%E4%BA%94%E6%AD%A5%E8%B5%B0/" rel="next" title="摆脱限制五步走">
+                <i class="fa fa-chevron-left"></i> 摆脱限制五步走
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/25/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C/" rel="prev" title="mysql数据库操作">
+                mysql数据库操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/isme.jpeg"
+                alt="kingback" />
+            
+              <p class="site-author-name" itemprop="name">kingback</p>
+              <p class="site-description motion-element" itemprop="description">昆明理工大学无线通信团队成员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kingback2019/kingback2019.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2020465823@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/weixin_38468077" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-具体要求"><span class="nav-number">1.</span> <span class="nav-text">0.具体要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-系统的工作流程以及原理"><span class="nav-number">2.</span> <span class="nav-text">1. 系统的工作流程以及原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Servelt介绍"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 Servelt介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-jsp介绍"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 jsp介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Tomcat介绍"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 Tomcat介绍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-功能实现"><span class="nav-number">3.</span> <span class="nav-text">2.功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-建立四六级单词的MYSQL表格"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 建立四六级单词的MYSQL表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-功能实现"><span class="nav-number">3.2.</span> <span class="nav-text">2.2  功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-整个项目组成"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1 整个项目组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-介绍一下index-jsp文件内容"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2.2 介绍一下index.jsp文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-介绍TranslateServelt-java"><span class="nav-number">3.2.3.</span> <span class="nav-text">2.2.4 介绍TranslateServelt.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-5-后台数据返回前台"><span class="nav-number">3.2.4.</span> <span class="nav-text">2.2.5 后台数据返回前台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-6-前台接收后台的数据并处理，显示在前端页面。"><span class="nav-number">3.2.5.</span> <span class="nav-text">2.2.6 前台接收后台的数据并处理，显示在前端页面。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-7-其它文件"><span class="nav-number">3.2.6.</span> <span class="nav-text">2.2.7 其它文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-运行结果"><span class="nav-number">4.</span> <span class="nav-text">3.运行结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kingback</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>总访客
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1.2,"jsonPath":"/live2d_models/assets/assets/hibiki.model.json"},"display":{"position":"right","width":200,"height":500},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+</html>

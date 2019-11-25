@@ -80,13 +80,12 @@
 
 
 <meta name="description" content="昆明理工大学无线通信团队成员">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hello">
-<meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;18&#x2F;Hello&#x2F;index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="王延凯的博客">
+<meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;page&#x2F;3&#x2F;index.html">
 <meta property="og:site_name" content="王延凯的博客">
 <meta property="og:description" content="昆明理工大学无线通信团队成员">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-21T07:13:25.745Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -117,13 +116,13 @@
 
 
 
-  <link rel="canonical" href="https://kingback2019.github.io/2019/11/18/Hello/"/>
+  <link rel="canonical" href="https://kingback2019.github.io/page/3/"/>
 
 
 
 
 
-  <title>Hello | 王延凯的博客</title>
+  <title>王延凯的博客</title>
   
 
 
@@ -142,7 +141,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -259,9 +259,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -274,7 +274,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/18/Hello/">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/10/23/%E5%A6%82%E4%BD%95%E5%B0%86IDEA%E5%BC%80%E5%8F%91%E7%9A%84java%20web%E9%A1%B9%E7%9B%AE%E7%A7%BB%E6%A4%8D%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="kingback">
@@ -291,7 +291,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/23/%E5%A6%82%E4%BD%95%E5%B0%86IDEA%E5%BC%80%E5%8F%91%E7%9A%84java%20web%E9%A1%B9%E7%9B%AE%E7%A7%BB%E6%A4%8D%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url">如何将IDEA开发的java web项目移植到腾讯云服务器</a></h1>
         
 
         <div class="post-meta">
@@ -303,8 +305,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-18T20:57:13+08:00">
-                2019-11-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-23T20:46:53+08:00">
+                2019-10-23
               </time>
             
 
@@ -326,8 +328,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">测试</span>
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器相关</span>
                   </a>
                 </span>
 
@@ -344,11 +346,6 @@
           
           
 
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
           
 
           
@@ -369,15 +366,109 @@
 
       
         
+          
+            <h2 id="1-服务器添加国内新源"><a href="#1-服务器添加国内新源" class="headerlink" title="1.服务器添加国内新源"></a>1.服务器添加国内新源</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.<span class="built_in">list</span> /etc/apt/sources_init.<span class="built_in">list</span></span><br><span class="line">sudo gedit /etc/apt/sources.<span class="built_in">list</span></span><br><span class="line">sudo apt-<span class="built_in">get</span> update</span><br></pre></td></tr></table></figure>
+<p>操作内容具体可以参看这篇博客<a href="https://blog.csdn.net/qq_35451572/article/details/79516563#_70" target="_blank" rel="noopener">博客链接</a></p>
+<h2 id="2-服务器安装java-jdk"><a href="#2-服务器安装java-jdk" class="headerlink" title="2.服务器安装java jdk"></a>2.服务器安装java jdk</h2><p>使用命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install openjdk<span class="number">-8</span>-jdk</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20191017101952719.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>安装完成之后查看java版本<br><img src="https://img-blog.csdnimg.cn/20191017103006728.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="3-下载tomcat-8-5-31-（与自己电脑的tomcat版本对应）"><a href="#3-下载tomcat-8-5-31-（与自己电脑的tomcat版本对应）" class="headerlink" title="3.下载tomcat 8.5.31 （与自己电脑的tomcat版本对应）"></a>3.下载tomcat 8.5.31 （与自己电脑的tomcat版本对应）</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:<span class="comment">//archive.apache.org/dist/tomcat/tomcat-8/v8.5.31/bin/apache-tomcat-8.5.31.tar.gz</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20191017105426286.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -xvzf apache-tomcat<span class="number">-8.5</span><span class="number">.31</span>.tar.gz</span><br></pre></td></tr></table></figure><br>解压</p>
+<p>文件转移至usr/tomcat<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ cd /usr</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:/usr$ ls</span><br><span class="line">bin  games  include  lib  local  sbin  share  src</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:/usr$ sudo <span class="built_in">mkdir</span> tomcat</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:/usr$ ls</span><br><span class="line">bin  games  include  lib  local  sbin  share  src  tomcat</span><br></pre></td></tr></table></figure><br>创建tomcat文件夹之后，将之前解压的文件复制一份到/usr/tomcat<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:/usr$ cd tomcat/</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:/usr/tomcat$ sudo cp -r /<span class="built_in">home</span>/ubuntu/apache-tomcat<span class="number">-8.5</span><span class="number">.31</span> /usr/tomcat/</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:/usr/tomcat$ ls</span><br><span class="line">apache-tomcat<span class="number">-8.5</span><span class="number">.31</span></span><br></pre></td></tr></table></figure><br>执行tomcat文件<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:/usr/tomcat/apache-tomcat<span class="number">-8.5</span><span class="number">.31</span>$ cd bin/</span><br><span class="line">bash: cd: bin/: Permission denied</span><br></pre></td></tr></table></figure><br>我们在进入该文件下的bin目录时，我们发现，无法直接进入，提示权限不够，所以，我们直接切换到root用户<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:/usr/tomcat/apache-tomcat<span class="number">-8.5</span><span class="number">.31</span>$ sudo su</span><br><span class="line">root@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:/usr/tomcat/apache-tomcat<span class="number">-8.5</span><span class="number">.31</span><span class="meta"># cd bin/</span></span><br></pre></td></tr></table></figure><br>可以看到此时是可以的，接下里查看一下bin目录下的文件<br><img src="https://img-blog.csdnimg.cn/20191017120825558.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>执行如下命令，开启服务，<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./startup.sh</span><br></pre></td></tr></table></figure><br>我们则会看到提示：<br><img src="https://img-blog.csdnimg.cn/20191017121243258.png#pic_center" alt="在这里插入图片描述"><br>提示已经启动成功。这时我们只需要在浏览器页面输入网址<br>，即可看到tomcat默认的网页，如下所示：<br><img src="https://img-blog.csdnimg.cn/20191017121614125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>最后，如果想要关闭服务器的话，直接在服务器终端运行：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./<span class="built_in">shutdown</span>.sh</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-安装mysql数据库（版本最好和之前的web项目一样）"><a href="#4-安装mysql数据库（版本最好和之前的web项目一样）" class="headerlink" title="4.安装mysql数据库（版本最好和之前的web项目一样）"></a>4.安装mysql数据库（版本最好和之前的web项目一样）</h2><p>在这之前我们可以先退出root用户,切换到ubuntu用户，使用命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su ubuntu</span><br></pre></td></tr></table></figure><br>可以看到已经切换完毕，<br><img src="https://img-blog.csdnimg.cn/2019101712261064.png#pic_center" alt="在这里插入图片描述"><br>接下来我们直接回到主目录，使用命令<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br></pre></td></tr></table></figure><br>我们看到已经切换完毕。<br><img src="https://img-blog.csdnimg.cn/20191017122856669.png#pic_center" alt="在这里插入图片描述"></p>
+<p>在ubuntu上安装数据库话还是比较简单的，只需要下面三条命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install mysql-server</span><br><span class="line">sudo apt-<span class="built_in">get</span> install mysql-client</span><br><span class="line">sudo apt-<span class="built_in">get</span> install libmysqlclient-dev</span><br></pre></td></tr></table></figure><br>在安装过程中，只需要按照提示设置好密码即可。<br>在执行完成上边的三步之后，检验一下，是否真正安装成功，使用如下命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo netstat -tap |grep mysql</span><br></pre></td></tr></table></figure><br>如果出现下图所示，即表示已经安装成功：<br><img src="https://img-blog.csdnimg.cn/20191017123723759.png#pic_center" alt="在这里插入图片描述"><br>接下来让我们来打开我们的数据库，使用如下命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure><br>之后在输入密码以后即可成功访问数据库：<br><img src="https://img-blog.csdnimg.cn/20191017123905970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>接下来进行一下数据库的常规操作，查看拥有的数据库名称。<br><img src="https://img-blog.csdnimg.cn/20191017124104794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="5-将java-Web项目打包成war包"><a href="#5-将java-Web项目打包成war包" class="headerlink" title="5.将java Web项目打包成war包"></a>5.将java Web项目打包成war包</h2><p>由于我的项目是使用IDEA搞得，所以我在这里就直接用IDEA进行导包了，首先打开IDEA界面如下：<br><img src="https://img-blog.csdnimg.cn/20191017213143708.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>先创建一个explod</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><img src="https://img-blog.csdnimg.cn/20191017213445505.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></th>
+<th><img src="https://img-blog.csdnimg.cn/20191017214528671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其实在完成之前的四步操作的话，是不用进行任何操作的，只需要点击两次<strong>OK</strong>即可。此刻，我们的explode已经创建完成。我们要做的就是记住这个explode的名字，就是上方红色标注的地方。<br>再创建一个archive</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><img src="https://img-blog.csdnimg.cn/20191017214757163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></th>
+<th><img src="https://img-blog.csdnimg.cn/20191017215056674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_60" alt="在这里插入图片描述"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>完成之后点击OK即可完成创建，接下来我们就要对其进行Build</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><img src="https://img-blog.csdnimg.cn/20191017215414973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_50" alt="在这里插入图片描述"></th>
+<th><img src="https://img-blog.csdnimg.cn/20191017215503324.png" alt="在这里插入图片描述"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>点击之后即可看见项目正在打包，而后我们便可以在对应的目录找到打包后的文件<br><img src="https://img-blog.csdnimg.cn/20191017215744478.png" alt="在这里插入图片描述"><br>此处我的文件位置为（每个人的位置都不一样，这个上边创建Archive的时候有设置输出路径）：<br><img src="https://img-blog.csdnimg.cn/20191017215938650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>好了到此，项目打包完成。</p>
+<h2 id="6-将本地数据库导入服务器数据库"><a href="#6-将本地数据库导入服务器数据库" class="headerlink" title="6.将本地数据库导入服务器数据库"></a>6.将本地数据库导入服务器数据库</h2><h3 id="6-1-将本地的数据库表格导出为sql"><a href="#6-1-将本地的数据库表格导出为sql" class="headerlink" title="6.1 将本地的数据库表格导出为sql"></a>6.1 将本地的数据库表格导出为sql</h3><p>对于数据库表格的导出，由于我的电脑之前安装过mysql workbench（windows上的一个图形化管理工具）,所以在这里我就使用其将本地的数据表格导出为sql文件。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><img src="https://img-blog.csdnimg.cn/20191017204604227.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></th>
+<th><img src="https://img-blog.csdnimg.cn/20191017205033326.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_60" alt="在这里插入图片描述"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如上操作完毕之后则可以将数据库表格导出为sql文件，我们只需到指定文件夹下去寻找即可。</p>
+<h3 id="6-2-将sql文件导入到服务器的mysql数据库"><a href="#6-2-将sql文件导入到服务器的mysql数据库" class="headerlink" title="6.2 将sql文件导入到服务器的mysql数据库"></a>6.2 将sql文件导入到服务器的mysql数据库</h3><p>本节使用之前搭建好的MobaXterm工具，只需将文件拖入即可在服务器端接收到。这里我们将这些sql文件都放在一个文件夹下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ mv words_cet.sql sql_documents/</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ mv words_chinese_word.sql sql_documents/</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ mv words_engchdic.sql sql_documents/</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ cd sql_documents/</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~/sql_documents$ ls</span><br><span class="line">words_cet.sql  words_chinese_word.sql  words_engchdic.sql</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~/sql_documents$</span><br></pre></td></tr></table></figure></p>
+<p>打开mysql服务<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure><br>此过程需要输入密码，完成之后如下所示：<br><img src="https://img-blog.csdnimg.cn/20191017205933962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>然后分别执行如下命令<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create database words;</span><br><span class="line">use words;</span><br></pre></td></tr></table></figure><br>创建一个数据库并且进入该数据库,然后再使用source 命令导入sql文件<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; source /<span class="built_in">home</span>/ubuntu/sql_documents/words_cet.sql;</span><br><span class="line">mysql&gt; source /<span class="built_in">home</span>/ubuntu/sql_documents/words_chinese_word.sql;</span><br><span class="line">mysql&gt; source /<span class="built_in">home</span>/ubuntu/sql_documents/words_engchdic.sql;</span><br></pre></td></tr></table></figure><br>执行之后可以看到如下结果：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><img src="https://img-blog.csdnimg.cn/201910172109406.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></th>
+<th><img src="https://img-blog.csdnimg.cn/20191017211012815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>我们可以看到文件已经导入成功，那么，我们来检验一下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show tables;</span><br><span class="line">select * from cet;</span><br></pre></td></tr></table></figure><br>其执行结果如下：<br><img src="https://img-blog.csdnimg.cn/20191017211508174.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>在上图中我们可以看到，我们的sql文件已经导入成功。</p>
+<h2 id="7-tomcat加载之前打包的war文件，完成webapp的移植"><a href="#7-tomcat加载之前打包的war文件，完成webapp的移植" class="headerlink" title="7.tomcat加载之前打包的war文件，完成webapp的移植"></a>7.tomcat加载之前打包的war文件，完成webapp的移植</h2><h3 id="7-1-将之前打包好的war文件上传到服务器"><a href="#7-1-将之前打包好的war文件上传到服务器" class="headerlink" title="7.1 将之前打包好的war文件上传到服务器"></a>7.1 将之前打包好的war文件上传到服务器</h3><p>在这里我使用的工具为MobaXterm工具，直接将文件上传到tomcat安装目录下的webapps文件夹下即可。<br>先后执行如下命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line">cd /usr/tomcat/apache-tomcat<span class="number">-8.5</span><span class="number">.31</span>/bin</span><br><span class="line">./<span class="built_in">shutdown</span>.sh</span><br><span class="line">./startup.sh</span><br></pre></td></tr></table></figure><br>我们即可以看到在webapps下刚丢进来的war包，已被tomcat自动解压，如下所示：<br><img src="https://img-blog.csdnimg.cn/20191017221001662.png#pic_center" alt="在这里插入图片描述"><br>此刻我们打开我们的浏览器，输入我们的<strong>公网ip地址：8080/项目路径</strong><br>以下附上整个服务器的运行动图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20191017221655380.gif#pic_center" alt="在这里插入图片描述"><br>好了，打完收工。</p>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8.总结"></a>8.总结</h2><p><strong>太累了！！！</strong></p>
+
+          
+        
       
     </div>
 	<div>
-		
-			<div>
-    
-        <div style="text-align:center;color: #636363;font-size:14px;letter-spacing: 10px">本文结束啦<i class="fa fa-bell"></i>感谢您的阅读</div>
-    
-</div>
 		
 	</div>
     
@@ -394,32 +485,12 @@
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/11/18/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/18/IDM%E7%9A%84%E5%AE%89%E8%A3%85%20(1)/" rel="prev" title="IDM的安装">
-                IDM的安装 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -429,11 +500,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/">&lt;i class=&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
@@ -441,10 +515,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -703,10 +773,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -1081,6 +1147,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

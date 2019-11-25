@@ -79,15 +79,31 @@
 
 
 
-<meta name="description" content="昆明理工大学无线通信团队成员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;tags&#x2F;index.html">
+<meta name="description" content="1. 检查数据库版本打开电脑cmd窗口，在其中输入mysql -uroot -p，如下所示：$\qquad$ 如果你的电脑出现如图所示，说明你的电脑mysql已经配置成功了。如果没有成功，你可以去检查一下mysql是否已经安装成功，如果已经安装了，但是还是没有出现我的类似界面，检查一下是否将mysql安装路径配置到环境变量。 2. 查看已有数据库$\qquad$ 使用命令show database">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql数据库操作">
+<meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;25&#x2F;MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C&#x2F;index.html">
 <meta property="og:site_name" content="王延凯的博客">
-<meta property="og:description" content="昆明理工大学无线通信团队成员">
+<meta property="og:description" content="1. 检查数据库版本打开电脑cmd窗口，在其中输入mysql -uroot -p，如下所示：$\qquad$ 如果你的电脑出现如图所示，说明你的电脑mysql已经配置成功了。如果没有成功，你可以去检查一下mysql是否已经安装成功，如果已经安装了，但是还是没有出现我的类似界面，检查一下是否将mysql安装路径配置到环境变量。 2. 查看已有数据库$\qquad$ 使用命令show database">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-21T08:54:04.720Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829215635637.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019082922054779.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829221118386.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829221353796.png#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829221526674.png#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829222123275.png#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829223516603.png#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829223725712.png#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829223801220.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829224519951.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829224537303.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829225008900.png#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829224950651.png#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829225026426.png#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829230452213.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:updated_time" content="2019-11-25T08:58:17.017Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190829215635637.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
 
 
 
@@ -117,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="https://kingback2019.github.io/tags/"/>
+  <link rel="canonical" href="https://kingback2019.github.io/2019/11/25/MYSQL数据库的操作/"/>
 
 
 
 
 
-  <title>tags | 王延凯的博客</title>
+  <title>mysql数据库操作 | 王延凯的博客</title>
   
 
 
@@ -262,40 +278,192 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/25/MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                No tags
-            </div>
-            <div class="tag-cloud-tags">
+          <h1 class="post-title" itemprop="name headline">mysql数据库操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
               
-            </div>
-          </div>
-        
-      </div>
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-25T16:52:21+08:00">
+                2019-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库操作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="1-检查数据库版本"><a href="#1-检查数据库版本" class="headerlink" title="1. 检查数据库版本"></a>1. 检查数据库版本</h1><p>打开电脑cmd窗口，在其中输入mysql -uroot -p，如下所示：<br><img src="https://img-blog.csdnimg.cn/20190829215635637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$ 如果你的电脑出现如图所示，说明你的电脑mysql已经配置成功了。如果没有成功，你可以去检查一下mysql是否已经安装成功，如果已经安装了，但是还是没有出现我的类似界面，检查一下是否将mysql安装路径配置到环境变量。</p>
+<h1 id="2-查看已有数据库"><a href="#2-查看已有数据库" class="headerlink" title="2. 查看已有数据库"></a>2. 查看已有数据库</h1><p>$\qquad$ 使用命令show databases;将会得到目前已经创建的数据库目录。<br><img src="https://img-blog.csdnimg.cn/2019082922054779.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>在列表中就是显示出我的mysql中已经创建的数据库。</p>
+<h1 id="3-创建数据库"><a href="#3-创建数据库" class="headerlink" title="3.创建数据库"></a>3.创建数据库</h1><p>$\qquad$ 使用命令create database test；来创建一个名叫test的数据库，并且使用show databases;查看是否创建成功。<br><img src="https://img-blog.csdnimg.cn/20190829221118386.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>可以看到新创建的test数据库已经建立。</p>
+<h2 id="3-1-数据库的使用"><a href="#3-1-数据库的使用" class="headerlink" title="3.1 数据库的使用"></a>3.1 数据库的使用</h2><p>使用ues test；命令来操作刚刚创建的test数据库，并且使用命show tables；查看数据库中存在的表格。<br><img src="https://img-blog.csdnimg.cn/20190829221353796.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="3-1-1-创建表格"><a href="#3-1-1-创建表格" class="headerlink" title="3.1.1 创建表格"></a>3.1.1 创建表格</h3><p>如果我们想要创建一个表格的话，可以参照以下格式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create table tablename(</span><br><span class="line">			name varchar(<span class="number">20</span>),</span><br><span class="line">			age smallint,</span><br><span class="line">			gender varchar(<span class="number">1</span>),</span><br><span class="line">			<span class="class"><span class="keyword">class</span> <span class="title">varchar</span>(20),</span></span><br><span class="line"><span class="class">			<span class="title">id</span> <span class="title">smallint</span> <span class="title">unsigned</span> <span class="title">auto_increment</span> <span class="title">primary</span> <span class="title">key</span></span></span><br><span class="line"><span class="class">			)</span>;</span><br></pre></td></tr></table></figure><br> $\qquad$ 需要注意的是，在每个表格中都需要有一个主键，标拾命令为private key，并且我们在此表中还将id列设置为int类型的自增类型。这样就不必每次都插入id列了，而是由计算机直接生成。<br>执行之后则可以看到如下所示界面：<br><img src="https://img-blog.csdnimg.cn/20190829221526674.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="3-1-2-显示表格"><a href="#3-1-2-显示表格" class="headerlink" title="3.1.2 显示表格"></a>3.1.2 显示表格</h3><p>$\qquad$ 并且使用show columns from qust;命令查看该表包含的列。<br><img src="https://img-blog.csdnimg.cn/20190829222123275.png#pic_center" alt="在这里插入图片描述"><br>上图展示的就是我们刚刚建立的表的结构。</p>
+<h2 id="3-2-数据表格的操作（增删查改）"><a href="#3-2-数据表格的操作（增删查改）" class="headerlink" title="3.2 数据表格的操作（增删查改）"></a>3.2 数据表格的操作（增删查改）</h2><p>$\qquad$ 其实在我看来，对于数据库简单的操作，一般都是对于数据库内容的增删查改使用的多，因此，此处我也就仅仅拿这几个方向来分别做一下实验。</p>
+<h3 id="3-2-1-向表中插入数据"><a href="#3-2-1-向表中插入数据" class="headerlink" title="3.2.1 向表中插入数据"></a>3.2.1 向表中插入数据</h3><p>当我们想要向表格中插入几条数据的时候，其语法如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name ( field1, field2,...fieldN ) VALUES ( value1, value2,...valueN );</span><br></pre></td></tr></table></figure><br>下图所示为我在数据库中插入数据信息：<br><img src="https://img-blog.csdnimg.cn/20190829223516603.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="3-2-2-查询表中数据"><a href="#3-2-2-查询表中数据" class="headerlink" title="3.2.2 查询表中数据"></a>3.2.2 查询表中数据</h3><p>查询数据表格中的数据，其语法如下所示：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,column_name FROM table_name [WHERE Clause] [LIMIT N][ OFFSET M]</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190829223725712.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="3-2-3-更改表中某条数据"><a href="#3-2-3-更改表中某条数据" class="headerlink" title="3.2.3 更改表中某条数据"></a>3.2.3 更改表中某条数据</h3><p>更改数据库中某条件下的数据，其使用规范为：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name SET field1=<span class="keyword">new</span>-value1, field2=<span class="keyword">new</span>-value2 [WHERE Clause]</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190829223801220.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="3-2-4-删除表中某条数据"><a href="#3-2-4-删除表中某条数据" class="headerlink" title="3.2.4 删除表中某条数据"></a>3.2.4 删除表中某条数据</h3><p>在删除之前我先插入了一些数据如下所示：<br><img src="https://img-blog.csdnimg.cn/20190829224519951.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>执行删除操作，使用delete from qust where id=2;删除表中的刘淑贵<br>其使用规范为：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name [WHERE Clause]</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190829224537303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="3-3-最大、最小、平均值查询"><a href="#3-3-最大、最小、平均值查询" class="headerlink" title="3.3 最大、最小、平均值查询"></a>3.3 最大、最小、平均值查询</h2><h3 id="3-3-1-查询表中工资最高值"><a href="#3-3-1-查询表中工资最高值" class="headerlink" title="3.3.1 查询表中工资最高值"></a>3.3.1 查询表中工资最高值</h3><p>查询表中数据最高值的使用规范：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select max(field1) <span class="keyword">as</span> maxvalue <span class="keyword">from</span> table1</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190829225008900.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="3-3-2-查询表中工资最低值"><a href="#3-3-2-查询表中工资最低值" class="headerlink" title="3.3.2 查询表中工资最低值"></a>3.3.2 查询表中工资最低值</h3><p>查询最低工资，使用规范：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select min(field1) <span class="keyword">as</span> minvalue <span class="keyword">from</span> table1</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190829224950651.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="3-3-3-查询表中工资平均值"><a href="#3-3-3-查询表中工资平均值" class="headerlink" title="3.3.3 查询表中工资平均值"></a>3.3.3 查询表中工资平均值</h3><p>查询平均工资：使用规范：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select avg(field1) <span class="keyword">as</span> avgvalue <span class="keyword">from</span> table1</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190829225026426.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="3-4-排序"><a href="#3-4-排序" class="headerlink" title="3.4 排序"></a>3.4 排序</h2><p>按照工资高低进行排序，使用规范：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span> table1 order by field1,field2 [desc]</span><br></pre></td></tr></table></figure><br>可以看到 添加desc 是对其工资从高到低进行排序，而如果不添加desc 则会对其进行升序排列。<br><img src="https://img-blog.csdnimg.cn/20190829230452213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+
       
     </div>
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #636363;font-size:14px;letter-spacing: 10px">本文结束啦<i class="fa fa-bell"></i>感谢您的阅读</div>
+    
+</div>
+		
+	</div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/25/jsp+servelt+mysql+tomcat%20%E5%9B%9B%E5%85%AD%E7%BA%A7%E5%8D%95%E8%AF%8D%E6%9F%A5%E8%AF%A2%E7%B3%BB%E7%BB%9F/" rel="next" title="jsp+servelt+mysql+tomcat实现的四六级单词查询系统">
+                <i class="fa fa-chevron-left"></i> jsp+servelt+mysql+tomcat实现的四六级单词查询系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/25/scrapy%E7%88%AC%E5%8F%96%E6%98%86%E5%B7%A5%E4%BF%A1%E8%87%AA%E9%99%A2%E5%AF%BC%E5%B8%88%E4%BF%A1%E6%81%AF/" rel="prev" title="scrapy爬取昆工信自院导师信息">
+                scrapy爬取昆工信自院导师信息 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -328,8 +496,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -406,6 +583,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-检查数据库版本"><span class="nav-number">1.</span> <span class="nav-text">1. 检查数据库版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-查看已有数据库"><span class="nav-number">2.</span> <span class="nav-text">2. 查看已有数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-创建数据库"><span class="nav-number">3.</span> <span class="nav-text">3.创建数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-数据库的使用"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 数据库的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-创建表格"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 创建表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-显示表格"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 显示表格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-数据表格的操作（增删查改）"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 数据表格的操作（增删查改）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-向表中插入数据"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 向表中插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-查询表中数据"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 查询表中数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-更改表中某条数据"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.3 更改表中某条数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-删除表中某条数据"><span class="nav-number">3.2.4.</span> <span class="nav-text">3.2.4 删除表中某条数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-最大、最小、平均值查询"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 最大、最小、平均值查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-查询表中工资最高值"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1 查询表中工资最高值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-查询表中工资最低值"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.3.2 查询表中工资最低值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-查询表中工资平均值"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.3.3 查询表中工资平均值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-排序"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 排序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

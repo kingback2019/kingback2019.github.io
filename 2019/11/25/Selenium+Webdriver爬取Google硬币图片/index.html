@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.需求目的$\qquad$在做本科毕业设计的时候，女朋友选的课题时对于不同国家硬币的识别，这无疑将会用到深度学习以及机器学习的理论和方法来进行识别。但是前提是必须先拿一些样本数据在神经网络中进行训练，而每个币种也都需要三四百左右有效图片（就是那种含有用用信息的图片），这可当时愁坏了女朋友，我不忍心看她发愁，于是就揽下了图片资料的搜集这一部分的任务。 2.爬取原理$\qquad$由于此次我们的爬取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Selenium+Webdriver爬取Google硬币图片">
+<meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;25&#x2F;Selenium+Webdriver%E7%88%AC%E5%8F%96Google%E7%A1%AC%E5%B8%81%E5%9B%BE%E7%89%87&#x2F;index.html">
+<meta property="og:site_name" content="王延凯的博客">
+<meta property="og:description" content="1.需求目的$\qquad$在做本科毕业设计的时候，女朋友选的课题时对于不同国家硬币的识别，这无疑将会用到深度学习以及机器学习的理论和方法来进行识别。但是前提是必须先拿一些样本数据在神经网络中进行训练，而每个币种也都需要三四百左右有效图片（就是那种含有用用信息的图片），这可当时愁坏了女朋友，我不忍心看她发愁，于是就揽下了图片资料的搜集这一部分的任务。 2.爬取原理$\qquad$由于此次我们的爬取">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190830210336520.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190830210407798.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:updated_time" content="2019-11-25T09:02:26.285Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190830210336520.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kingback2019.github.io/2019/11/25/Selenium+Webdriver爬取Google硬币图片/"/>
+
+
+
+
+
+  <title>Selenium+Webdriver爬取Google硬币图片 | 王延凯的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王延凯的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/25/Selenium+Webdriver%E7%88%AC%E5%8F%96Google%E7%A1%AC%E5%B8%81%E5%9B%BE%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Selenium+Webdriver爬取Google硬币图片</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-25T16:52:57+08:00">
+                2019-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-需求目的"><a href="#1-需求目的" class="headerlink" title="1.需求目的"></a>1.需求目的</h1><p>$\qquad$在做本科毕业设计的时候，女朋友选的课题时对于不同国家硬币的识别，这无疑将会用到深度学习以及机器学习的理论和方法来进行识别。但是前提是必须先拿一些样本数据在神经网络中进行训练，而每个币种也都需要三四百左右有效图片（就是那种含有用用信息的图片），这可当时愁坏了女朋友，我不忍心看她发愁，于是就揽下了图片资料的搜集这一部分的任务。</p>
+<h1 id="2-爬取原理"><a href="#2-爬取原理" class="headerlink" title="2.爬取原理"></a>2.爬取原理</h1><p>$\qquad$由于此次我们的爬取对象为Google浏览器，所以我就默认大家已经可以成功翻墙。如果大家还是翻不了，可以私聊找我，免费分享资料。<br>$\qquad$接下来我来介绍一下Selenium，Selenium它是一个用于Web应用程序自动化测试工具。它可以直接运行在浏览器中，就像真正的用户在操作一样。可以在受程序控制的窗口，让程序来模拟人的点击、下拉、输入、选择等操作，从而得到我们想要的数据。<br>$\qquad$selenium支持的浏览器包括IE（7, 8, 9, 10, 11），Mozilla Firefox，Safari，Google Chrome，Opera等。此次实验我使用的浏览器为Chrome浏览器。<br>$\qquad$Webdriver在我理解看来，它是一个可以产生一个受程序控制的浏览器模拟器，如果我们使用selenium+webdriver组合来爬取信息的话，那么我们所有的活动都是发生在这个模拟器之中的。<br>在此处我就先不展示微Webdriver的安装教程，如果后边有时间，我会尽力量将这个教程补全。</p>
+<h1 id="3-代码介绍"><a href="#3-代码介绍" class="headerlink" title="3.代码介绍"></a>3.代码介绍</h1><p>$\qquad$在程序中，我是定义了几个函数来分别实现获取图片的下载地址get_str()、重命名图片的名称rename()、以及图片的下载download()函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"># @Time : 2019/5/5 0:22 </span><br><span class="line"># @Author : kingback</span><br><span class="line"># @File : pics_USA.py </span><br><span class="line"># @Software: PyCharm</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support.ui <span class="keyword">import</span> WebDriverWait</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"><span class="keyword">import</span> traceback</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">##################################################################</span><br><span class="line">##    以下开始定义函数</span><br><span class="line">##    首先一点需要明确，如果函数只是定义了，</span><br><span class="line">##    而没有被调用，它是不会执行的</span><br><span class="line">##################################################################</span><br><span class="line"></span><br><span class="line">##该函数主要实现抓取网页内容的解析工作</span><br><span class="line">##获取当前页面硬币图片的下载地址</span><br><span class="line">def  get_str(driver):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            driver.find_element_by_id(<span class="string">"irc-rac"</span>).click()</span><br><span class="line">            ##模拟用户点击网页右边的下一个</span><br><span class="line">        except:</span><br><span class="line">            driver.find_element_by_xpath(<span class="string">"//*[@id='irc-rac']/a"</span>).click()</span><br><span class="line">    except:</span><br><span class="line">        driver.find_element_by_class_name(<span class="string">"Q8Bv4e"</span>).click()</span><br><span class="line">        driver.find_element_by_css_selector(<span class="string">"div#irc-lac &gt; a"</span>).click()</span><br><span class="line"></span><br><span class="line">    ##上边的try except都是模拟点击下一个的，因为有时候单纯的使用id来寻找那个下一个控件的时候网页有时候会搜索不到</span><br><span class="line">    ## 当id搜索不到的时候，就会采用xpath来定位这个空间</span><br><span class="line">    ##如果还是不行，那就再通过class_name来定位，如果还是不行那就通过css选择器来定位</span><br><span class="line">    ##一般来说通过id来定位就直接可以</span><br><span class="line"></span><br><span class="line">    # 使用xpath解析网页中硬币图片的下载地址，可以看出这只是摘取网页该路径下的内容，也就是网页下包含硬币图片的img字段</span><br><span class="line">    img = driver.find_element_by_xpath(<span class="string">"//*[@id='irc_cc']/div[2]/div[1]/div[2]/div[1]/a/img"</span>)</span><br><span class="line">    # 因为字段中含有很多属性，经过chrome（）的开发者模式发现该图片的下载地址存储在src属性里边</span><br><span class="line">    img_url = img.get_attribute(<span class="string">"src"</span>)</span><br><span class="line">    ##提取src属性数据</span><br><span class="line">    <span class="keyword">return</span> img_url</span><br><span class="line">    ##返回网页解析出来的图片下载地址</span><br><span class="line"></span><br><span class="line">##该函数主要实现</span><br><span class="line">##传入的两个参数一个为file，是当前爬取图片的种类，比如‘一欧元’</span><br><span class="line">##img_url 为图片的下载地址</span><br><span class="line">##返回初步处理的文件名 例如‘一欧元/0322.jpg.jpg’或‘一欧元/0566.jpg’或‘一欧元/58777.jpg.wddcvcrrcc.jpg’</span><br><span class="line">##总之返回数据多样,我们将会在rename函数中规范处理文件名称</span><br><span class="line">def get_fileneme(file,img_url):</span><br><span class="line"></span><br><span class="line">    lists = re.split(r<span class="string">'/'</span>, img_url)</span><br><span class="line">    #将img_url 字符串按照‘/’拆分为数组lists</span><br><span class="line">    ## lists数组的倒数第一个（在数组中表现形式为-1）数据即为我们需要的文件名称，但是此处得到的图片命名格式不规范</span><br><span class="line">    filename=os.path.join(file,lists[<span class="number">-1</span>])</span><br><span class="line">    #考虑到有些图片的网页下载地址最后几位不是‘.jpg’结尾，于是我们在其文件名称上都手动加上‘.jpg’</span><br><span class="line">    filename = filename + <span class="string">".jpg"</span></span><br><span class="line">    ## 返回初步处理得到的文件名称</span><br><span class="line">    <span class="keyword">return</span> filename</span><br><span class="line"></span><br><span class="line">##再次处理已经拆分出来的图片名字，将一些命名不规范的图片统一规范</span><br><span class="line">def rename(filename):</span><br><span class="line">    ## 由于我们通过函数get_filename()得到的文件名称不规范</span><br><span class="line">    lists = re.split(r<span class="string">'.jpg'</span>, filename)</span><br><span class="line">    ##使用re库对传入的filename按照‘.jpg’拆分</span><br><span class="line">    ##比如‘一欧元/0322.jpg.jpg’ 拆分完后lists[0]内就是我们需要的规范文件名，为‘一欧元/0322’</span><br><span class="line">    filename_reshape = lists[<span class="number">0</span>] + <span class="string">".jpg"</span></span><br><span class="line">    ##再对已经处理好的文件名进行字符串拼接，此时的文件名为 ‘一欧元/0322.jpg’</span><br><span class="line">    <span class="keyword">return</span> filename_reshape</span><br><span class="line">    ##返回规范的图片保存名字</span><br><span class="line"></span><br><span class="line">##创建文件夹操作，fileame为要创建的文件夹的名字</span><br><span class="line">def mkdir(filename):</span><br><span class="line">    #判断该文件夹是否存在</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(filename) is False:</span><br><span class="line">        ##如果不存在那就创建该文件夹</span><br><span class="line">        os.makedirs(filename)</span><br><span class="line"></span><br><span class="line">##该函数主要实现图片地址的下载，需要传入两个参数</span><br><span class="line">##url为要下载图片的网络连接地址，filename为图片要保存为的名字（规范版）</span><br><span class="line">##该程序执行会返回两个结果，如果要下载的文件已经存在，那么直接返回‘file exites!’</span><br><span class="line">##如果图片下载成功，直接返回图片的名字</span><br><span class="line">def download(url, filename):</span><br><span class="line"></span><br><span class="line">    #首先要对需要下载的图片进行查询</span><br><span class="line">    #如果文件已经存在，直接返回result,不再继续往下执行</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(filename):</span><br><span class="line">        result=<span class="string">"file exists!"</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    ##以下执行部分执行，则说明该文件不存在</span><br><span class="line">    #以下大可不必管，就是一个图片保存操作</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        r = requests.get(url, stream=True, timeout=<span class="number">15</span>)</span><br><span class="line">        r.raise_for_status()</span><br><span class="line">        <span class="keyword">with</span> open(filename, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">for</span> chunk <span class="keyword">in</span> r.iter_content(chunk_size=<span class="number">1024</span>):</span><br><span class="line">                if chunk:  # filter out keep-alive new chunks</span><br><span class="line">                    f.write(chunk)</span><br><span class="line">                    f.flush()</span><br><span class="line">        <span class="keyword">return</span> filename</span><br><span class="line">    except KeyboardInterrupt:</span><br><span class="line">            <span class="keyword">if</span> os.path.exists(filename):</span><br><span class="line">                os.remove(filename)</span><br><span class="line">            raise KeyboardInterrupt</span><br><span class="line">    except Exception:</span><br><span class="line">            <span class="keyword">if</span> os.path.exists(filename):</span><br><span class="line">                os.remove(filename)</span><br></pre></td></tr></table></figure><br>$\qquad$以上的代码部分都是一些为实现整体的爬取过程而定义的几个小函数，接下来引出今天的大Boss,那就是我们的main函数：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">##该函数为程序执行的主体部分，通过调用不同的函数来实现我们的数据爬取</span><br><span class="line">def main():</span><br><span class="line">    #开始驱动浏览器打开页面</span><br><span class="line">    # 程序开始</span><br><span class="line">    #使用webdriver创建一个Chrome浏览器，受程序控制</span><br><span class="line">    driver = webdriver.Chrome()</span><br><span class="line">    driver.maximize_window()</span><br><span class="line">    ##设置浏览器界面最大化</span><br><span class="line"></span><br><span class="line">    ##定义要爬取的网页地址</span><br><span class="line">    start_urls=[<span class="string">'https://www.google.com.hk/search?q=One+cent+picture&amp;tbm=isch&amp;source=hp&amp;sa=X&amp;ved=2ahUKEwiToZvMooLiAhXmslQKHUqjDJwQsAR6BAgJEAE&amp;biw=1536&amp;bih=498&amp;dpr=1.25#imgrc=n64_jLKJUBJDuM:'</span>,</span><br><span class="line">                <span class="string">'https://www.google.com.hk/search?q=5+cent+picture&amp;tbm=isch&amp;source=univ&amp;sa=X&amp;ved=2ahUKEwiUqdP_sILiAhUVpJ4KHc4WBo0QsAR6BAgHEAE&amp;biw=1536&amp;bih=498#imgrc=4nPkDSV6jzmtPM:'</span>,</span><br><span class="line">                <span class="string">'https://www.google.com.hk/search?q=10+cent+picture&amp;tbm=isch&amp;source=univ&amp;sa=X&amp;ved=2ahUKEwid7MzHrYLiAhUPsZ4KHV_pB-wQsAR6BAgJEAE&amp;biw=1536&amp;bih=498#imgrc=tSuhZO5ob26USM:'</span>,</span><br><span class="line">                <span class="string">'https://www.google.com.hk/search?biw=1536&amp;bih=498&amp;tbm=isch&amp;sa=1&amp;ei=rcvNXLOiLJf7-gT325fADA&amp;q=25+cent+picture&amp;oq=25+cent+picture#imgrc=SPdU2SyxQ6tyNM:'</span>,</span><br><span class="line">                <span class="string">'https://www.google.com/search?biw=1536&amp;bih=498&amp;tbm=isch&amp;sa=1&amp;ei=27rPXISNAc-U-gSw8bKIBw&amp;q=1+dollar+coin&amp;oq=1+dollar+coin&amp;gs_l=img.3..0j0i67j0l8.1880.3046..4526...0.0..0.1243.3240.2-1j2j7-2......0....1..gws-wiz-img.HZop3grZwiA#imgrc=sQ7fSoquvqlbQM:'</span>,</span><br><span class="line">                <span class="string">'https://www.google.com/search?q=1+pound+coin&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ved=0ahUKEwjopoOy3oXiAhUMup4KHd4zAoQQ_AUIDigB&amp;biw=1366&amp;bih=656#imgrc=Cmk0QjVR04jZ8M:'</span>,</span><br><span class="line">                <span class="string">'https://www.google.com/search?q=1+euro+coins+pictures&amp;tbm=isch&amp;tbs=rimg:CUjCBQXqwMc1IjjLWV147TNxfsot4jFYTW-D-ZdMNwIH9RAPN4NbTVGbT2WIEN4N0zHChVTYC_1PLBmu4i8IjJ-HTzyoSCctZXXjtM3F-EdESbyfDkBffKhIJyi3iMVhNb4MRsM09YsukhJUqEgn5l0w3Agf1EBFIOTsFSko0GioSCQ83g1tNUZtPEQTD6K2VqDMHKhIJZYgQ3g3TMcIRBMPorZWoMwcqEgmFVNgL88sGaxFFsZNELmkR8SoSCbiLwiMn4dPPEXrc3fEvwxkL&amp;tbo=u&amp;sa=X&amp;ved=2ahUKEwisss7e4YXiAhVPvZ4KHcg0DRgQ9C96BAgBEBg&amp;biw=1366&amp;bih=656&amp;dpr=1#imgrc=SMIFBerAxzVhMM:'</span>]</span><br><span class="line">    ##每个地址所对应的硬币种类</span><br><span class="line">    files=[<span class="string">'一美分'</span>,<span class="string">'五美分'</span>,<span class="string">'十美分'</span>,<span class="string">'二十五美分'</span>,<span class="string">'一美元'</span>,<span class="string">'一英镑'</span>,<span class="string">'一欧元'</span>]</span><br><span class="line">    #每个种类的硬币要爬取的数量</span><br><span class="line">    nums=[<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">200</span>]</span><br><span class="line">    #开始对这些网页一个一个的爬取,for循环次数为start_urls内网页的个数</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(start_urls)):</span><br><span class="line">        driver.get(start_urls[i])</span><br><span class="line">        ##模拟浏览器开始自动访问第一个网址</span><br><span class="line">        sleep(<span class="number">6</span>)</span><br><span class="line">        ##设置时间等待，以确保页面加载完毕</span><br><span class="line">        print(<span class="string">"********************       当前爬取:"</span>, files[i], <span class="string">"     *******************************\n\n"</span>)</span><br><span class="line">        number=<span class="number">1</span></span><br><span class="line">        #定义一个number变量来计数已经成功爬取的图片个数</span><br><span class="line">        #在当前路径下创建文件夹，比如创建‘一美分’</span><br><span class="line">        mkdir(files[i])</span><br><span class="line">        #当已经爬取的图片个数大于要爬取的图片个数的时候，停止执行该步骤</span><br><span class="line">        <span class="keyword">while</span> (number&lt;nums[i]):</span><br><span class="line">            #调用get_str函数获取硬币图片的下载地址</span><br><span class="line">            img_url=get_str(driver)</span><br><span class="line">            print(<span class="string">"img_url"</span>,img_url)</span><br><span class="line">            ##如果没有得到地址，输出网络不好</span><br><span class="line">            <span class="keyword">if</span>(img_url==None):</span><br><span class="line">                print(<span class="string">"当前网络状况不好！！！"</span>)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            # 定义图片名称</span><br><span class="line">            filename=get_fileneme(files[i],img_url)         #未规范版</span><br><span class="line">            filename = rename(filename)                     #规范版</span><br><span class="line">            # 保存图片</span><br><span class="line">            aaa=download(img_url, filename)</span><br><span class="line">            ##定义一个变量aaa来接收download的返回结果，如果返回为file exits则说明文件已存在，此时number不加1</span><br><span class="line">            ##如果返回结果为filename,则说明成功保存图片，此时number+1</span><br><span class="line">            <span class="keyword">if</span> (aaa == <span class="string">"file exists!"</span>):</span><br><span class="line">                print(<span class="string">"file exists!"</span>)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            elif(aaa==filename):</span><br><span class="line">                print(<span class="string">"图片存储路径： "</span>, aaa)</span><br><span class="line">                # sleep(0.5)</span><br><span class="line">                number+=<span class="number">1</span></span><br><span class="line">        ##以下都是一些输出格式</span><br><span class="line">        print(<span class="string">"***********************    爬取"</span>, files[i], <span class="string">"完毕!!!     *****************************"</span>)</span><br><span class="line">        <span class="keyword">if</span>(i&lt;=len(nums)):</span><br><span class="line">            print(<span class="string">"*****                      下一步爬取:"</span>,files[i+<span class="number">1</span>],<span class="string">"                             *****"</span>)</span><br><span class="line">            print(<span class="string">"***********************     当前爬取进度"</span>,<span class="string">'%d / %d'</span> % (i+<span class="number">1</span>, len(nums)),<span class="string">"      *****************************\n\n"</span>)</span><br><span class="line">        sleep(<span class="number">3</span>)</span><br><span class="line">    print(<span class="string">"\n\n**********************     全部数据爬取完毕！！！      ****************************"</span>)</span><br><span class="line"></span><br><span class="line">    driver.quit()  # 关闭浏览器</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##############################################################</span><br><span class="line">####            自定义函数结束，以上函数如果不被调用</span><br><span class="line">####            其本身是不会执行的。</span><br><span class="line">##############################################################</span><br></pre></td></tr></table></figure><br>$\qquad$其实当我们执行完之后，发现程序并没有真正的开始，那是因为，我们虽然定义了一个名叫main的函数，但是计算机不知道这个函数就是整个程序的入口，所以我们要想激活这个main函数，还需对其进行声明一下;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##真正的开始执行</span><br><span class="line">##在前边定义的函数中选择 def main()这个函数</span><br><span class="line">##并且执行该函数内的操作</span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure><br>$\qquad$当这些我们都准备好了之后，我们就可以运行该程序了，运行之后，接下来就是静待图片慢慢爬取完毕了。<br>虽然到这里程序已经可以完整的跑起来了，但是有个地方我还是忍不住，想要说几句;<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##每个地址所对应的硬币种类</span><br><span class="line">   files=[<span class="string">'一美分'</span>,<span class="string">'五美分'</span>,<span class="string">'十美分'</span>,<span class="string">'二十五美分'</span>,<span class="string">'一美元'</span>,<span class="string">'一英镑'</span>,<span class="string">'一欧元'</span>]</span><br><span class="line">   #每个种类的硬币要爬取的数量</span><br><span class="line">   nums=[<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">200</span>]</span><br><span class="line">   #开始对这些网页一个一个的爬取,for循环次数为start_urls内网页的个数</span><br></pre></td></tr></table></figure><br>$\qquad$那就是这里，可以看的出来我们这次需要爬取的硬币的种类，对于第二个数组nums，我是用来定义每种硬币所要爬取的图片个数，例如这里的一欧元图片我们就只需要200张，而其它的则需要1000张。</p>
+<h1 id="4-运行结果"><a href="#4-运行结果" class="headerlink" title="4.运行结果"></a>4.运行结果</h1><p><img src="https://img-blog.csdnimg.cn/20190830210336520.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190830210407798.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$其它国家硬币的截图我就不再一一展示，如果有需要的可以私聊我，我看到后定会回复。</p>
+
+      
+    </div>
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #636363;font-size:14px;letter-spacing: 10px">本文结束啦<i class="fa fa-bell"></i>感谢您的阅读</div>
+    
+</div>
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/25/scrapy%E7%88%AC%E5%8F%96%E6%98%86%E5%B7%A5%E4%BF%A1%E8%87%AA%E9%99%A2%E5%AF%BC%E5%B8%88%E4%BF%A1%E6%81%AF/" rel="next" title="scrapy爬取昆工信自院导师信息">
+                <i class="fa fa-chevron-left"></i> scrapy爬取昆工信自院导师信息
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/isme.jpeg"
+                alt="kingback" />
+            
+              <p class="site-author-name" itemprop="name">kingback</p>
+              <p class="site-description motion-element" itemprop="description">昆明理工大学无线通信团队成员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kingback2019/kingback2019.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2020465823@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/weixin_38468077" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-需求目的"><span class="nav-number">1.</span> <span class="nav-text">1.需求目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-爬取原理"><span class="nav-number">2.</span> <span class="nav-text">2.爬取原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-代码介绍"><span class="nav-number">3.</span> <span class="nav-text">3.代码介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-运行结果"><span class="nav-number">4.</span> <span class="nav-text">4.运行结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kingback</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>总访客
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1.2,"jsonPath":"/live2d_models/assets/assets/hibiki.model.json"},"display":{"position":"right","width":200,"height":500},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+</html>
