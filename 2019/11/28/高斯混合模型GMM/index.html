@@ -89,11 +89,9 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126203555590.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112620425469.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126204803304.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126204959305.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126210926617.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112814202235.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126211154931.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127213638939.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112721365539.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191128144052252.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112721474373.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127215606275.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127221408820.png">
@@ -107,7 +105,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127235722796.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127235738532.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112800054120.gif#pic_center">
-<meta property="og:updated_time" content="2019-11-28T06:10:50.160Z">
+<meta property="og:updated_time" content="2019-11-28T06:44:53.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126203555590.png">
 
@@ -406,7 +404,7 @@
 
 <p>以下图片左边部分展示的是两个二维高斯分布的平面图，那么其对应的高斯混合模型在三维视图中，就像下图中的右半部分，有着两个峰。</p>
 <center class="half">
-    <img  src="https://img-blog.csdnimg.cn/20191126204959305.png"  width="49%" ><img  src="https://img-blog.csdnimg.cn/20191126210926617.png"  width="49%" >
+    <img  src="https://img-blog.csdnimg.cn/2019112814202235.png"  width="85%" >
 </center>
 
 <p>又或者三个高斯混合模型其叠加后的三维展示图如下所示：</p>
@@ -417,10 +415,8 @@
 <h1 id="2-高斯混合模型的一个例子"><a href="#2-高斯混合模型的一个例子" class="headerlink" title="2.高斯混合模型的一个例子"></a>2.高斯混合模型的一个例子</h1><p>在校园里随机抽取2000个学生，其中有男生也有女生，已知男女生的身高都服从高斯分布，这两个高斯分布的均值和方差我们不知道，另外，由于某种原因，我们也不知道这2000个人中有多少个男生有多少个女生，现在我们要求出这两个分布的均值和标准差，还有其权重。</p>
 <h2 id="2-0-注意事项"><a href="#2-0-注意事项" class="headerlink" title="2.0 注意事项"></a>2.0 注意事项</h2><p>根据题目的需求，我们需要产生两个高斯分布序列，分别代表男女生的身高。需要注意的是，我们在产生序列的时候必须要在知道男女生各占多少的情况下进行随机生成。但是在求解的过程中，我们必须遵照题意，假设不知道男女生的人数和其各自的均值和方差。然后再对这混合后的2000人序列数据，进行不断地迭代，直到得到的均值和方差趋于平稳。<br>对于混合前和混合后的数据分别如下图所示：</p>
 <center class="half">
-    <img  src="https://img-blog.csdnimg.cn/20191127213638939.png"  width="40%" /><img  src="https://img-blog.csdnimg.cn/2019112721365539.png"  width="40%" />
+    <img  src="https://img-blog.csdnimg.cn/20191128144052252.jpg"  width="90%" />
 </center>
-
-
 
 <p>在图中我们也可以看到，我们生成的女生身高$female$服从于$N(160，16)$,男生身高$male$服从于$N(180,30)$。并且其matlab生成该随机序列的代码如下：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">%绘制男女生身高的例子</span><br><span class="line">clc</span><br><span class="line"><span class="built_in">clear</span> all</span><br><span class="line">%男女生共取<span class="number">2000</span>人，女生平均身高<span class="number">160</span>，男生平均身高<span class="number">180</span></span><br><span class="line">female=<span class="number">160</span>+randn(<span class="number">1</span>,<span class="number">821</span>)*<span class="built_in">sqrt</span>(<span class="number">16</span>);</span><br><span class="line">male=<span class="number">180</span>+randn(<span class="number">1</span>,<span class="number">1179</span>)*<span class="built_in">sqrt</span>(<span class="number">30</span>);</span><br><span class="line">people=[female male];</span><br><span class="line">figure(<span class="number">1</span>)</span><br><span class="line">hist(people,<span class="number">150</span>);%画出混合后的频率分布直方图</span><br><span class="line">N=<span class="number">100</span>;</span><br><span class="line">figure(<span class="number">2</span>)</span><br><span class="line">hist(female,N);%画出生成的女性的频率分布直方图</span><br><span class="line">h=findobj(gca,'Type','patch');</span><br><span class="line">set(h,'facecolor','r');hold on;%设置柱形图颜色</span><br><span class="line">hist(male,N);%画出生成的男性的频率分布直方图</span><br><span class="line">title('某校男女生身高的分布直方图');</span><br><span class="line">xlabel('身高/cm');ylabel('人数');hold off ;%坐标轴设置</span><br></pre></td></tr></table></figure>
