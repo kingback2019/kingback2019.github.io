@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="# 1.高斯混合模型概念 高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。高斯混合模型是指具有如下形式的概率分布模型：       其中K为高斯混合模型中成分的个数，g为高斯分布密度，均值是$\mu$协方差矩阵是$\sum{_k}$,另外$\omega$是每个成分的权重。例如如图下所示">
+<meta name="description" content="1.高斯混合模型概念高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。高斯混合模型是指具有如下形式的概率分布模型：       其中K为高斯混合模型中成分的个数，g为高斯分布密度，均值是$\mu$协方差矩阵是$\sum{_k}$,另外$\omega$是每个成分的权重。例如如图下所示，是两个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高斯混合模型GMM">
 <meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8BGMM&#x2F;index.html">
 <meta property="og:site_name" content="王延凯的博客">
-<meta property="og:description" content="# 1.高斯混合模型概念 高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。高斯混合模型是指具有如下形式的概率分布模型：       其中K为高斯混合模型中成分的个数，g为高斯分布密度，均值是$\mu$协方差矩阵是$\sum{_k}$,另外$\omega$是每个成分的权重。例如如图下所示">
+<meta property="og:description" content="1.高斯混合模型概念高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。高斯混合模型是指具有如下形式的概率分布模型：       其中K为高斯混合模型中成分的个数，g为高斯分布密度，均值是$\mu$协方差矩阵是$\sum{_k}$,另外$\omega$是每个成分的权重。例如如图下所示，是两个">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126203555590.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112620425469.png">
@@ -107,7 +107,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127235722796.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127235738532.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112800054120.gif#pic_center">
-<meta property="og:updated_time" content="2019-11-28T05:20:09.210Z">
+<meta property="og:updated_time" content="2019-11-28T05:32:39.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126203555590.png">
 
@@ -390,8 +390,7 @@
       
 
       
-        <p>﻿# 1.高斯混合模型概念</p>
-<p>高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。<br>高斯混合模型是指具有如下形式的概率分布模型：</p>
+        <h1 id="1-高斯混合模型概念"><a href="#1-高斯混合模型概念" class="headerlink" title="1.高斯混合模型概念"></a>1.高斯混合模型概念</h1><p>高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。<br>高斯混合模型是指具有如下形式的概率分布模型：</p>
 <center>
  <img  src="https://img-blog.csdnimg.cn/20191126203555590.png"  width="40%" >
  </center>
@@ -408,11 +407,12 @@
 <p>以下图片左边部分展示的是两个二维高斯分布的平面图，那么其对应的高斯混合模型在三维视图中，就像下图中的右半部分，有着两个峰。</p>
 <center>
     <figure>
-         <img  src="https://img-blog.csdnimg.cn/20191126204959305.png"  width="49%" >
-         <img  src="https://img-blog.csdnimg.cn/20191126210926617.png"  width="49%" >
+         <img  src="https://img-blog.csdnimg.cn/20191126204959305.png"  width="45%" >
+         <img  src="https://img-blog.csdnimg.cn/20191126210926617.png"  width="45%" >
     </figure>
 </center>
-又或者三个高斯混合模型其叠加后的三维展示图如下所示：
+
+<p>又或者三个高斯混合模型其叠加后的三维展示图如下所示：</p>
 <center>
       <img  src="https://img-blog.csdnimg.cn/20191126211154931.png"  width="60%" >
  </center>
@@ -669,7 +669,7 @@ g(h_i|\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(h_i-\mu)^2}{2\sigma^2}}<
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-高斯混合模型的一个例子"><span class="nav-number">1.</span> <span class="nav-text">2.高斯混合模型的一个例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-0-注意事项"><span class="nav-number">1.1.</span> <span class="nav-text">2.0 注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Step-1-初始化参数"><span class="nav-number">1.2.</span> <span class="nav-text">2.1 Step 1. 初始化参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-计算每个身高-h-i-在男分布中的响应-R"><span class="nav-number">1.3.</span> <span class="nav-text">2.2 计算每个身高$h_i$在男分布中的响应$R$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-更新男女生分布的方差-sigma-2"><span class="nav-number">1.4.</span> <span class="nav-text">2.4 更新男女生分布的方差$\sigma^2$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-更新权值-omega-1-omega-2"><span class="nav-number">1.5.</span> <span class="nav-text">2.5 更新权值$\omega_1,\omega_2$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-仿真效果"><span class="nav-number">1.6.</span> <span class="nav-text">2.6 仿真效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-高斯混合模型不同权值的比较"><span class="nav-number">1.7.</span> <span class="nav-text">2.7 高斯混合模型不同权值的比较</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-matlab源码"><span class="nav-number">2.</span> <span class="nav-text">3.matlab源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-迭代更新的函数封装（matlab）"><span class="nav-number">2.1.</span> <span class="nav-text">3.1 迭代更新的函数封装（matlab）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-主函数实现高斯混合模型GMM"><span class="nav-number">2.2.</span> <span class="nav-text">3.2 主函数实现高斯混合模型GMM</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-高斯混合模型概念"><span class="nav-number">1.</span> <span class="nav-text">1.高斯混合模型概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-高斯混合模型的一个例子"><span class="nav-number">2.</span> <span class="nav-text">2.高斯混合模型的一个例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-0-注意事项"><span class="nav-number">2.1.</span> <span class="nav-text">2.0 注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Step-1-初始化参数"><span class="nav-number">2.2.</span> <span class="nav-text">2.1 Step 1. 初始化参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-计算每个身高-h-i-在男分布中的响应-R"><span class="nav-number">2.3.</span> <span class="nav-text">2.2 计算每个身高$h_i$在男分布中的响应$R$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-更新男女生分布的方差-sigma-2"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 更新男女生分布的方差$\sigma^2$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-更新权值-omega-1-omega-2"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 更新权值$\omega_1,\omega_2$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-仿真效果"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 仿真效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-高斯混合模型不同权值的比较"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 高斯混合模型不同权值的比较</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-matlab源码"><span class="nav-number">3.</span> <span class="nav-text">3.matlab源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-迭代更新的函数封装（matlab）"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 迭代更新的函数封装（matlab）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-主函数实现高斯混合模型GMM"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 主函数实现高斯混合模型GMM</span></a></li></ol></li></ol></div>
             
 
           </div>

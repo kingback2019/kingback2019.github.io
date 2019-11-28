@@ -3,8 +3,7 @@
   <entry>
     <title>高斯混合模型GMM</title>
     <url>/2019/11/28/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8BGMM/</url>
-    <content><![CDATA[<p>﻿# 1.高斯混合模型概念</p>
-<p>高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。<br>高斯混合模型是指具有如下形式的概率分布模型：</p>
+    <content><![CDATA[<h1 id="1-高斯混合模型概念"><a href="#1-高斯混合模型概念" class="headerlink" title="1.高斯混合模型概念"></a>1.高斯混合模型概念</h1><p>高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。<br>高斯混合模型是指具有如下形式的概率分布模型：</p>
 <center>
  <img  src="https://img-blog.csdnimg.cn/20191126203555590.png"  width="40%" >
  </center>
@@ -21,11 +20,12 @@
 <p>以下图片左边部分展示的是两个二维高斯分布的平面图，那么其对应的高斯混合模型在三维视图中，就像下图中的右半部分，有着两个峰。</p>
 <center>
     <figure>
-         <img  src="https://img-blog.csdnimg.cn/20191126204959305.png"  width="49%" >
-         <img  src="https://img-blog.csdnimg.cn/20191126210926617.png"  width="49%" >
+         <img  src="https://img-blog.csdnimg.cn/20191126204959305.png"  width="45%" >
+         <img  src="https://img-blog.csdnimg.cn/20191126210926617.png"  width="45%" >
     </figure>
 </center>
-又或者三个高斯混合模型其叠加后的三维展示图如下所示：
+
+<p>又或者三个高斯混合模型其叠加后的三维展示图如下所示：</p>
 <center>
       <img  src="https://img-blog.csdnimg.cn/20191126211154931.png"  width="60%" >
  </center>
