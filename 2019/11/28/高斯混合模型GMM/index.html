@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="# 1.高斯混合模型概念 高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。高斯混合模型是指具有如下形式的概率分布模型：       其中K为高斯混合模型中成分的个数，g为高斯分布密度，均值是$\mu$协方差矩阵是$\sum{_k}$,另外$\omega$是每个成分的权重。例如如图下所示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高斯混合模型GMM">
+<meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8BGMM&#x2F;index.html">
+<meta property="og:site_name" content="王延凯的博客">
+<meta property="og:description" content="# 1.高斯混合模型概念 高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。高斯混合模型是指具有如下形式的概率分布模型：       其中K为高斯混合模型中成分的个数，g为高斯分布密度，均值是$\mu$协方差矩阵是$\sum{_k}$,另外$\omega$是每个成分的权重。例如如图下所示">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126203555590.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112620425469.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126204803304.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126204959305.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126210926617.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126211154931.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127213638939.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112721365539.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112721474373.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127215606275.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127221408820.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127221808586.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127222101183.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127222252363.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191128124844664.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191128125003133.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127222942756.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127222959165.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127235722796.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191127235738532.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019112800054120.gif#pic_center">
+<meta property="og:updated_time" content="2019-11-28T05:20:09.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191126203555590.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kingback2019.github.io/2019/11/28/高斯混合模型GMM/"/>
+
+
+
+
+
+  <title>高斯混合模型GMM | 王延凯的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王延凯的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/28/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8BGMM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高斯混合模型GMM</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-28T13:12:50+08:00">
+                2019-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">语音识别</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>﻿# 1.高斯混合模型概念</p>
+<p>高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。<br>高斯混合模型是指具有如下形式的概率分布模型：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191126203555590.png"  width="40%" >
+ </center>
+
+<p>其中K为高斯混合模型中成分的个数，g为高斯分布密度，均值是$\mu$协方差矩阵是$\sum{_k}$,另外$\omega$是每个成分的权重。<br>例如如图下所示，是两个高斯分量叠加而成的一维GMM：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/2019112620425469.png"  width="60%" >
+ </center>
+则上图中红色的曲线其表达式就为;
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191126204803304.png"  width="50%" >
+ </center>
+
+<p>以下图片左边部分展示的是两个二维高斯分布的平面图，那么其对应的高斯混合模型在三维视图中，就像下图中的右半部分，有着两个峰。</p>
+<center>
+    <figure>
+         <img  src="https://img-blog.csdnimg.cn/20191126204959305.png"  width="49%" >
+         <img  src="https://img-blog.csdnimg.cn/20191126210926617.png"  width="49%" >
+    </figure>
+</center>
+又或者三个高斯混合模型其叠加后的三维展示图如下所示：
+<center>
+      <img  src="https://img-blog.csdnimg.cn/20191126211154931.png"  width="60%" >
+ </center>
+
+<h1 id="2-高斯混合模型的一个例子"><a href="#2-高斯混合模型的一个例子" class="headerlink" title="2.高斯混合模型的一个例子"></a>2.高斯混合模型的一个例子</h1><p>在校园里随机抽取2000个学生，其中有男生也有女生，已知男女生的身高都服从高斯分布，这两个高斯分布的均值和方差我们不知道，另外，由于某种原因，我们也不知道这2000个人中有多少个男生有多少个女生，现在我们要求出这两个分布的均值和标准差，还有其权重。</p>
+<h2 id="2-0-注意事项"><a href="#2-0-注意事项" class="headerlink" title="2.0 注意事项"></a>2.0 注意事项</h2><p>根据题目的需求，我们需要产生两个高斯分布序列，分别代表男女生的身高。需要注意的是，我们在产生序列的时候必须要在知道男女生各占多少的情况下进行随机生成。但是在求解的过程中，我们必须遵照题意，假设不知道男女生的人数和其各自的均值和方差。然后再对这混合后的2000人序列数据，进行不断地迭代，直到得到的均值和方差趋于平稳。<br>对于混合前和混合后的数据分别如下图所示：<br><img src="https://img-blog.csdnimg.cn/20191127213638939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="项目">     | <img src="https://img-blog.csdnimg.cn/2019112721365539.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="Value"><br>———— | ——-<br>在图中我们也可以看到，我们生成的女生身高$female$服从于$N(160，16)$,男生身高$male$服从于$N(180,30)$。并且其matlab生成该随机序列的代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">%绘制男女生身高的例子</span><br><span class="line">clc</span><br><span class="line"><span class="built_in">clear</span> all</span><br><span class="line">%男女生共取<span class="number">2000</span>人，女生平均身高<span class="number">160</span>，男生平均身高<span class="number">180</span></span><br><span class="line">female=<span class="number">160</span>+randn(<span class="number">1</span>,<span class="number">821</span>)*<span class="built_in">sqrt</span>(<span class="number">16</span>);</span><br><span class="line">male=<span class="number">180</span>+randn(<span class="number">1</span>,<span class="number">1179</span>)*<span class="built_in">sqrt</span>(<span class="number">30</span>);</span><br><span class="line">people=[female male];</span><br><span class="line">figure(<span class="number">1</span>)</span><br><span class="line">hist(people,<span class="number">150</span>);%画出混合后的频率分布直方图</span><br><span class="line">N=<span class="number">100</span>;</span><br><span class="line">figure(<span class="number">2</span>)</span><br><span class="line">hist(female,N);%画出生成的女性的频率分布直方图</span><br><span class="line">h=findobj(gca,'Type','patch');</span><br><span class="line">set(h,'facecolor','r');hold on;%设置柱形图颜色</span><br><span class="line">hist(male,N);%画出生成的男性的频率分布直方图</span><br><span class="line">title('某校男女生身高的分布直方图');</span><br><span class="line">xlabel('身高/cm');ylabel('人数');hold off ;%坐标轴设置</span><br></pre></td></tr></table></figure><br>接下来我们就需要对数据进行不断地迭代，从而使其得到两类分布的最优解。</p>
+<h2 id="2-1-Step-1-初始化参数"><a href="#2-1-Step-1-初始化参数" class="headerlink" title="2.1 Step 1. 初始化参数"></a>2.1 Step 1. 初始化参数</h2><p>对于首次迭代，我们需要提供一下，对于男女的均值方差以及权值之间的初始值设定，否则无法启动迭代。这里我们的初始值的设定，我们只需要我们生活中的常识对其进行一下赋初值即可。无需考虑太多。</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/2019112721474373.png"  width="70%" >
+ </center>
+
+<p>正如图上所画的，在以后的介绍中，$\mu$,$sigma$的颜色不同，代表了性别不同，此处我们以蓝色代表男生的，粉色代表女生的。<br>例如我们在这里的，我假设男女生人数一样多，于是我就对初值进行了如下赋值：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%前提是不知道男女生分布的均值和方差的。</span><br><span class="line">g_mu1=<span class="number">170</span>;g_sigma1=<span class="number">10</span>;g_w1=<span class="number">0.5</span>;%男生的</span><br><span class="line">g_mu2=<span class="number">160</span>;g_sigma2=<span class="number">5</span>;g_w2=<span class="number">0.5</span>;%女生的</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-2-计算每个身高-h-i-在男分布中的响应-R"><a href="#2-2-计算每个身高-h-i-在男分布中的响应-R" class="headerlink" title="2.2 计算每个身高$h_i$在男分布中的响应$R$"></a>2.2 计算每个身高$h_i$在男分布中的响应$R$</h2><p>通过下面的公式，我们要对我们的2000个混合后的身高数据，利用我们刚刚赋的初值来计算一下每个身高$h_i$在男分布中的响应$R$。所以此处也就一共有2000个响应值。</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127215606275.png"  width="35%" >
+ </center>
+
+<p>在这里或许大家会疑惑，公式中的$g(h_i|\mu,\sigma)$代表的是啥，其实这是一维高斯函数的密度函数，对于我们的这个例子而言，其详细的表达式如下：</p>
+<script type="math/tex; mode=display">
+g(h_i|\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(h_i-\mu)^2}{2\sigma^2}}</script><p>好了计算完身高男生的身高$h_i$在男分布中的响应$R$，我们再来计算一下女生的$h_i$在男分布中的响应$R$，其求解公式类比于前边介绍到的男生的求解：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127221408820.png"  width="35%" >
+ </center>
+同样，也是得到2000个响应值。
+
+## 2.3 更新男女生分布的期望值$\mu$
+由于之前的男女生的期望值$\mu$都是我们凭着主观经验猜测的，所以我们需要对该值进行迭代更新，下面我先介绍男生身高期望值的更新公式。
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127221808586.png"  width="35%" >
+ </center>
+
+<p>这里的$R_i$值和$h_i$值都是我们已知的数据，其中$R_i$是我们上一步所求，$h_i$是我们已知的混合后的2000个身高序列中的一个。<br>如果我们对于上式不是特别理解的话，我们可以将其一步不拆解开来，方便我们理解。详见下图：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127222101183.png"  width="50%" >
+ </center>
+
+<p>通过上式的拆解展示，我们可以看到，新更新的均值是和之前的均值有关系的。<br>通过此方式更新完均值之后，我们便可同理求得女生身高的更新后的数据，具体其表达式如下所示：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127222252363.png"  width="30%" >
+ </center>
+
+<p>最后我们求得的均值很明显是一个值。</p>
+<h2 id="2-4-更新男女生分布的方差-sigma-2"><a href="#2-4-更新男女生分布的方差-sigma-2" class="headerlink" title="2.4 更新男女生分布的方差$\sigma^2$"></a>2.4 更新男女生分布的方差$\sigma^2$</h2><p>原因同上边一样，我们要通过如下公式更新一下男生分布的方差，其求解公式如下所示：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191128124844664.png"  width="35%" >
+ </center>
+
+<p>需要注意的是，我们在这里求得的是更新后的<strong>方差</strong>，而别的地方使用的是<strong>标准差</strong>，所以在这里编程的时候要注意一下。另外，女生的更新方式类似：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191128125003133.png"  width="35%" >
+ </center>
+
+<h2 id="2-5-更新权值-omega-1-omega-2"><a href="#2-5-更新权值-omega-1-omega-2" class="headerlink" title="2.5 更新权值$\omega_1,\omega_2$"></a>2.5 更新权值$\omega_1,\omega_2$</h2><p>男生分布的权值的更新如下：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127222942756.png"  width="35%" >
+ </center>
+
+<p>类似的，女生分布的权值的更新如下：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127222959165.png"  width="35%" >
+ </center>
+
+<h2 id="2-6-仿真效果"><a href="#2-6-仿真效果" class="headerlink" title="2.6 仿真效果"></a>2.6 仿真效果</h2><p>在迭代十次之后，我们就可以看到，其迭代结果已趋于稳定，效果显示如下：<br>  <img src="https://img-blog.csdnimg.cn/20191127235722796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">   | <img src="https://img-blog.csdnimg.cn/20191127235738532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="Value"><br>———— | ——-<br>在上图中我们可以看到，随着迭代次数的增加，我们的男女的权重系数也都趋于稳定，并且我们取最后一次迭代的结果，做出男女身高的高斯概率曲线。我们 可以拿该曲线迭代出的结果与之前的结果进行比较，可知其迭代精度还是可以的。</p>
+<h2 id="2-7-高斯混合模型不同权值的比较"><a href="#2-7-高斯混合模型不同权值的比较" class="headerlink" title="2.7 高斯混合模型不同权值的比较"></a>2.7 高斯混合模型不同权值的比较</h2><p>对于不同的迭代结果，我以动图的形式来展示如下，在不同的权值下，其叠加后的高斯混合模型图样也是不一样的，如下所示：<br><img src="https://img-blog.csdnimg.cn/2019112800054120.gif#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="3-matlab源码"><a href="#3-matlab源码" class="headerlink" title="3.matlab源码"></a>3.matlab源码</h1><h2 id="3-1-迭代更新的函数封装（matlab）"><a href="#3-1-迭代更新的函数封装（matlab）" class="headerlink" title="3.1 迭代更新的函数封装（matlab）"></a>3.1 迭代更新的函数封装（matlab）</h2><p>由于要使用不断迭代的方式来不断求取新的均值方差权值，以期使得迭代的结果更加接近真实值，于是我对于这部分的代码进行了一下封装，将其封装为一个loop.m文件。其内容具体如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">文件名称：loop.m</span><br><span class="line">function [ mu1_new,sigma1_new,w1_new,mu2_new,sigma2_new,w2_new ] = loop(male,female,g_mu1,g_sigma1,g_w1,g_mu2,g_sigma2,g_w2 )</span><br><span class="line">%UNTITLED 此处显示有关此函数的摘要</span><br><span class="line">%   此处显示详细说明</span><br><span class="line">%Step <span class="number">1.</span>首先根据经验来分别设置男女生的均值、方差和权值</span><br><span class="line">% g_mu1=<span class="number">175</span>;g_sigma1=<span class="number">10</span>;g_w1=<span class="number">0.5</span>;%男生的</span><br><span class="line">% g_mu2=<span class="number">158</span>;g_sigma2=<span class="number">10</span>;g_w2=<span class="number">0.5</span>;%女生的</span><br><span class="line"></span><br><span class="line">%Step <span class="number">2.</span> </span><br><span class="line">%计算男的身高在男分布中的响应R1i</span><br><span class="line">%计算女的身高在男分布中的响应R2i</span><br><span class="line">people=[female male];</span><br><span class="line">R1=zeros(<span class="number">1</span>,<span class="number">2000</span>);</span><br><span class="line">R2=zeros(<span class="number">1</span>,<span class="number">2000</span>);</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">2000</span></span><br><span class="line">    px1=g_w1*pdf('norm',people(i),g_mu1,g_sigma1);</span><br><span class="line">    px2=g_w2*pdf('norm',people(i),g_mu2,g_sigma2);</span><br><span class="line">    R1(i)=px1/(px1+px2);</span><br><span class="line">    R2(i)=px2/(px1+px2);</span><br><span class="line"><span class="built_in">end</span></span><br><span class="line"></span><br><span class="line">%Step <span class="number">3.</span></span><br><span class="line">%更新男、女生身高分布的期望mu</span><br><span class="line"></span><br><span class="line">sum1=<span class="number">0</span>;</span><br><span class="line">sum2=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">2000</span></span><br><span class="line">    sum1=sum1+R1(i)*people(i);</span><br><span class="line">    sum2=sum2+R2(i)*people(i);</span><br><span class="line"><span class="built_in">end</span></span><br><span class="line">sum11=sum(R1);</span><br><span class="line">sum22=sum(R2);</span><br><span class="line">mu1_new=sum1/sum11;%得出男生的新均值</span><br><span class="line">mu2_new=sum2/sum22;%得出女生的新均值</span><br><span class="line"></span><br><span class="line">%Step <span class="number">4.</span></span><br><span class="line">%更新男、女生身高分布的标准差sigma</span><br><span class="line">sum1=<span class="number">0</span>;</span><br><span class="line">sum2=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">2000</span></span><br><span class="line">    sum1=sum1+R1(i)*(people(i)-mu1_new)^<span class="number">2</span>;</span><br><span class="line">    sum2=sum2+R2(i)*(people(i)-mu2_new)^<span class="number">2</span>;</span><br><span class="line"><span class="built_in">end</span></span><br><span class="line">sigma1_new=(sum1/sum11)^<span class="number">0.5</span>;%得出男生的新标准差</span><br><span class="line">sigma2_new=(sum2/sum22)^<span class="number">0.5</span>;%得出女生的新标准差</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">%Step <span class="number">5.</span></span><br><span class="line">%更新权值</span><br><span class="line">w1_new=sum11/<span class="number">2000</span>;</span><br><span class="line">w2_new=sum22/<span class="number">2000</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">end</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="3-2-主函数实现高斯混合模型GMM"><a href="#3-2-主函数实现高斯混合模型GMM" class="headerlink" title="3.2 主函数实现高斯混合模型GMM"></a>3.2 主函数实现高斯混合模型GMM</h2><p>该函数是实现整个这个实例的matlab代码主函数，其内容如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">文件名称：GMM.m</span><br><span class="line">%绘制男女生身高的例子</span><br><span class="line">clc</span><br><span class="line"><span class="built_in">clear</span> all</span><br><span class="line">%男女生各取<span class="number">2000</span>人，女生平均身高<span class="number">163</span>，男声平均身高<span class="number">180</span></span><br><span class="line">female=<span class="number">160</span>+randn(<span class="number">1</span>,<span class="number">821</span>)*<span class="built_in">sqrt</span>(<span class="number">16</span>);</span><br><span class="line">male=<span class="number">180</span>+randn(<span class="number">1</span>,<span class="number">1179</span>)*<span class="built_in">sqrt</span>(<span class="number">30</span>);</span><br><span class="line">people=[female male];</span><br><span class="line">figure(<span class="number">1</span>)</span><br><span class="line">hist(people,<span class="number">150</span>);%画出混合后的频率分布直方图</span><br><span class="line">N=<span class="number">100</span>;</span><br><span class="line">figure(<span class="number">2</span>)</span><br><span class="line">hist(female,N);%画出生成的女性的频率分布直方图</span><br><span class="line">h=findobj(gca,'Type','patch');</span><br><span class="line">set(h,'facecolor','r');hold on;%设置柱形图颜色</span><br><span class="line">hist(male,N);%画出生成的男性的频率分布直方图</span><br><span class="line">title('某校男女生身高的分布直方图');</span><br><span class="line">xlabel('身高/cm');ylabel('人数');hold off ;%坐标轴设置</span><br><span class="line"></span><br><span class="line">%以下通过五个步骤开始构建高斯混合模型</span><br><span class="line"></span><br><span class="line">%Step <span class="number">1.</span>首先根据经验来分别设置男女生的均值、方差和权值</span><br><span class="line">%前提是不知道男女生分布的均值和方差的。</span><br><span class="line">g_mu1=<span class="number">170</span>;g_sigma1=<span class="number">10</span>;g_w1=<span class="number">0.5</span>;%男生的</span><br><span class="line">g_mu2=<span class="number">160</span>;g_sigma2=<span class="number">5</span>;g_w2=<span class="number">0.5</span>;%女生的</span><br><span class="line"></span><br><span class="line">times=<span class="number">10</span>;%设置迭代次数</span><br><span class="line">result=zeros(times,<span class="number">6</span>);%定义一个数组来存储每次的迭代结果</span><br><span class="line">result(<span class="number">1</span>,<span class="number">1</span>)=g_mu1;result(<span class="number">1</span>,<span class="number">2</span>)=g_sigma1;%以下</span><br><span class="line">result(<span class="number">1</span>,<span class="number">3</span>)=g_w1;result(<span class="number">1</span>,<span class="number">4</span>)=g_mu2;</span><br><span class="line">result(<span class="number">1</span>,<span class="number">5</span>)=g_sigma2;result(<span class="number">1</span>,<span class="number">6</span>)=g_w2;%以上将result的第一行设置为初始值</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>:times<span class="number">-1</span></span><br><span class="line">    %调用自己的迭代函数loop来实现迭代计算</span><br><span class="line">   [ mu11_new,sigma11_new,w11_new,mu22_new,sigma22_new,w22_new ]=loop(male,female,result(i,<span class="number">1</span>),result(i,<span class="number">2</span>),result(i,<span class="number">3</span>),result(i,<span class="number">4</span>),result(i,<span class="number">5</span>),result(i,<span class="number">6</span>));</span><br><span class="line">    result(i+<span class="number">1</span>,<span class="number">1</span>)=mu11_new;result(i+<span class="number">1</span>,<span class="number">2</span>)=sigma11_new;result(i+<span class="number">1</span>,<span class="number">3</span>)=w11_new;%将每次迭代的结果存入result</span><br><span class="line">    result(i+<span class="number">1</span>,<span class="number">4</span>)=mu22_new;result(i+<span class="number">1</span>,<span class="number">5</span>)=sigma22_new;result(i+<span class="number">1</span>,<span class="number">6</span>)=w22_new ;%当前迭代完成</span><br><span class="line"><span class="built_in">end</span></span><br><span class="line">result    % 输出每次迭代结果</span><br><span class="line">figure(<span class="number">3</span>)</span><br><span class="line">%plot(result(:,3),'linewidth',1.5);%画出男生的权重迭代历史</span><br><span class="line">xi=<span class="number">1</span>:<span class="number">0.4</span>:times;</span><br><span class="line">xx=interp1(result(:,3),xi, 'spline');</span><br><span class="line">plot(xx,'linewidth',1.5);%画出男生的权重迭代历史</span><br><span class="line">hold on ;grid on;</span><br><span class="line">yy=interp1(result(:,6),xi, 'spline');</span><br><span class="line">plot(yy,'r','linewidth',1.5);%画出女生权重迭代历史</span><br><span class="line">legend('男生权重变化','女生权重变化','location','northeast');%坐标轴设置</span><br><span class="line">title('男女生权重随迭代次数的变化');</span><br><span class="line">xlabel('迭代次数');ylabel('权重值');axis([1 times 0 1]);%坐标轴设置</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">%开始分别求取出男女生的概率密度函数</span><br><span class="line">%在刚刚的迭代结果中取出男女生的分别的mu和sigma</span><br><span class="line">%男生而言需要求出mu1,sigma1,w1</span><br><span class="line">%女生而言需要求取mu2,sigma2,w2</span><br><span class="line">mu1=result(times,<span class="number">1</span>);</span><br><span class="line">sigma1=result(times,<span class="number">2</span>);</span><br><span class="line">mu2=result(times,<span class="number">4</span>);</span><br><span class="line">sigma2=result(times,<span class="number">5</span>);</span><br><span class="line">figure(<span class="number">4</span>);</span><br><span class="line">%画出男生的概率密度曲线</span><br><span class="line">inter_x=linspace(<span class="number">140</span>,<span class="number">210</span>,<span class="number">500</span>)<span class="string">';</span></span><br><span class="line">inter_y=normpdf(inter_x,mu1,sigma1);</span><br><span class="line">plot(inter_x,inter_y,'linewidth',1.5);</span><br><span class="line">hold on;</span><br><span class="line">%画出女生的概率密度曲线</span><br><span class="line">inter_yy=normpdf(inter_x,mu2,sigma2);</span><br><span class="line">plot(inter_x,inter_yy,'m','linewidth',1.5)</span><br><span class="line">grid on;</span><br><span class="line">legend('男生','女生');title('男女生身高的概率密度曲线');</span><br><span class="line">xlabel('身高/cm');ylabel('概率');hold off;%坐标轴设置</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">%%此部分开始画高斯混合模型的图像</span><br><span class="line">x =<span class="number">140</span>:<span class="number">0.1</span>:<span class="number">210</span> ;</span><br><span class="line">y1 = normpdf(x,mu1,sigma1);%定义第<span class="number">1</span>个高斯密度曲线</span><br><span class="line">y2 = normpdf(x,mu2,sigma2);%定义第<span class="number">2</span>个高斯密度曲线</span><br><span class="line">figure(<span class="number">5</span>)</span><br><span class="line">plot(x,y1,'--b','linewidth',1.5);%画出第1个高斯概率密度曲线的图像</span><br><span class="line">hold on;</span><br><span class="line">plot(x,y2,'--g','linewidth',1.5);%画出第2个高斯概率密度曲线的图像</span><br><span class="line">title('两个一维高斯分布HMM模型');xlabel('X');ylabel('概率密度');</span><br><span class="line">% axis([<span class="number">-8</span> <span class="number">10</span> <span class="number">0</span> <span class="number">0.5</span>]);</span><br><span class="line">grid on;%坐标轴设置</span><br><span class="line">tex=text(180,0.1,'当前W1数值为：','FontSize',14,'FontWeight','demi');%图中显示权重</span><br><span class="line">rate=result(:,<span class="number">3</span>)%定义一个权重</span><br><span class="line">c=colormap(lines(times));%定义times条不同颜色的线条</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>:times</span><br><span class="line">   pause(<span class="number">0.1</span>);%延时函数</span><br><span class="line">   y3=rate(i)*y1+(<span class="number">1</span>-rate(i))*y2%对两个高斯概率密度图像进行加权</span><br><span class="line">   p2=plot(x,y3,'color',c(i,:),'linewidth',1.5);%绘画加权后的图像</span><br><span class="line">   num=num2str(rate(i));%将当前第一个高斯概率所用的权重值转为字符串类型</span><br><span class="line">   tex1=text(203,0.1,num,'FontSize',14,'FontWeight','demi','color','r');%显示当前权重值</span><br><span class="line">   pause(<span class="number">0.3</span>);%延时函数</span><br><span class="line">   <span class="keyword">if</span>(i&lt;times)</span><br><span class="line">       <span class="keyword">delete</span>(tex1);%删除当前权重</span><br><span class="line">       <span class="keyword">delete</span>(p2);  %删除当前加权后图像</span><br><span class="line">   <span class="built_in">end</span></span><br><span class="line"><span class="built_in">end</span></span><br><span class="line">hold off</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+	<div>
+		
+			<div>
+    
+        <div style="text-align:center;color: #636363;font-size:14px;letter-spacing: 10px">本文结束啦<i class="fa fa-bell"></i>感谢您的阅读</div>
+    
+</div>
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/25/python3.X%E7%89%88%E6%9C%ACTurtle%E5%BA%93%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E5%8E%9F%E5%9B%A0%E5%8F%8A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" rel="next" title="Python3.X版本Turtle库安装失败原因及解决办法">
+                <i class="fa fa-chevron-left"></i> Python3.X版本Turtle库安装失败原因及解决办法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/isme.jpeg"
+                alt="kingback" />
+            
+              <p class="site-author-name" itemprop="name">kingback</p>
+              <p class="site-description motion-element" itemprop="description">昆明理工大学无线通信团队成员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kingback2019/kingback2019.github.io" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2020465823@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/weixin_38468077" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-高斯混合模型的一个例子"><span class="nav-number">1.</span> <span class="nav-text">2.高斯混合模型的一个例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-0-注意事项"><span class="nav-number">1.1.</span> <span class="nav-text">2.0 注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Step-1-初始化参数"><span class="nav-number">1.2.</span> <span class="nav-text">2.1 Step 1. 初始化参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-计算每个身高-h-i-在男分布中的响应-R"><span class="nav-number">1.3.</span> <span class="nav-text">2.2 计算每个身高$h_i$在男分布中的响应$R$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-更新男女生分布的方差-sigma-2"><span class="nav-number">1.4.</span> <span class="nav-text">2.4 更新男女生分布的方差$\sigma^2$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-更新权值-omega-1-omega-2"><span class="nav-number">1.5.</span> <span class="nav-text">2.5 更新权值$\omega_1,\omega_2$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-仿真效果"><span class="nav-number">1.6.</span> <span class="nav-text">2.6 仿真效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-高斯混合模型不同权值的比较"><span class="nav-number">1.7.</span> <span class="nav-text">2.7 高斯混合模型不同权值的比较</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-matlab源码"><span class="nav-number">2.</span> <span class="nav-text">3.matlab源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-迭代更新的函数封装（matlab）"><span class="nav-number">2.1.</span> <span class="nav-text">3.1 迭代更新的函数封装（matlab）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-主函数实现高斯混合模型GMM"><span class="nav-number">2.2.</span> <span class="nav-text">3.2 主函数实现高斯混合模型GMM</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kingback</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>总访客
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1.2,"jsonPath":"/live2d_models/assets/assets/hibiki.model.json"},"display":{"position":"right","width":200,"height":500},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+</html>

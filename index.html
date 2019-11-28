@@ -274,6 +274,239 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/28/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8BGMM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/28/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8BGMM/" itemprop="url">高斯混合模型GMM</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-28T13:12:50+08:00">
+                2019-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">语音识别</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>﻿# 1.高斯混合模型概念</p>
+<p>高斯混合模型（Gaussian Mixture Model）是一种聚类算法，它是多个高斯分布函数的线性组合，通常用于解决同一集合下的数据包含多种不同的分布情况。<br>高斯混合模型是指具有如下形式的概率分布模型：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191126203555590.png"  width="40%" >
+ </center>
+
+<p>其中K为高斯混合模型中成分的个数，g为高斯分布密度，均值是$\mu$协方差矩阵是$\sum{_k}$,另外$\omega$是每个成分的权重。<br>例如如图下所示，是两个高斯分量叠加而成的一维GMM：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/2019112620425469.png"  width="60%" >
+ </center>
+则上图中红色的曲线其表达式就为;
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191126204803304.png"  width="50%" >
+ </center>
+
+<p>以下图片左边部分展示的是两个二维高斯分布的平面图，那么其对应的高斯混合模型在三维视图中，就像下图中的右半部分，有着两个峰。</p>
+<center>
+    <figure>
+         <img  src="https://img-blog.csdnimg.cn/20191126204959305.png"  width="49%" >
+         <img  src="https://img-blog.csdnimg.cn/20191126210926617.png"  width="49%" >
+    </figure>
+</center>
+又或者三个高斯混合模型其叠加后的三维展示图如下所示：
+<center>
+      <img  src="https://img-blog.csdnimg.cn/20191126211154931.png"  width="60%" >
+ </center>
+
+<h1 id="2-高斯混合模型的一个例子"><a href="#2-高斯混合模型的一个例子" class="headerlink" title="2.高斯混合模型的一个例子"></a>2.高斯混合模型的一个例子</h1><p>在校园里随机抽取2000个学生，其中有男生也有女生，已知男女生的身高都服从高斯分布，这两个高斯分布的均值和方差我们不知道，另外，由于某种原因，我们也不知道这2000个人中有多少个男生有多少个女生，现在我们要求出这两个分布的均值和标准差，还有其权重。</p>
+<h2 id="2-0-注意事项"><a href="#2-0-注意事项" class="headerlink" title="2.0 注意事项"></a>2.0 注意事项</h2><p>根据题目的需求，我们需要产生两个高斯分布序列，分别代表男女生的身高。需要注意的是，我们在产生序列的时候必须要在知道男女生各占多少的情况下进行随机生成。但是在求解的过程中，我们必须遵照题意，假设不知道男女生的人数和其各自的均值和方差。然后再对这混合后的2000人序列数据，进行不断地迭代，直到得到的均值和方差趋于平稳。<br>对于混合前和混合后的数据分别如下图所示：<br><img src="https://img-blog.csdnimg.cn/20191127213638939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="项目">     | <img src="https://img-blog.csdnimg.cn/2019112721365539.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="Value"><br>———— | ——-<br>在图中我们也可以看到，我们生成的女生身高$female$服从于$N(160，16)$,男生身高$male$服从于$N(180,30)$。并且其matlab生成该随机序列的代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">%绘制男女生身高的例子</span><br><span class="line">clc</span><br><span class="line"><span class="built_in">clear</span> all</span><br><span class="line">%男女生共取<span class="number">2000</span>人，女生平均身高<span class="number">160</span>，男生平均身高<span class="number">180</span></span><br><span class="line">female=<span class="number">160</span>+randn(<span class="number">1</span>,<span class="number">821</span>)*<span class="built_in">sqrt</span>(<span class="number">16</span>);</span><br><span class="line">male=<span class="number">180</span>+randn(<span class="number">1</span>,<span class="number">1179</span>)*<span class="built_in">sqrt</span>(<span class="number">30</span>);</span><br><span class="line">people=[female male];</span><br><span class="line">figure(<span class="number">1</span>)</span><br><span class="line">hist(people,<span class="number">150</span>);%画出混合后的频率分布直方图</span><br><span class="line">N=<span class="number">100</span>;</span><br><span class="line">figure(<span class="number">2</span>)</span><br><span class="line">hist(female,N);%画出生成的女性的频率分布直方图</span><br><span class="line">h=findobj(gca,'Type','patch');</span><br><span class="line">set(h,'facecolor','r');hold on;%设置柱形图颜色</span><br><span class="line">hist(male,N);%画出生成的男性的频率分布直方图</span><br><span class="line">title('某校男女生身高的分布直方图');</span><br><span class="line">xlabel('身高/cm');ylabel('人数');hold off ;%坐标轴设置</span><br></pre></td></tr></table></figure><br>接下来我们就需要对数据进行不断地迭代，从而使其得到两类分布的最优解。</p>
+<h2 id="2-1-Step-1-初始化参数"><a href="#2-1-Step-1-初始化参数" class="headerlink" title="2.1 Step 1. 初始化参数"></a>2.1 Step 1. 初始化参数</h2><p>对于首次迭代，我们需要提供一下，对于男女的均值方差以及权值之间的初始值设定，否则无法启动迭代。这里我们的初始值的设定，我们只需要我们生活中的常识对其进行一下赋初值即可。无需考虑太多。</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/2019112721474373.png"  width="70%" >
+ </center>
+
+<p>正如图上所画的，在以后的介绍中，$\mu$,$sigma$的颜色不同，代表了性别不同，此处我们以蓝色代表男生的，粉色代表女生的。<br>例如我们在这里的，我假设男女生人数一样多，于是我就对初值进行了如下赋值：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%前提是不知道男女生分布的均值和方差的。</span><br><span class="line">g_mu1=<span class="number">170</span>;g_sigma1=<span class="number">10</span>;g_w1=<span class="number">0.5</span>;%男生的</span><br><span class="line">g_mu2=<span class="number">160</span>;g_sigma2=<span class="number">5</span>;g_w2=<span class="number">0.5</span>;%女生的</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-2-计算每个身高-h-i-在男分布中的响应-R"><a href="#2-2-计算每个身高-h-i-在男分布中的响应-R" class="headerlink" title="2.2 计算每个身高$h_i$在男分布中的响应$R$"></a>2.2 计算每个身高$h_i$在男分布中的响应$R$</h2><p>通过下面的公式，我们要对我们的2000个混合后的身高数据，利用我们刚刚赋的初值来计算一下每个身高$h_i$在男分布中的响应$R$。所以此处也就一共有2000个响应值。</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127215606275.png"  width="35%" >
+ </center>
+
+<p>在这里或许大家会疑惑，公式中的$g(h_i|\mu,\sigma)$代表的是啥，其实这是一维高斯函数的密度函数，对于我们的这个例子而言，其详细的表达式如下：</p>
+<script type="math/tex; mode=display">
+g(h_i|\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(h_i-\mu)^2}{2\sigma^2}}</script><p>好了计算完身高男生的身高$h_i$在男分布中的响应$R$，我们再来计算一下女生的$h_i$在男分布中的响应$R$，其求解公式类比于前边介绍到的男生的求解：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127221408820.png"  width="35%" >
+ </center>
+同样，也是得到2000个响应值。
+
+## 2.3 更新男女生分布的期望值$\mu$
+由于之前的男女生的期望值$\mu$都是我们凭着主观经验猜测的，所以我们需要对该值进行迭代更新，下面我先介绍男生身高期望值的更新公式。
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127221808586.png"  width="35%" >
+ </center>
+
+<p>这里的$R_i$值和$h_i$值都是我们已知的数据，其中$R_i$是我们上一步所求，$h_i$是我们已知的混合后的2000个身高序列中的一个。<br>如果我们对于上式不是特别理解的话，我们可以将其一步不拆解开来，方便我们理解。详见下图：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127222101183.png"  width="50%" >
+ </center>
+
+<p>通过上式的拆解展示，我们可以看到，新更新的均值是和之前的均值有关系的。<br>通过此方式更新完均值之后，我们便可同理求得女生身高的更新后的数据，具体其表达式如下所示：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127222252363.png"  width="30%" >
+ </center>
+
+<p>最后我们求得的均值很明显是一个值。</p>
+<h2 id="2-4-更新男女生分布的方差-sigma-2"><a href="#2-4-更新男女生分布的方差-sigma-2" class="headerlink" title="2.4 更新男女生分布的方差$\sigma^2$"></a>2.4 更新男女生分布的方差$\sigma^2$</h2><p>原因同上边一样，我们要通过如下公式更新一下男生分布的方差，其求解公式如下所示：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191128124844664.png"  width="35%" >
+ </center>
+
+<p>需要注意的是，我们在这里求得的是更新后的<strong>方差</strong>，而别的地方使用的是<strong>标准差</strong>，所以在这里编程的时候要注意一下。另外，女生的更新方式类似：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191128125003133.png"  width="35%" >
+ </center>
+
+<h2 id="2-5-更新权值-omega-1-omega-2"><a href="#2-5-更新权值-omega-1-omega-2" class="headerlink" title="2.5 更新权值$\omega_1,\omega_2$"></a>2.5 更新权值$\omega_1,\omega_2$</h2><p>男生分布的权值的更新如下：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127222942756.png"  width="35%" >
+ </center>
+
+<p>类似的，女生分布的权值的更新如下：</p>
+<center>
+ <img  src="https://img-blog.csdnimg.cn/20191127222959165.png"  width="35%" >
+ </center>
+
+<h2 id="2-6-仿真效果"><a href="#2-6-仿真效果" class="headerlink" title="2.6 仿真效果"></a>2.6 仿真效果</h2><p>在迭代十次之后，我们就可以看到，其迭代结果已趋于稳定，效果显示如下：<br>  <img src="https://img-blog.csdnimg.cn/20191127235722796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">   | <img src="https://img-blog.csdnimg.cn/20191127235738532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="Value"><br>———— | ——-<br>在上图中我们可以看到，随着迭代次数的增加，我们的男女的权重系数也都趋于稳定，并且我们取最后一次迭代的结果，做出男女身高的高斯概率曲线。我们 可以拿该曲线迭代出的结果与之前的结果进行比较，可知其迭代精度还是可以的。</p>
+<h2 id="2-7-高斯混合模型不同权值的比较"><a href="#2-7-高斯混合模型不同权值的比较" class="headerlink" title="2.7 高斯混合模型不同权值的比较"></a>2.7 高斯混合模型不同权值的比较</h2><p>对于不同的迭代结果，我以动图的形式来展示如下，在不同的权值下，其叠加后的高斯混合模型图样也是不一样的，如下所示：<br><img src="https://img-blog.csdnimg.cn/2019112800054120.gif#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="3-matlab源码"><a href="#3-matlab源码" class="headerlink" title="3.matlab源码"></a>3.matlab源码</h1><h2 id="3-1-迭代更新的函数封装（matlab）"><a href="#3-1-迭代更新的函数封装（matlab）" class="headerlink" title="3.1 迭代更新的函数封装（matlab）"></a>3.1 迭代更新的函数封装（matlab）</h2><p>由于要使用不断迭代的方式来不断求取新的均值方差权值，以期使得迭代的结果更加接近真实值，于是我对于这部分的代码进行了一下封装，将其封装为一个loop.m文件。其内容具体如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">文件名称：loop.m</span><br><span class="line">function [ mu1_new,sigma1_new,w1_new,mu2_new,sigma2_new,w2_new ] = loop(male,female,g_mu1,g_sigma1,g_w1,g_mu2,g_sigma2,g_w2 )</span><br><span class="line">%UNTITLED 此处显示有关此函数的摘要</span><br><span class="line">%   此处显示详细说明</span><br><span class="line">%Step <span class="number">1.</span>首先根据经验来分别设置男女生的均值、方差和权值</span><br><span class="line">% g_mu1=<span class="number">175</span>;g_sigma1=<span class="number">10</span>;g_w1=<span class="number">0.5</span>;%男生的</span><br><span class="line">% g_mu2=<span class="number">158</span>;g_sigma2=<span class="number">10</span>;g_w2=<span class="number">0.5</span>;%女生的</span><br><span class="line"></span><br><span class="line">%Step <span class="number">2.</span> </span><br><span class="line">%计算男的身高在男分布中的响应R1i</span><br><span class="line">%计算女的身高在男分布中的响应R2i</span><br><span class="line">people=[female male];</span><br><span class="line">R1=zeros(<span class="number">1</span>,<span class="number">2000</span>);</span><br><span class="line">R2=zeros(<span class="number">1</span>,<span class="number">2000</span>);</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">2000</span></span><br><span class="line">    px1=g_w1*pdf('norm',people(i),g_mu1,g_sigma1);</span><br><span class="line">    px2=g_w2*pdf('norm',people(i),g_mu2,g_sigma2);</span><br><span class="line">    R1(i)=px1/(px1+px2);</span><br><span class="line">    R2(i)=px2/(px1+px2);</span><br><span class="line"><span class="built_in">end</span></span><br><span class="line"></span><br><span class="line">%Step <span class="number">3.</span></span><br><span class="line">%更新男、女生身高分布的期望mu</span><br><span class="line"></span><br><span class="line">sum1=<span class="number">0</span>;</span><br><span class="line">sum2=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">2000</span></span><br><span class="line">    sum1=sum1+R1(i)*people(i);</span><br><span class="line">    sum2=sum2+R2(i)*people(i);</span><br><span class="line"><span class="built_in">end</span></span><br><span class="line">sum11=sum(R1);</span><br><span class="line">sum22=sum(R2);</span><br><span class="line">mu1_new=sum1/sum11;%得出男生的新均值</span><br><span class="line">mu2_new=sum2/sum22;%得出女生的新均值</span><br><span class="line"></span><br><span class="line">%Step <span class="number">4.</span></span><br><span class="line">%更新男、女生身高分布的标准差sigma</span><br><span class="line">sum1=<span class="number">0</span>;</span><br><span class="line">sum2=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">2000</span></span><br><span class="line">    sum1=sum1+R1(i)*(people(i)-mu1_new)^<span class="number">2</span>;</span><br><span class="line">    sum2=sum2+R2(i)*(people(i)-mu2_new)^<span class="number">2</span>;</span><br><span class="line"><span class="built_in">end</span></span><br><span class="line">sigma1_new=(sum1/sum11)^<span class="number">0.5</span>;%得出男生的新标准差</span><br><span class="line">sigma2_new=(sum2/sum22)^<span class="number">0.5</span>;%得出女生的新标准差</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">%Step <span class="number">5.</span></span><br><span class="line">%更新权值</span><br><span class="line">w1_new=sum11/<span class="number">2000</span>;</span><br><span class="line">w2_new=sum22/<span class="number">2000</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">end</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="3-2-主函数实现高斯混合模型GMM"><a href="#3-2-主函数实现高斯混合模型GMM" class="headerlink" title="3.2 主函数实现高斯混合模型GMM"></a>3.2 主函数实现高斯混合模型GMM</h2><p>该函数是实现整个这个实例的matlab代码主函数，其内容如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">文件名称：GMM.m</span><br><span class="line">%绘制男女生身高的例子</span><br><span class="line">clc</span><br><span class="line"><span class="built_in">clear</span> all</span><br><span class="line">%男女生各取<span class="number">2000</span>人，女生平均身高<span class="number">163</span>，男声平均身高<span class="number">180</span></span><br><span class="line">female=<span class="number">160</span>+randn(<span class="number">1</span>,<span class="number">821</span>)*<span class="built_in">sqrt</span>(<span class="number">16</span>);</span><br><span class="line">male=<span class="number">180</span>+randn(<span class="number">1</span>,<span class="number">1179</span>)*<span class="built_in">sqrt</span>(<span class="number">30</span>);</span><br><span class="line">people=[female male];</span><br><span class="line">figure(<span class="number">1</span>)</span><br><span class="line">hist(people,<span class="number">150</span>);%画出混合后的频率分布直方图</span><br><span class="line">N=<span class="number">100</span>;</span><br><span class="line">figure(<span class="number">2</span>)</span><br><span class="line">hist(female,N);%画出生成的女性的频率分布直方图</span><br><span class="line">h=findobj(gca,'Type','patch');</span><br><span class="line">set(h,'facecolor','r');hold on;%设置柱形图颜色</span><br><span class="line">hist(male,N);%画出生成的男性的频率分布直方图</span><br><span class="line">title('某校男女生身高的分布直方图');</span><br><span class="line">xlabel('身高/cm');ylabel('人数');hold off ;%坐标轴设置</span><br><span class="line"></span><br><span class="line">%以下通过五个步骤开始构建高斯混合模型</span><br><span class="line"></span><br><span class="line">%Step <span class="number">1.</span>首先根据经验来分别设置男女生的均值、方差和权值</span><br><span class="line">%前提是不知道男女生分布的均值和方差的。</span><br><span class="line">g_mu1=<span class="number">170</span>;g_sigma1=<span class="number">10</span>;g_w1=<span class="number">0.5</span>;%男生的</span><br><span class="line">g_mu2=<span class="number">160</span>;g_sigma2=<span class="number">5</span>;g_w2=<span class="number">0.5</span>;%女生的</span><br><span class="line"></span><br><span class="line">times=<span class="number">10</span>;%设置迭代次数</span><br><span class="line">result=zeros(times,<span class="number">6</span>);%定义一个数组来存储每次的迭代结果</span><br><span class="line">result(<span class="number">1</span>,<span class="number">1</span>)=g_mu1;result(<span class="number">1</span>,<span class="number">2</span>)=g_sigma1;%以下</span><br><span class="line">result(<span class="number">1</span>,<span class="number">3</span>)=g_w1;result(<span class="number">1</span>,<span class="number">4</span>)=g_mu2;</span><br><span class="line">result(<span class="number">1</span>,<span class="number">5</span>)=g_sigma2;result(<span class="number">1</span>,<span class="number">6</span>)=g_w2;%以上将result的第一行设置为初始值</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>:times<span class="number">-1</span></span><br><span class="line">    %调用自己的迭代函数loop来实现迭代计算</span><br><span class="line">   [ mu11_new,sigma11_new,w11_new,mu22_new,sigma22_new,w22_new ]=loop(male,female,result(i,<span class="number">1</span>),result(i,<span class="number">2</span>),result(i,<span class="number">3</span>),result(i,<span class="number">4</span>),result(i,<span class="number">5</span>),result(i,<span class="number">6</span>));</span><br><span class="line">    result(i+<span class="number">1</span>,<span class="number">1</span>)=mu11_new;result(i+<span class="number">1</span>,<span class="number">2</span>)=sigma11_new;result(i+<span class="number">1</span>,<span class="number">3</span>)=w11_new;%将每次迭代的结果存入result</span><br><span class="line">    result(i+<span class="number">1</span>,<span class="number">4</span>)=mu22_new;result(i+<span class="number">1</span>,<span class="number">5</span>)=sigma22_new;result(i+<span class="number">1</span>,<span class="number">6</span>)=w22_new ;%当前迭代完成</span><br><span class="line"><span class="built_in">end</span></span><br><span class="line">result    % 输出每次迭代结果</span><br><span class="line">figure(<span class="number">3</span>)</span><br><span class="line">%plot(result(:,3),'linewidth',1.5);%画出男生的权重迭代历史</span><br><span class="line">xi=<span class="number">1</span>:<span class="number">0.4</span>:times;</span><br><span class="line">xx=interp1(result(:,3),xi, 'spline');</span><br><span class="line">plot(xx,'linewidth',1.5);%画出男生的权重迭代历史</span><br><span class="line">hold on ;grid on;</span><br><span class="line">yy=interp1(result(:,6),xi, 'spline');</span><br><span class="line">plot(yy,'r','linewidth',1.5);%画出女生权重迭代历史</span><br><span class="line">legend('男生权重变化','女生权重变化','location','northeast');%坐标轴设置</span><br><span class="line">title('男女生权重随迭代次数的变化');</span><br><span class="line">xlabel('迭代次数');ylabel('权重值');axis([1 times 0 1]);%坐标轴设置</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">%开始分别求取出男女生的概率密度函数</span><br><span class="line">%在刚刚的迭代结果中取出男女生的分别的mu和sigma</span><br><span class="line">%男生而言需要求出mu1,sigma1,w1</span><br><span class="line">%女生而言需要求取mu2,sigma2,w2</span><br><span class="line">mu1=result(times,<span class="number">1</span>);</span><br><span class="line">sigma1=result(times,<span class="number">2</span>);</span><br><span class="line">mu2=result(times,<span class="number">4</span>);</span><br><span class="line">sigma2=result(times,<span class="number">5</span>);</span><br><span class="line">figure(<span class="number">4</span>);</span><br><span class="line">%画出男生的概率密度曲线</span><br><span class="line">inter_x=linspace(<span class="number">140</span>,<span class="number">210</span>,<span class="number">500</span>)<span class="string">';</span></span><br><span class="line">inter_y=normpdf(inter_x,mu1,sigma1);</span><br><span class="line">plot(inter_x,inter_y,'linewidth',1.5);</span><br><span class="line">hold on;</span><br><span class="line">%画出女生的概率密度曲线</span><br><span class="line">inter_yy=normpdf(inter_x,mu2,sigma2);</span><br><span class="line">plot(inter_x,inter_yy,'m','linewidth',1.5)</span><br><span class="line">grid on;</span><br><span class="line">legend('男生','女生');title('男女生身高的概率密度曲线');</span><br><span class="line">xlabel('身高/cm');ylabel('概率');hold off;%坐标轴设置</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">%%此部分开始画高斯混合模型的图像</span><br><span class="line">x =<span class="number">140</span>:<span class="number">0.1</span>:<span class="number">210</span> ;</span><br><span class="line">y1 = normpdf(x,mu1,sigma1);%定义第<span class="number">1</span>个高斯密度曲线</span><br><span class="line">y2 = normpdf(x,mu2,sigma2);%定义第<span class="number">2</span>个高斯密度曲线</span><br><span class="line">figure(<span class="number">5</span>)</span><br><span class="line">plot(x,y1,'--b','linewidth',1.5);%画出第1个高斯概率密度曲线的图像</span><br><span class="line">hold on;</span><br><span class="line">plot(x,y2,'--g','linewidth',1.5);%画出第2个高斯概率密度曲线的图像</span><br><span class="line">title('两个一维高斯分布HMM模型');xlabel('X');ylabel('概率密度');</span><br><span class="line">% axis([<span class="number">-8</span> <span class="number">10</span> <span class="number">0</span> <span class="number">0.5</span>]);</span><br><span class="line">grid on;%坐标轴设置</span><br><span class="line">tex=text(180,0.1,'当前W1数值为：','FontSize',14,'FontWeight','demi');%图中显示权重</span><br><span class="line">rate=result(:,<span class="number">3</span>)%定义一个权重</span><br><span class="line">c=colormap(lines(times));%定义times条不同颜色的线条</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>:times</span><br><span class="line">   pause(<span class="number">0.1</span>);%延时函数</span><br><span class="line">   y3=rate(i)*y1+(<span class="number">1</span>-rate(i))*y2%对两个高斯概率密度图像进行加权</span><br><span class="line">   p2=plot(x,y3,'color',c(i,:),'linewidth',1.5);%绘画加权后的图像</span><br><span class="line">   num=num2str(rate(i));%将当前第一个高斯概率所用的权重值转为字符串类型</span><br><span class="line">   tex1=text(203,0.1,num,'FontSize',14,'FontWeight','demi','color','r');%显示当前权重值</span><br><span class="line">   pause(<span class="number">0.3</span>);%延时函数</span><br><span class="line">   <span class="keyword">if</span>(i&lt;times)</span><br><span class="line">       <span class="keyword">delete</span>(tex1);%删除当前权重</span><br><span class="line">       <span class="keyword">delete</span>(p2);  %删除当前加权后图像</span><br><span class="line">   <span class="built_in">end</span></span><br><span class="line"><span class="built_in">end</span></span><br><span class="line">hold off</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+	<div>
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/25/python3.X%E7%89%88%E6%9C%ACTurtle%E5%BA%93%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E5%8E%9F%E5%9B%A0%E5%8F%8A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1636,153 +1869,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/25/java%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0--%E6%95%B0%E6%8D%AE%E6%B5%81%E7%BB%83%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kingback">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/isme.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王延凯的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/25/java%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0--%E6%95%B0%E6%8D%AE%E6%B5%81%E7%BB%83%E4%B9%A0/" itemprop="url">Java基础练习--数据流操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-25T17:03:38+08:00">
-                2019-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="使用Java实现一个程序，输出windows的全部汉字到一个文件中（提示：通过汉字内码，做循环来实现。）"><a href="#使用Java实现一个程序，输出windows的全部汉字到一个文件中（提示：通过汉字内码，做循环来实现。）" class="headerlink" title="使用Java实现一个程序，输出windows的全部汉字到一个文件中（提示：通过汉字内码，做循环来实现。）"></a>使用Java实现一个程序，输出windows的全部汉字到一个文件中（提示：通过汉字内码，做循环来实现。）</h1><p>在这里我为了实现该功能我封装了一个方法，名字为print_word方法，当我们要实现该功能时，我们只需要在main函数中调用该方法，其调用方法如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">      //调用汉字输出方法</span><br><span class="line">      print_word();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><br>另外接下来就是来展示一下print_word方法：</p>
-<h2 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">***************************</span><br><span class="line">用Java实现一程序，输出windows系统中的全部汉字到一个文件中。</span><br><span class="line">提示：（通过汉字内码实现）</span><br><span class="line">***************************<span class="regexp">/</span></span><br><span class="line"><span class="regexp">public static void print_word() &#123;</span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/快捷键Alt+Insert 建立方法</span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/ctrl+alt+T 为选中的代码块添加try catch，用于捕捉异常</span></span><br><span class="line"><span class="regexp">    try &#123;</span></span><br><span class="line"><span class="regexp">        File file=new File("words.txt");/</span><span class="regexp">/创建文件对象</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/if语句用来判断该路径下是否存在该文件</span></span><br><span class="line"><span class="regexp">        if(!file.exists())&#123;</span></span><br><span class="line"><span class="regexp">            file.createNewFile();/</span><span class="regexp">/如果不存在该文件，则会在该路径下创建该文件</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        FileWriter fileWriter=new FileWriter("words.txt");/</span><span class="regexp">/实例化FileWriter</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/经过查询得知汉字码的范围为4e00-9fa5</span></span><br><span class="line"><span class="regexp">        String start="4e00";</span></span><br><span class="line"><span class="regexp">        String end="9fa5";</span></span><br><span class="line"><span class="regexp">        int s=Integer.parseInt(start,16);/</span><span class="regexp">/将16进制的4e00转换为10进制</span></span><br><span class="line"><span class="regexp">        int e=Integer.parseInt(end,16);/</span><span class="regexp">/将16进制的9fa5转换为10进制</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/通过for循环输出汉字</span></span><br><span class="line"><span class="regexp">        for (int i = s; i &lt;e; i++) &#123;</span></span><br><span class="line"><span class="regexp">            String str=(char)i+" ";/</span><span class="regexp">/强制类型转换</span></span><br><span class="line"><span class="regexp">            fileWriter.write(str);/</span><span class="regexp">/将str对应字符写入words.txt</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        System.out.println("汉字已经全部输出完毕！！！");/</span><span class="regexp">/输出完毕验证</span></span><br><span class="line"><span class="regexp">        fileWriter.flush();/</span><span class="regexp">/通过flush实现批量输出</span></span><br><span class="line"><span class="regexp">        fileWriter.close();/</span><span class="regexp">/关闭流</span></span><br><span class="line"><span class="regexp">    &#125; catch (IOException e1) &#123;/</span><span class="regexp">/当try代码块发生错误时，则会跳转到catch代码块</span></span><br><span class="line"><span class="regexp">        e1.printStackTrace();/</span><span class="regexp">/打印错误原因以及错误发生位置</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="运行结果截图"><a href="#运行结果截图" class="headerlink" title="运行结果截图"></a>运行结果截图</h2><p><img src="https://img-blog.csdnimg.cn/20190829210458606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>好了，做到这里，对于Java的数据流的基本操作已经完成的差不多了，当然如果想要其它方法的话，可以在后续的编程练习中继续积累。</p>
-
-          
-        
-      
-    </div>
-	<div>
-		
-	</div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1837,7 +1923,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
