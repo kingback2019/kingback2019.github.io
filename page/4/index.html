@@ -274,6 +274,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/10/24/%E8%85%BE%E8%AE%AF%E4%BA%91%E7%94%B3%E8%AF%B7+MobaXterm%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8+%E9%85%8D%E7%BD%AEAnaconda%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/24/%E8%85%BE%E8%AE%AF%E4%BA%91%E7%94%B3%E8%AF%B7+MobaXterm%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8+%E9%85%8D%E7%BD%AEAnaconda%E7%8E%AF%E5%A2%83/" itemprop="url">腾讯云申请+MobaXterm连接服务器+配置Anaconda环境</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-24T12:54:58+08:00">
+                2019-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-腾讯云申请、选择系统、更换系统"><a href="#1-腾讯云申请、选择系统、更换系统" class="headerlink" title="1.腾讯云申请、选择系统、更换系统"></a>1.腾讯云申请、选择系统、更换系统</h2><h3 id="1-1-腾讯云服务器申请"><a href="#1-1-腾讯云服务器申请" class="headerlink" title="1.1 腾讯云服务器申请"></a>1.1 腾讯云服务器申请</h3><p>申请网址：<a href="https://cloud.tencent.com/product/cvm" target="_blank" rel="noopener">链接</a><br>之后点击立即选购即可。<br><img src="https://img-blog.csdnimg.cn/20191016212128855.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="1-2-选择系统以及配置"><a href="#1-2-选择系统以及配置" class="headerlink" title="1.2 选择系统以及配置"></a>1.2 选择系统以及配置</h3><p><img src="https://img-blog.csdnimg.cn/20191016212330934.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$根据上图我们就可以选择出我们需要的配置。此处我选择了1核1G带宽。对我我现在的要求来说已经足够了。请大家根据自己需求来进行配置。</p>
+<h3 id="1-3-更换系统为Ubuntu-16-04-64位"><a href="#1-3-更换系统为Ubuntu-16-04-64位" class="headerlink" title="1.3 更换系统为Ubuntu 16.04 64位"></a>1.3 更换系统为Ubuntu 16.04 64位</h3><p>其操作如下所示：<br>其操作网址如下，需要微信登陆。连接地址：<a href="https://console.cloud.tencent.com/cvm" target="_blank" rel="noopener">网址链接</a></p>
+<p><img src="https://img-blog.csdnimg.cn/20191016191241809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>选择要重装的配置即可。<br><img src="https://img-blog.csdnimg.cn/20191016191521398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>之后即可完成系统重装。速度很快很方便。</p>
+<h2 id="2-安装MobaXterm并连接远程服务器"><a href="#2-安装MobaXterm并连接远程服务器" class="headerlink" title="2.安装MobaXterm并连接远程服务器"></a>2.安装MobaXterm并连接远程服务器</h2><p>MobaXterm下载地址：<a href="https://mobaxterm.mobatek.net/download-home-edition.html" target="_blank" rel="noopener">官网下载地址</a><br>如果无法下载则使用网盘链接下载：<a href="https://pan.baidu.com/s/1Buj-WuaoLzQdogX8gMqDMA" target="_blank" rel="noopener">链接</a>    提取码：zese<br><img src="https://img-blog.csdnimg.cn/20191016184120905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$这里我需要说明的一下就是，由于我的服务器使用的用户名为ubuntu,我也是在后来才发现的，在连接中我将我自己的用户名已经改正，但是在上图中没有做出更正。点击ok之后，则会提示你让你输入密码，但是这里的密码是不显示的，只需要敲对了回车即可。然后即可看到首次的SSH认证许可，首次认证通过以后，以后则不再出现这个认证界面：<br><img src="https://img-blog.csdnimg.cn/20191016190545701.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">    |  <img src="https://img-blog.csdnimg.cn/20191016185825243.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>———— | ————————</p>
+<p>好了到此已经连接成功了</p>
+<h2 id="3-测试连接，输出”hello-word-”"><a href="#3-测试连接，输出”hello-word-”" class="headerlink" title="3.测试连接，输出”hello word!”"></a>3.测试连接，输出”hello word!”</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ touch test</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ vi test</span><br></pre></td></tr></table></figure>
+<p>在使用之前先使用touch命令创建一个文件，并且使用vim对其进行编辑：<br><img src="https://img-blog.csdnimg.cn/20191016192703835.png#pic_center" alt="在这里插入图片描述"><br>退出编辑器之后运行刚刚创建的test文件<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ ./test</span><br><span class="line">bash: ./test: Permission denied</span><br></pre></td></tr></table></figure><br>则会出现错误，提示是权限不够，于是我们使用命令<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ ls</span><br><span class="line">test</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ ls -l</span><br><span class="line">total <span class="number">4</span></span><br><span class="line">-rw-rw-r-- <span class="number">1</span> ubuntu ubuntu <span class="number">20</span> Oct <span class="number">16</span> <span class="number">19</span>:<span class="number">21</span> test</span><br></pre></td></tr></table></figure><br>我们看到文件没有执行权限，接下来我们要对该文件开放权限，使用chmod命令，其中777代表的是“可读 可写 可执行”。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ chmod <span class="number">777</span> test</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ ls -l</span><br><span class="line">total <span class="number">4</span></span><br><span class="line">-rwxrwxrwx <span class="number">1</span> ubuntu ubuntu <span class="number">20</span> Oct <span class="number">16</span> <span class="number">19</span>:<span class="number">21</span> test</span><br></pre></td></tr></table></figure><br>更改完权限之后，我们再次执行：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ ./test</span><br><span class="line">hello world!</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$</span><br></pre></td></tr></table></figure><br>可以看到已经执行成功。</p>
+<h2 id="4-配置anaconda环境"><a href="#4-配置anaconda环境" class="headerlink" title="4.配置anaconda环境"></a>4.配置anaconda环境</h2><h3 id="方式1-使用MobaXterm上传到服务器"><a href="#方式1-使用MobaXterm上传到服务器" class="headerlink" title="方式1  使用MobaXterm上传到服务器"></a>方式1  使用MobaXterm上传到服务器</h3><p>在清华大学镜像下载linux版的anaconda安装包:<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;O=A" target="_blank" rel="noopener">下载地址</a><br>下载完成之后直接将文件拖入MobaXterm左侧即可完成上传到服务器<br><img src="https://img-blog.csdnimg.cn/2019101619562981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="方式2-使用wget在线下载安装包"><a href="#方式2-使用wget在线下载安装包" class="headerlink" title="方式2 使用wget在线下载安装包"></a>方式2 使用wget在线下载安装包</h3><p>使用wget命令下载anaconda安装包<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.1.0-Linux-x86_64.sh</span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20191016200118407.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>完成下载之后，再次执行命令进行安装;<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Anaconda3<span class="number">-5.1</span><span class="number">.0</span>-Linux-x86.sh</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20191016200523721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>在之后的界面一直输入回车或者yes即可完成安装。<br><img src="https://img-blog.csdnimg.cn/2019101620145586.png#pic_center" alt="在这里插入图片描述"><br>在这里记得输入yes，将其加入path环境变量。<br><img src="https://img-blog.csdnimg.cn/20191016201552178.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$在安装完之后，会提示你是否要安装VSCode，这里我们不需要，所以直接输入no。<br>在这之后，我们直接运行conda命令，发现环境变量未配置好。<img src="https://img-blog.csdnimg.cn/20191016201837927.png#pic_center" alt="在这里插入图片描述"><br>$\qquad$虽然我们刚刚将anaconda的路径添加进环境变量$PATH，但是我们还没有重启环境变量，所以会出现这个错误，现在只需要在命令行中输入如下命令激活即可：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ source ~/.bashrc</span><br></pre></td></tr></table></figure></p>
+<p>之后再界面分别conda版本和查看预装python版本。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ python -V</span><br><span class="line">Python <span class="number">3.6</span><span class="number">.4</span> :: Anaconda, Inc.</span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ conda -V</span><br><span class="line">conda <span class="number">4.4</span><span class="number">.10</span></span><br><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$</span><br></pre></td></tr></table></figure></p>
+<p>$\qquad$我们可以看到这里的python版本是2.7版本，虽然这是一个经典版本，但是现在常用的是3.X版本，于是我们需要使用conda撞见一个3.X的虚拟环境</p>
+<h2 id="5-conda创建python3-6虚拟环境"><a href="#5-conda创建python3-6虚拟环境" class="headerlink" title="5.conda创建python3.6虚拟环境"></a>5.conda创建python3.6虚拟环境</h2><p>创建虚拟环境<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n py36 python=<span class="number">3.6</span></span><br></pre></td></tr></table></figure><br>其结果如下所示：<br><img src="https://img-blog.csdnimg.cn/20191016204837821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>激活刚刚创建的虚拟环境<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source activate py36</span><br></pre></td></tr></table></figure><br>执行完毕之后其结果如下所示：<br><img src="https://img-blog.csdnimg.cn/20191016205523832.png#pic_center" alt="在这里插入图片描述"><br>我们便可以见到已经进到这个虚拟环境之中了，现在我们来查看其python版本：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(py36) ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ python -V</span><br><span class="line">Python <span class="number">3.6</span><span class="number">.9</span> :: Anaconda, Inc.</span><br></pre></td></tr></table></figure><br>我们可以看到此处的python版本已经是3.6系列了。<br>如果我们需要关闭该虚拟环境的话，可以执行命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source deactivate</span><br></pre></td></tr></table></figure><br>执行完毕之后则会看到已经退出虚拟环境py36<br><img src="https://img-blog.csdnimg.cn/20191016205947573.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="6-创建python文件，使其输出”Hello-World-”"><a href="#6-创建python文件，使其输出”Hello-World-”" class="headerlink" title="6.创建python文件，使其输出”Hello World!”"></a>6.创建python文件，使其输出”Hello World!”</h2><p>在这里我们使用python3.6环境进行输出，首先进入虚拟环境py36，并且创建一个test.py文件。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ source activate py36</span><br><span class="line">(py36) ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ ls</span><br><span class="line">anaconda3  Anaconda3<span class="number">-5.1</span><span class="number">.0</span>-Linux-x86_64.sh  test</span><br><span class="line">(py36) ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ touch test.py</span><br><span class="line">(py36) ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ vi test.py</span><br></pre></td></tr></table></figure><br>之后在文件内输入<br><img src="https://img-blog.csdnimg.cn/20191016211336773.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>在编辑完毕之后退出，运行该python程序：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(py36) ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$ python test.py</span><br><span class="line">Hello World!</span><br><span class="line">(py36) ubuntu@VM<span class="number">-0</span><span class="number">-12</span>-ubuntu:~$</span><br></pre></td></tr></table></figure><br>$\qquad$看到该结果还是比较满意的。好了这篇文章就分享到这里了，接下来我将会分享如何在服务器上部署IDEA 发布的Web项目。</p>
+
+          
+        
+      
+    </div>
+	<div>
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/10/24/%E6%9C%80%E8%AF%A6%E7%BB%86%E7%9A%84MFCC%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%EF%BC%88matlab%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -747,7 +905,7 @@ i=1，2，3，...,301 \quad; \quad j=1,2,3...,13</script><p>按照上边的公�
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

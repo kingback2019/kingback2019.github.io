@@ -274,6 +274,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/25/Java%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%E4%B9%8B%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%BB%83%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/25/Java%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%E4%B9%8B%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%BB%83%E4%B9%A0/" itemprop="url">Java基础练习之控制台练习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-25T17:03:54+08:00">
+                2019-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-要求使用java编程实现一个命令窗口程序，使得实现以下功能"><a href="#1-要求使用java编程实现一个命令窗口程序，使得实现以下功能" class="headerlink" title="1.要求使用java编程实现一个命令窗口程序，使得实现以下功能"></a>1.要求使用java编程实现一个命令窗口程序，使得实现以下功能</h1><ol>
+<li>输入“A”则在屏上回显“Your input is A”</li>
+<li>输入”我”则在屏上回显“your input is 我”</li>
+<li>输入ByeBye退出程序。<h2 id="1-1-代码实现"><a href="#1-1-代码实现" class="headerlink" title="1.1 代码实现"></a>1.1 代码实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***************************</span></span><br><span class="line"><span class="comment"> *  编程实现一个命令窗口程序，使得输入A,</span></span><br><span class="line"><span class="comment"> *  在屏幕上回显“your input is A”，</span></span><br><span class="line"><span class="comment"> *  输入我,在屏幕上回显“your input is 我”</span></span><br><span class="line"><span class="comment"> *  输入ByeBye结束程序</span></span><br><span class="line"><span class="comment"> *  **************************/</span></span><br><span class="line">public <span class="keyword">static</span> <span class="keyword">void</span> A() &#123;</span><br><span class="line">    <span class="built_in">String</span> str=<span class="string">""</span>;<span class="comment">//定义一个空字符串来存储用户输入的字符</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>==<span class="number">1</span>)&#123;<span class="comment">//使用1==1死循环来循环获取控制台输入的数据。</span></span><br><span class="line">        System.out.println(<span class="string">"请输入任意字符："</span>);</span><br><span class="line">        Scanner scanner=<span class="keyword">new</span> Scanner(System.in);<span class="comment">//创建一个新的Scanner ,控制台等待用户敲击Enter键，把所输入的内容传给Scanner</span></span><br><span class="line">        str=scanner.nextLine();<span class="comment">//获取Scanner输入的内容</span></span><br><span class="line">        <span class="comment">//当用户输入的字符串和"ByeBye"是否相等，如果相等则程序正常退出</span></span><br><span class="line">        <span class="keyword">if</span> (str.equals(<span class="string">"ByeBye"</span>))&#123;</span><br><span class="line">            System.out.println(<span class="string">"程序正常退出！"</span>);</span><br><span class="line">            System.exit(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"your input is "</span>+str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="1-2-运行结果"><a href="#1-2-运行结果" class="headerlink" title="1.2 运行结果"></a>1.2 运行结果</h2><p><img src="https://img-blog.csdnimg.cn/20190829173205506.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="2-编程实现一个命令窗口程序，要求实现以下功能："><a href="#2-编程实现一个命令窗口程序，要求实现以下功能：" class="headerlink" title="2.编程实现一个命令窗口程序，要求实现以下功能："></a>2.编程实现一个命令窗口程序，要求实现以下功能：</h1><ol>
+<li>输入“A”则在屏上回显A字符的ASCII码。</li>
+<li>输入“4”则在屏上回显4字符的ASCII码。</li>
+<li>输入“我”则在屏上回显“我”字的汉字内码。</li>
+<li>输入ByeBye结束程序<h2 id="2-1-代码实现"><a href="#2-1-代码实现" class="headerlink" title="2.1 代码实现"></a>2.1 代码实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***************************</span></span><br><span class="line"><span class="comment"> * 编程实现一个命令窗口程序，使得输入A,则在屏上回显 A 字符的 ASCII 码。</span></span><br><span class="line"><span class="comment"> * 输入“4”则在屏上回显 4 字符的 ASCII 码。</span></span><br><span class="line"><span class="comment"> * 输入“我”则在屏上回显“我”字的汉字内码</span></span><br><span class="line"><span class="comment"> * 输入 ByeBye 则退出程序.</span></span><br><span class="line"><span class="comment"> * **************************/</span></span><br><span class="line">public <span class="keyword">static</span> <span class="keyword">void</span> B() &#123;</span><br><span class="line">    <span class="built_in">String</span> str=<span class="string">""</span>;<span class="comment">//定义一个空字符串来存储用户输入的字符</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)&#123;<span class="comment">//使用true死循环来循环获取控制台输入的数据。</span></span><br><span class="line">        System.out.println(<span class="string">"请输入任意字符："</span>);</span><br><span class="line">        Scanner scanner=<span class="keyword">new</span> Scanner(System.in);<span class="comment">//创建一个新的Scanner ,控制台等待用户敲击Enter键，把所输入的内容传给Scanner</span></span><br><span class="line">        str=scanner.nextLine();<span class="comment">//获取Scanner输入的内容</span></span><br><span class="line">        char[] a=str.toCharArray();<span class="comment">//将字符串对象中的字符转换为一个字符数组</span></span><br><span class="line">        <span class="comment">//当用户输入的字符串和"ByeBye"是否相等，如果相等则程序正常退出</span></span><br><span class="line">        <span class="keyword">if</span> (str.equals(<span class="string">"ByeBye"</span>))&#123;</span><br><span class="line">            System.out.println(<span class="string">"程序正常退出！"</span>);</span><br><span class="line">            System.exit(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">                System.out.println(<span class="string">"the ASCII of "</span>+a[i]+<span class="string">" is:"</span>+Integer.valueOf(a[i]));<span class="comment">//将字符转换成对应的ASCII码</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-运行结果"><a href="#2-2-运行结果" class="headerlink" title="2.2 运行结果"></a>2.2 运行结果</h2><img src="https://img-blog.csdnimg.cn/20190829173244647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><h1 id="3-编程实现一个命令窗口程序，使得："><a href="#3-编程实现一个命令窗口程序，使得：" class="headerlink" title="3.编程实现一个命令窗口程序，使得："></a>3.编程实现一个命令窗口程序，使得：</h1></li>
+<li>输入“你”,则在屏上回显“you”</li>
+<li>输入“书”,则在屏上回显“book”</li>
+<li>输入“中”,则在屏上回显“middle”</li>
+<li>输入“中国”,则在屏上回显“China”</li>
+<li>要求至少100个单词。如果没有记录的词则如下所示：</li>
+<li>输入“东东”,则在屏上回显“查不到该词”</li>
+<li>输入ByeBye结束程序。<h2 id="3-1-代码实现"><a href="#3-1-代码实现" class="headerlink" title="3.1 代码实现"></a>3.1 代码实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************</span></span><br><span class="line"><span class="comment"> * 编程实现一个命令窗程序，使得：输入“你”则在屏上回显“you”。</span></span><br><span class="line"><span class="comment"> * 输入“书”则在屏上回显“book”。</span></span><br><span class="line"><span class="comment"> * 输入“中”则在屏上回显“middle”。</span></span><br><span class="line"><span class="comment"> * 输入“中国”则在屏上回显“China”。</span></span><br><span class="line"><span class="comment"> * 要能输入至少 100 个词。如输入没有记录的词则如下：</span></span><br><span class="line"><span class="comment"> * 输入“东东”则在屏上回显“查不到该词”。</span></span><br><span class="line"><span class="comment"> * 输入 ByeBye 则退出程序.</span></span><br><span class="line"><span class="comment"> * *************************/</span></span><br><span class="line">public <span class="keyword">static</span> <span class="keyword">void</span> C() &#123;</span><br><span class="line">    <span class="built_in">String</span> strname=<span class="string">"C:\\Users\\kingback\\Desktop\\龙华老师资料\\下放资料\\dic.txt"</span>;</span><br><span class="line">    <span class="comment">//定义txt文本位置</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="comment">//创建try catch快捷键，选中代码块，Ctrl+Alt+T</span></span><br><span class="line">        BufferedReader br= <span class="literal">null</span>;</span><br><span class="line">        <span class="comment">//为FileReader创建一个try catch,捕获错误。</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileReader reader=<span class="keyword">new</span> FileReader(strname);<span class="comment">//创建一个FileReader，用来读取txt文件</span></span><br><span class="line">            br = <span class="keyword">new</span> BufferedReader(reader);<span class="comment">//从字符输入流中读取文本</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        Scanner scanner=<span class="keyword">new</span> Scanner(System.in);<span class="comment">//定义一个Scanner实例</span></span><br><span class="line">        System.out.println(<span class="string">"请输入要查询的单词："</span>);</span><br><span class="line">        <span class="built_in">String</span> str=scanner.nextLine();<span class="comment">//获取用户输入的数据</span></span><br><span class="line">        <span class="built_in">String</span> line;<span class="comment">//用来接收文本文件中每一行的数据</span></span><br><span class="line">        boolean match=<span class="literal">false</span>;<span class="comment">//表示是否查询到对应的词汇</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果输入ByeBye结束程序</span></span><br><span class="line">        <span class="keyword">if</span>(str.equals(<span class="string">"ByeBye"</span>))&#123;</span><br><span class="line">            System.out.println(<span class="string">"程序正常退出！"</span>);</span><br><span class="line">            System.exit(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//为br.readline()捕获异常</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> ((line=br.readLine())!=<span class="literal">null</span>)&#123;</span><br><span class="line">                <span class="built_in">String</span>[] aa=line.split(<span class="string">"\t"</span>);<span class="comment">//以\t拆分字符串</span></span><br><span class="line">                <span class="keyword">if</span>(aa[<span class="number">0</span>].equals(str))&#123;<span class="comment">//判断输入的字符串是否存在</span></span><br><span class="line">                    System.out.println(<span class="string">"the result is :"</span>+aa[<span class="number">1</span>]);<span class="comment">//输出查询到的英语单词</span></span><br><span class="line">                    match=<span class="literal">true</span>;<span class="comment">//修改查询状态</span></span><br><span class="line">                    <span class="keyword">break</span>;<span class="comment">//跳出此次循环</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//如果没有查询到数据执行此步骤</span></span><br><span class="line">            <span class="keyword">if</span>(!match)&#123;</span><br><span class="line">                System.out.println(<span class="string">"查不到该词！！！"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-运行结果"><a href="#3-2-运行结果" class="headerlink" title="3.2 运行结果"></a>3.2 运行结果</h2><img src="https://img-blog.csdnimg.cn/20190829173311849.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><h1 id="4-整体代码"><a href="#4-整体代码" class="headerlink" title="4.整体代码"></a>4.整体代码</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">	package main.java.demo;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;<span class="comment">//把Scanner类导入到程序中</span></span><br><span class="line"><span class="keyword">import</span> java.io.*;<span class="comment">//将io包全部导入</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created with IntelliJ IDEA.</span></span><br><span class="line"><span class="comment"> * User: kingback</span></span><br><span class="line"><span class="comment"> * Author:king@王延凯</span></span><br><span class="line"><span class="comment"> * Date: 2019/4/16</span></span><br><span class="line"><span class="comment"> * Time: 23:38</span></span><br><span class="line"><span class="comment"> * Description: No Description</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">practice01</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</span><br><span class="line">        <span class="comment">//行注释Ctrl+/、块注释Ctrl+Shift+/</span></span><br><span class="line">        <span class="comment">//A();//调用A程序</span></span><br><span class="line">        <span class="comment">//B();//调用B程序</span></span><br><span class="line">        C();<span class="comment">//调用C程序</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/***************************</span></span><br><span class="line"><span class="comment">     *  编程实现一个命令窗口程序，使得输入A,</span></span><br><span class="line"><span class="comment">     *  在屏幕上回显“your input is A”，</span></span><br><span class="line"><span class="comment">     *  输入我,在屏幕上回显“your input is 我”</span></span><br><span class="line"><span class="comment">     *  输入ByeBye结束程序</span></span><br><span class="line"><span class="comment">     *  **************************/</span></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> A() &#123;</span><br><span class="line">        <span class="built_in">String</span> str=<span class="string">""</span>;<span class="comment">//定义一个空字符串来存储用户输入的字符</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>==<span class="number">1</span>)&#123;<span class="comment">//使用1==1死循环来循环获取控制台输入的数据。</span></span><br><span class="line">            System.out.println(<span class="string">"请输入任意字符："</span>);</span><br><span class="line">            Scanner scanner=<span class="keyword">new</span> Scanner(System.in);<span class="comment">//创建一个新的Scanner ,控制台等待用户敲击Enter键，把所输入的内容传给Scanner</span></span><br><span class="line">            str=scanner.nextLine();<span class="comment">//获取Scanner输入的内容</span></span><br><span class="line">            <span class="comment">//当用户输入的字符串和"ByeBye"是否相等，如果相等则程序正常退出</span></span><br><span class="line">            <span class="keyword">if</span> (str.equals(<span class="string">"ByeBye"</span>))&#123;</span><br><span class="line">                System.out.println(<span class="string">"程序正常退出！"</span>);</span><br><span class="line">                System.exit(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">"your input is "</span>+str);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/***************************</span></span><br><span class="line"><span class="comment">     * 编程实现一个命令窗口程序，使得输入A,则在屏上回显 A 字符的 ASCII 码。</span></span><br><span class="line"><span class="comment">     * 输入“4”则在屏上回显 4 字符的 ASCII 码。</span></span><br><span class="line"><span class="comment">     * 输入“我”则在屏上回显“我”字的汉字内码</span></span><br><span class="line"><span class="comment">     * 输入 ByeBye 则退出程序.</span></span><br><span class="line"><span class="comment">     * **************************/</span></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> B() &#123;</span><br><span class="line">        <span class="built_in">String</span> str=<span class="string">""</span>;<span class="comment">//定义一个空字符串来存储用户输入的字符</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>)&#123;<span class="comment">//使用true死循环来循环获取控制台输入的数据。</span></span><br><span class="line">            System.out.println(<span class="string">"请输入任意字符："</span>);</span><br><span class="line">            Scanner scanner=<span class="keyword">new</span> Scanner(System.in);<span class="comment">//创建一个新的Scanner ,控制台等待用户敲击Enter键，把所输入的内容传给Scanner</span></span><br><span class="line">            str=scanner.nextLine();<span class="comment">//获取Scanner输入的内容</span></span><br><span class="line">            char[] a=str.toCharArray();<span class="comment">//将字符串对象中的字符转换为一个字符数组</span></span><br><span class="line">            <span class="comment">//当用户输入的字符串和"ByeBye"是否相等，如果相等则程序正常退出</span></span><br><span class="line">            <span class="keyword">if</span> (str.equals(<span class="string">"ByeBye"</span>))&#123;</span><br><span class="line">                System.out.println(<span class="string">"程序正常退出！"</span>);</span><br><span class="line">                System.exit(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">                    System.out.println(<span class="string">"the ASCII of "</span>+a[i]+<span class="string">" is:"</span>+Integer.valueOf(a[i]));<span class="comment">//将字符转换成对应的ASCII码</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*************************</span></span><br><span class="line"><span class="comment">     * 编程实现一个命令窗程序，使得：输入“你”则在屏上回显“you”。</span></span><br><span class="line"><span class="comment">     * 输入“书”则在屏上回显“book”。</span></span><br><span class="line"><span class="comment">     * 输入“中”则在屏上回显“middle”。</span></span><br><span class="line"><span class="comment">     * 输入“中国”则在屏上回显“China”。</span></span><br><span class="line"><span class="comment">     * 要能输入至少 100 个词。如输入没有记录的词则如下：</span></span><br><span class="line"><span class="comment">     * 输入“东东”则在屏上回显“查不到该词”。</span></span><br><span class="line"><span class="comment">     * 输入 ByeBye 则退出程序.</span></span><br><span class="line"><span class="comment">     * *************************/</span></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> C() &#123;</span><br><span class="line">        <span class="built_in">String</span> strname=<span class="string">"C:\\Users\\kingback\\Desktop\\龙华老师资料\\下放资料\\dic.txt"</span>;</span><br><span class="line">        <span class="comment">//定义txt文本位置</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="comment">//创建try catch快捷键，选中代码块，Ctrl+Alt+T</span></span><br><span class="line">            BufferedReader br= <span class="literal">null</span>;</span><br><span class="line">            <span class="comment">//为FileReader创建一个try catch,捕获错误。</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                FileReader reader=<span class="keyword">new</span> FileReader(strname);<span class="comment">//创建一个FileReader，用来读取txt文件</span></span><br><span class="line">                br = <span class="keyword">new</span> BufferedReader(reader);<span class="comment">//从字符输入流中读取文本</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            Scanner scanner=<span class="keyword">new</span> Scanner(System.in);<span class="comment">//定义一个Scanner实例</span></span><br><span class="line">            System.out.println(<span class="string">"请输入要查询的单词："</span>);</span><br><span class="line">            <span class="built_in">String</span> str=scanner.nextLine();<span class="comment">//获取用户输入的数据</span></span><br><span class="line">            <span class="built_in">String</span> line;<span class="comment">//用来接收文本文件中每一行的数据</span></span><br><span class="line">            boolean match=<span class="literal">false</span>;<span class="comment">//表示是否查询到对应的词汇</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//如果输入ByeBye结束程序</span></span><br><span class="line">            <span class="keyword">if</span>(str.equals(<span class="string">"ByeBye"</span>))&#123;</span><br><span class="line">                System.out.println(<span class="string">"程序正常退出！"</span>);</span><br><span class="line">                System.exit(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//为br.readline()捕获异常</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">while</span> ((line=br.readLine())!=<span class="literal">null</span>)&#123;</span><br><span class="line">                    <span class="built_in">String</span>[] aa=line.split(<span class="string">"\t"</span>);<span class="comment">//以\t拆分字符串</span></span><br><span class="line">                    <span class="keyword">if</span>(aa[<span class="number">0</span>].equals(str))&#123;<span class="comment">//判断输入的字符串是否存在</span></span><br><span class="line">                        System.out.println(<span class="string">"the result is :"</span>+aa[<span class="number">1</span>]);<span class="comment">//输出查询到的英语单词</span></span><br><span class="line">                        match=<span class="literal">true</span>;<span class="comment">//修改查询状态</span></span><br><span class="line">                        <span class="keyword">break</span>;<span class="comment">//跳出此次循环</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//如果没有查询到数据执行此步骤</span></span><br><span class="line">                <span class="keyword">if</span>(!match)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"查不到该词！！！"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+	<div>
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/25/java%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0--%E6%95%B0%E6%8D%AE%E6%B5%81%E7%BB%83%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1733,292 +1900,6 @@ X(e^{j\omega})=\sum_{n=-\infty}^{\infty}x(n)e^{-j\omega n}</script><p>其中$\om
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/19/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84gnuplot%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%902%E3%80%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kingback">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/isme.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王延凯的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/19/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84gnuplot%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%902%E3%80%91/" itemprop="url">超详细的gunplot使用教程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-19T09:04:52+08:00">
-                2019-11-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E8%AF%AD%E8%A8%80%E7%94%BB%E5%9B%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">c语言画图</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-gnuplot参数介绍及演示"><a href="#1-gnuplot参数介绍及演示" class="headerlink" title="1.gnuplot参数介绍及演示"></a>1.gnuplot参数介绍及演示</h1><h2 id="1-1首先来解释一下会用到的各类参数以及其解释"><a href="#1-1首先来解释一下会用到的各类参数以及其解释" class="headerlink" title="1.1首先来解释一下会用到的各类参数以及其解释"></a>1.1首先来解释一下会用到的各类参数以及其解释</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>缩写</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>With</td>
-<td>w</td>
-<td>with后边跟需要指定的样式</td>
-</tr>
-<tr>
-<td>Line</td>
-<td>l</td>
-<td>用线l显示</td>
-</tr>
-<tr>
-<td>Point</td>
-<td>p</td>
-<td>用点显示</td>
-</tr>
-<tr>
-<td>LinePoints</td>
-<td>lp</td>
-<td>用线和点画，对数据绘图时有用</td>
-</tr>
-<tr>
-<td>LineType</td>
-<td>lt</td>
-<td>线的样式（0代表虚线，1-7代表实线,颜色分别为紫、蓝、绿、橙、黄、靛、红。超过7以后颜色依次循环）</td>
-</tr>
-<tr>
-<td>LineWidth</td>
-<td>lw</td>
-<td>线的宽度（level从0开始，默认为1）</td>
-</tr>
-<tr>
-<td>PointType</td>
-<td>pt</td>
-<td>点的样式（level从0开始，默认为1）</td>
-</tr>
-<tr>
-<td>PointSize</td>
-<td>ps</td>
-<td>点的宽度（level从0开始，默认为1）</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="1-2-画图实际测试"><a href="#1-2-画图实际测试" class="headerlink" title="1.2 画图实际测试"></a>1.2 画图实际测试</h2><p>为了显示出不同的差别，此处我谨以sinx函数或者cos函数来进行显示：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//当没有设置其格式时，调用默认的设置</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920160153918.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w p</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用点画</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920161057593.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w l</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用线画</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920161010753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w lp</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用点和线画</span></span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190920160735752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w lp lt 0</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用点和线画，线的种类为0</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920160839952.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w l lt 1</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用线画，线的种类为1</span></span></span><br></pre></td></tr></table></figure></p>
-<p><img src="https://img-blog.csdnimg.cn/20190920161257971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w l lt 7</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用线画，线的种类为7</span></span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190920162128303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w l lt 1 lw 4</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用线画，线的种类为1，线的宽度为4</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920162321667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w p pt 4</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用点画，点的种类为4</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920162840218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">plot <span class="title">sin</span><span class="params">(x)</span> w p pt 4 ps 2</span></span><br><span class="line"><span class="function"><span class="comment">//表示使用点画。点的种类为4，点的大小为2</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/2019092016304359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="1-3-其它参数介绍（约定范围、坐标轴设定）"><a href="#1-3-其它参数介绍（约定范围、坐标轴设定）" class="headerlink" title="1.3 其它参数介绍（约定范围、坐标轴设定）"></a>1.3 其它参数介绍（约定范围、坐标轴设定）</h2><h3 id="1-3-1-约束画图范围"><a href="#1-3-1-约束画图范围" class="headerlink" title="1.3.1 约束画图范围"></a>1.3.1 约束画图范围</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot [<span class="number">-5</span>:<span class="number">5</span>] [<span class="number">-1.2</span>:<span class="number">1.2</span>] <span class="built_in">sin</span>(x)</span><br><span class="line"><span class="comment">//表示x取值范围为[-5,5],y的取值范围为[-1.2,1.2]</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190920164811487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h3 id="1-3-2-关于坐标轴的设定"><a href="#1-3-2-关于坐标轴的设定" class="headerlink" title="1.3.2 关于坐标轴的设定"></a>1.3.2 关于坐标轴的设定</h3><p>在对于坐标轴的设定，要注意的一点就是，在画图之前执行命令。<br>命令     | 含义<br>—————— | —————<br>set xlabel ‘x’ |x轴标为‘x’<br>set ylabel ‘y’ | y轴标为’y’<br>set ylabel ‘DOS’ tc lt 3 | ‘DOS’的颜色用第三种颜色<br>set xtics 1.0|x轴的主刻度的宽度为1.0，同样可以为y轴定义ytics<br>set mxtics 3|x轴上每个主刻度中画3个分刻度，同样可以为y轴定义mytics<br>set border 3|设为第三种边界，同样可以为上边的x轴（称为x2）和右边y（称为y2）轴进行设置，即x2tics，mx2tics，y2tics，my2tics。<br>set xtics nomirror|去掉上边x的刻度，同样可以为ytics设置<br>unset x2tics|去掉上边x的标度，同样可以为y2tics设置<br>下面我们就来验证一下上边的图吧。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; set title 'kmust team'</span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> xlabel <span class="string">'x'</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> ylabel <span class="string">'y'</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> xtics <span class="number">1.0</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> mxtics <span class="number">3</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> border <span class="number">3</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line">gnuplot&gt;</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920170828421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h3 id="1-3-3-图例"><a href="#1-3-3-图例" class="headerlink" title="1.3.3 图例"></a>1.3.3 图例</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>set key left</td>
-<td>放在左边，有left 和right两个选项</td>
-</tr>
-<tr>
-<td>set key bottom</td>
-<td>放在下边，只有这一个选项；默认在上边</td>
-</tr>
-<tr>
-<td>set key outside</td>
-<td>放在外边，但只能在右面的外边</td>
-</tr>
-<tr>
-<td>set key left bottom</td>
-<td>表示放在左下边</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>代码示例：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> key right bottom</span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> title <span class="string">"kmust"</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//将图例放在右下角</span></span></span><br><span class="line"><span class="function"><span class="comment">//设置标题为“kmust”</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920194230103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h3 id="1-3-4-在图中任意位置插入文字"><a href="#1-3-4-在图中任意位置插入文字" class="headerlink" title="1.3.4 在图中任意位置插入文字"></a>1.3.4 在图中任意位置插入文字</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; set label 'I Love Kmust!' at 2.5,0.5</span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//在坐标（2.5，0.5）处插入文字</span></span></span><br><span class="line"><span class="function"><span class="comment">//如果想要删除文字就使用 unset label 1(此处数字代表要删除label的序号)</span></span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190920203757755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="1-4-同时画出多条曲线"><a href="#1-4-同时画出多条曲线" class="headerlink" title="1.4 同时画出多条曲线"></a>1.4 同时画出多条曲线</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot sin(x),cos(x)</span><br><span class="line"><span class="comment">//注意连个函数之间要使用逗号分隔开</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190920171358263.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>当然两个函数之间也可以单独约束<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plot sin(x) title 'sin(x)' w l lt 0 lw 2, cos(x) title 'cos(x)' w l lt 2 lw 2</span><br><span class="line"><span class="comment">//注意连个函数之间要使用逗号分隔开，每个函数的绘画要求紧跟着对应的函数</span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920171518832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="1-5-x轴时间设置"><a href="#1-5-x轴时间设置" class="headerlink" title="1.5 x轴时间设置"></a>1.5 x轴时间设置</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>set xdata time</td>
-<td>X轴设置为时间格式</td>
-</tr>
-<tr>
-<td>set timefmt “%Y-%m-%d”</td>
-<td>文件中时间格式</td>
-</tr>
-<tr>
-<td>set format x “%m/%d”</td>
-<td>目标时间格式~</td>
-</tr>
-</tbody>
-</table>
-</div>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> xdata time</span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> timefmt <span class="string">"%Y-%m-%d"</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//设置x轴为时间格式，并且其显示形式为年-月-日</span></span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190920195359322.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_60#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="1-6-在图中添加直线和箭头"><a href="#1-6-在图中添加直线和箭头" class="headerlink" title="1.6 在图中添加直线和箭头"></a>1.6 在图中添加直线和箭头</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> arrow from <span class="number">0.0</span>,<span class="number">0.0</span> to <span class="number">2.0</span>,<span class="number">0.0</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//在图的中心点（0，0）向（2，0）画一条射线</span></span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190920200240285.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> arrow from <span class="number">0.0</span>,<span class="number">0.0</span> to <span class="number">0.0</span>,<span class="number">-0.4</span> nohead</span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//只画一条直线的话，在画箭头的语句上方添加nohead标签</span></span></span><br><span class="line"><span class="function"><span class="comment">//从中心点（0，0）到（0，-0.4）画一条直线</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920200806563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>除此之外我们还可以进行颜色调制<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> arrow from <span class="number">0.0</span>,<span class="number">0.0</span> to <span class="number">-2.0</span>,<span class="number">0.4</span> lt <span class="number">2</span> lw <span class="number">2</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//从中心点（0，0）到（-2.0，0.4）画一条绿色射线，线条粗细等级为2</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920201216642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>如果我们不小心画错了一个图形，我们又该如何删除呢，很简单，一句话就搞定了。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; unset arrow <span class="number">3</span></span><br><span class="line">gnuplot&gt; unset arrow <span class="number">2</span></span><br><span class="line">gnuplot&gt; unset arrow <span class="number">1</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//如果我们发现第几个值线画错了，就可以使用语句unset删除对应的直线即可</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920201549513.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="1-7-读取dat、txt文件进行画图"><a href="#1-7-读取dat、txt文件进行画图" class="headerlink" title="1.7 读取dat、txt文件进行画图"></a>1.7 读取dat、txt文件进行画图</h2><p>在用c语言进行程序设计的时候，有时就需要画图任务，这时gnuplot可以读取dat、txt文件内的内容，并再进行绘画。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> arrow from <span class="number">-16.0</span>,<span class="number">0.0</span> to <span class="number">16.0</span>,<span class="number">0.0</span> nohead</span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> arrow from <span class="number">-0.3</span>,<span class="number">0.0</span> to <span class="number">1.0</span>,<span class="number">0.0</span></span><br><span class="line">gnuplot&gt; plot [<span class="number">-16</span>:<span class="number">16</span>] [<span class="number">-0.3</span>:<span class="number">1</span>] <span class="string">"sinc.bat"</span>  u <span class="number">1</span>:<span class="number">2</span> w l lt <span class="number">1</span> lw <span class="number">1</span></span><br><span class="line"><span class="comment">//从（-16，0）到（16，0）画一条直线</span></span><br><span class="line"><span class="comment">//从（-0.3，0）到（1.0，0）画一条带箭头射线</span></span><br><span class="line"><span class="comment">//读取“sinc.bat”文件内的数据，并用其内的第一列和第二列作图，，并且设置线条颜色和粗细。</span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920202433729.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="1-8-设定图的大小和位置"><a href="#1-8-设定图的大小和位置" class="headerlink" title="1.8 设定图的大小和位置"></a>1.8 设定图的大小和位置</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//长宽均为默认宽度的一半，建议用这个取值，尤其是画成ps或eps图形的时候</span></span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190920204413633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> origin <span class="number">0.0</span>,<span class="number">0.5</span></span><br><span class="line">gnuplot&gt; <span class="function">plot <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//设定图的最左下角的那一点在图形面板中的位置。这里图将出现在左上角。</span></span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920204545846.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="1-9-画多个图"><a href="#1-9-画多个图" class="headerlink" title="1.9 画多个图"></a>1.9 画多个图</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> multiplot</span><br><span class="line"><span class="comment">//设置为多图模式</span></span><br><span class="line">multiplot&gt; <span class="built_in">set</span> origin <span class="number">0.0</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置第一个图的原点的位置</span></span><br><span class="line">multiplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置第一个图的大小，长和宽均为整个图的一半</span></span><br><span class="line">multiplot&gt; <span class="function">plot <span class="title">tan</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//开始绘制第一个图</span></span></span><br><span class="line">multiplot&gt; set origin 0.5,0.5</span><br><span class="line"><span class="comment">//设置第2个图的原点的位置</span></span><br><span class="line">multiplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置第2个图的大小，长和宽均为整个图的一半</span></span><br><span class="line">multiplot&gt; <span class="function">plot  <span class="title">cos</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//开始绘制第2个图</span></span></span><br><span class="line">multiplot&gt; set origin 0.0,0.0</span><br><span class="line"><span class="comment">//设置第3个图的原点的位置</span></span><br><span class="line">multiplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置第3个图的大小，长和宽均为整个图的一半</span></span><br><span class="line">multiplot&gt; <span class="function">plot  <span class="title">sin</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="comment">//开始绘制第3个图</span></span></span><br><span class="line">multiplot&gt; set origin 0.5,0.0</span><br><span class="line"><span class="comment">//设置第4个图的原点的位置</span></span><br><span class="line">multiplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置第4个图的大小，长和宽均为整个图的一半</span></span><br><span class="line">multiplot&gt; plot <span class="number">1</span>/x</span><br><span class="line"><span class="comment">//开始绘制第4个图</span></span><br></pre></td></tr></table></figure>
-<p>绘制完成之后就会出现这个四合一的图，当然我们还可以 为每个图设置自己的特有属性，比如颜色、标题等。<br><img src="https://img-blog.csdnimg.cn/20190920212747179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h1 id="2-gnuplot进阶"><a href="#2-gnuplot进阶" class="headerlink" title="2.gnuplot进阶"></a>2.gnuplot进阶</h1><h2 id="2-1-使两坐标轴的单位长度等长"><a href="#2-1-使两坐标轴的单位长度等长" class="headerlink" title="2.1 使两坐标轴的单位长度等长"></a>2.1 使两坐标轴的单位长度等长</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt;  <span class="built_in">set</span> <span class="built_in">size</span> square</span><br><span class="line"><span class="comment">//设置形状为方形</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> <span class="built_in">size</span> <span class="number">0.5</span>,<span class="number">0.5</span></span><br><span class="line"><span class="comment">//设置图形的大小各为一半</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> xrange[<span class="number">-10</span>:<span class="number">10</span>]</span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> yrange[<span class="number">-10</span>:<span class="number">10</span>]</span><br><span class="line"><span class="comment">//设置x,y的范围相同</span></span><br><span class="line">gnuplot&gt; plot x+<span class="number">2</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190920220255315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="2-2-在同一张图里利用左右两边的y轴分别画图"><a href="#2-2-在同一张图里利用左右两边的y轴分别画图" class="headerlink" title="2.2 在同一张图里利用左右两边的y轴分别画图"></a>2.2 在同一张图里利用左右两边的y轴分别画图</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> xtics nomirror</span><br><span class="line"><span class="comment">//去掉上边坐标轴x2的刻度</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> ytics nomirror</span><br><span class="line"><span class="comment">//去掉上边坐标轴y2的刻度</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> x2tics</span><br><span class="line"><span class="comment">//让上面坐标轴x2刻度自动产生</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> y2tics</span><br><span class="line"><span class="comment">//让上面坐标轴y2刻度自动产生</span></span><br><span class="line">gnuplot&gt; plot sin(x),cos(x) axes x1y2</span><br><span class="line"><span class="comment">//用x1y2坐标，axes x1y2表示用x1y2坐标轴</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190920220659444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; plot sin(x),cos(x) axes x2y2</span><br><span class="line"><span class="comment">//用x2y2坐标，axes x2y2表示用x2y2坐标轴</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> x2range[<span class="number">-20</span>:<span class="number">20</span>]</span><br><span class="line"><span class="comment">//设定x2坐标的范围</span></span><br><span class="line">gnuplot&gt; report</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920220837819.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> xrange[<span class="number">-5</span>:<span class="number">5</span>]</span><br><span class="line"><span class="comment">//设定x的范围</span></span><br><span class="line">gnuplot&gt; replot</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920221004407.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> xlabel <span class="string">'x'</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> x2label <span class="string">'t'</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> ylabel <span class="string">'y'</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> y2label <span class="string">'s'</span></span><br><span class="line"><span class="comment">//为图形的上下左右分别起标</span></span><br><span class="line">gnuplot&gt; replot</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920221127740.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; set title 'The figure'</span><br><span class="line"><span class="comment">//设置标题</span></span><br><span class="line">gnuplot&gt; replot</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20190920221253818.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="2-3画漂亮的pm3D图"><a href="#2-3画漂亮的pm3D图" class="headerlink" title="2.3画漂亮的pm3D图"></a>2.3画漂亮的pm3D图</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> pm3d</span><br><span class="line"><span class="comment">//设置pm3d模式</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> isosamples <span class="number">50</span>,<span class="number">50</span></span><br><span class="line"><span class="comment">//设置网格点为50x50</span></span><br><span class="line">gnuplot&gt; splot x**<span class="number">2</span>+y**<span class="number">2</span></span><br><span class="line"><span class="comment">//画三维图像</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190921162344681.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="2-4-画等高线"><a href="#2-4-画等高线" class="headerlink" title="2.4 画等高线"></a>2.4 画等高线</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gnuplot&gt; <span class="built_in">set</span> dgrid3d <span class="number">100</span>,<span class="number">100</span></span><br><span class="line"><span class="comment">//设置三维表面的网格书目</span></span><br><span class="line">gnuplot&gt; <span class="built_in">set</span> contour</span><br><span class="line"><span class="comment">//设置画等高线</span></span><br><span class="line">gnuplot&gt; splot x**<span class="number">2</span>+y**<span class="number">2</span></span><br><span class="line"><span class="comment">//画图像</span></span><br></pre></td></tr></table></figure>
-<p> <img src="https://img-blog.csdnimg.cn/20190921163220948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="2-5-利用脚本文件避免重复输入"><a href="#2-5-利用脚本文件避免重复输入" class="headerlink" title="2.5 利用脚本文件避免重复输入"></a>2.5 利用脚本文件避免重复输入</h2><p>我在文件夹下创建了一个 try.plt文件，其内容如下所示<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">reset</span><br><span class="line"><span class="comment">//重置画图属性</span></span><br><span class="line"><span class="built_in">set</span> pm3d</span><br><span class="line"><span class="comment">//设置为pm3d模式</span></span><br><span class="line">unset ztics</span><br><span class="line"><span class="comment">//取消z轴标题</span></span><br><span class="line"><span class="built_in">set</span> isosamples <span class="number">200</span>,<span class="number">200</span></span><br><span class="line"><span class="comment">//设置网格属性为200x200</span></span><br><span class="line">splot x**<span class="number">2</span>+y**<span class="number">2</span> w pm3d</span><br><span class="line"><span class="comment">//开始画图并且设置为pm3d模式</span></span><br></pre></td></tr></table></figure><br>然后只需在gnuplot命令界面输入<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">load 'try.plt'</span><br><span class="line"><span class="comment">//加载plt文件，执行画图任务</span></span><br></pre></td></tr></table></figure><br>其结果如下所示：<br><img src="https://img-blog.csdnimg.cn/20190921165002556.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="2-6-gnuplot画GIF动图"><a href="#2-6-gnuplot画GIF动图" class="headerlink" title="2.6 gnuplot画GIF动图"></a>2.6 gnuplot画GIF动图</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> term gif animate</span><br><span class="line"><span class="comment">//设置可以画动画</span></span><br><span class="line"><span class="built_in">set</span> output <span class="string">"e1.gif"</span></span><br><span class="line"><span class="comment">//设置输出的文件路径</span></span><br><span class="line"><span class="built_in">set</span> xrange [<span class="number">0</span>:<span class="number">4</span>*pi]</span><br><span class="line"><span class="built_in">set</span> yrange [<span class="number">-1</span>:<span class="number">1</span>]</span><br><span class="line"><span class="comment">//设置x,y范围</span></span><br><span class="line"><span class="keyword">do</span> <span class="keyword">for</span> [i=<span class="number">0</span>:<span class="number">40</span>]&#123;</span><br><span class="line">  plot <span class="built_in">sin</span>(x+i*pi/<span class="number">40</span>) lw <span class="number">1.5</span> title <span class="built_in">sprintf</span>(<span class="string">"t=%i"</span>,i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//循环输出图像</span></span><br><span class="line"><span class="built_in">set</span> output</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20190921170213773.gif#pic_center" alt="在这里插入图片描述"></p>
-<h1 id="3-参考文章"><a href="#3-参考文章" class="headerlink" title="3.参考文章"></a>3.参考文章</h1><blockquote>
-<p>gnuplot使用: <a href="https://www.cnblogs.com/waterystone/p/5085801.html" target="_blank" rel="noopener">https://www.cnblogs.com/waterystone/p/5085801.html</a><br>gnuplot生成gif动图：<a href="https://blog.csdn.net/weixin_34187862/article/details/85648365" target="_blank" rel="noopener">https://blog.csdn.net/weixin_34187862/article/details/85648365</a><br>gnuplot三维绘图;<a href="https://blog.csdn.net/ouening/article/details/72141345" target="_blank" rel="noopener">https://blog.csdn.net/ouening/article/details/72141345</a></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-	<div>
-		
-	</div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2073,7 +1954,7 @@ X(e^{j\omega})=\sum_{n=-\infty}^{\infty}x(n)e^{-j\omega n}</script><p>其中$\om
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
