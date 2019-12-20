@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>高斯混合模型GMM的推导</title>
+    <url>/2019/12/20/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%A6%E7%BB%86%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="1-多维高斯分布回顾"><a href="#1-多维高斯分布回顾" class="headerlink" title="1.多维高斯分布回顾"></a>1.多维高斯分布回顾</h1><p>在上一篇文章中介绍了高斯混合模型的公式，但是在实际应用中每次迭代的公式又是如何出来的呢，抱着这个疑问，我也就写出了这篇博客，希望可以记录一下，如下所示，是多维高斯分布的分布公式：
+$$
+N(\vec{X}\mid\vec{\mu},{\Sigma})=\frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma\mid}^{\frac{1}{2}}}\cdot e^{-\frac{({\vec{X}-\vec{\mu})}^T\cdot{\sum^{-1}}\cdot{({\vec{X}-\vec{\mu})}}}{2}}
+$$
+</p>
+<h1 id="2-极大似然估计"><a href="#2-极大似然估计" class="headerlink" title="2.极大似然估计"></a>2.极大似然估计</h1><p>求解高斯混合模型的过程就是，就是求解所有模型参数的过程，也就是通过不断的迭代求取$\pi_k$,$\mu_i$,$\sigma^2_i$这三个参数，并且使其趋于稳定从而得到稳定后的模型分布参数。<br>对于混合模型进行参数估计，首先都会想到极大似然估计，于是我们首先使用极大似然估计来进行参数的估计,其推导公式也即如下所示：
+$$
+P=\prod_{i=1}^{N}p(\vec{x_i}|\pi_k,\vec{{\mu_k)}},{\Sigma}_k)\\ \qquad \\\qquad =\prod_{i=1}^{N}\cdot\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)\\ \qquad \\=\prod_{i=1}^{N}\cdot\sum_{k=1}^K\pi_k \frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma_k\mid}^{\frac{1}{2}}}\cdot e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{X_i}-\vec{\mu_k})}}}{2}}\\\qquad \\=\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k)\cdot \sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k)\cdot\cdot\cdot\cdot\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k)
+$$
+
+</p>
+<h1 id="3-EM算法的E步"><a href="#3-EM算法的E步" class="headerlink" title="3.EM算法的E步"></a>3.EM算法的E步</h1><p>在理想情况下，每个样本应该只由一个混合成分生成，这个混合成分对应的就是被样本分配到的簇，这样样本$x_i$只由第$k$个混合成分组成，也就是说$p(z_i=k\mid x_i)=1$，并且$p(z_n=k\mid x_n)=0$,此时$n\neq i$,但是由于我们之前不知道这样的理想的高斯分布是怎样的，我们只能根据已经观察到的数据集，来获取每个样本由每个混合成分生成的概率，这个概率就是公式所表达的值，如下所示：
+$$
+E(h_{ik}\mid x_i)=0\cdot p(h_{ik}=0\mid x_i))+1\cdot p(h_{ik}=1\mid x_i))\\ \qquad \\=p(h_{ik}=1\mid x_i))\\ \qquad \\=p(z_i=k\mid x_i)\\ \qquad \\=\frac{\pi_k \cdot p(x_i\mid \mu_k,\Sigma_k)}{\sum_{k=1}^{K}\pi_k \cdot p(x_i\mid \mu_k,\Sigma_k)}
+$$
+对上边的公式进行一下解释，</p>
+<blockquote>
+<p>1.随机变量$h_{ik}$表示样本$x_i$是否由第$k$个混合成分生成<br>2.随机变量$h_{ik}$也就是EM算法的隐变量</p>
+</blockquote>
+<p>如果随机变量$h_{ik}$表示样本$x_i$是否由第$k$个混合成分生成，则$h_{ik}$记为1，否则记为0。根据这个定义我们知道，$h_{i1}，h_{i2}，h_{i3}，……,h_{iK}$,这K个数中，只有一个为1，说明$x_i$只由一个混合成分生成，其余所有数都为0，以下列出了其分布列：<br>$h_{ik}$| 0|1<br>———— | ——-|——-<br>概率| $p(h_{ik}=0\mid x_i)$|$p(h_{ik}=1\mid x_i)$<br>上边的公式就是根据隐变量的分布列，来求取其期望的公式。</p>
+<h1 id="4-EM算法的M步"><a href="#4-EM算法的M步" class="headerlink" title="4.EM算法的M步"></a>4.EM算法的M步</h1><p>EM算法的M步骤，就是对于先对数化似然函数，然后求取其极大值 ，对上式展开并且带入$N(\vec{x_i}|\vec{\mu_k},\Sigma_k)$公式可得
+$$
+lnP=ln(\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k)\cdot \sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k)\cdot\cdot\cdot\cdot\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k))\\\qquad \\=ln(\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k))+ln(\sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k))+\cdot\cdot\cdot\cdot+ln(\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k))\\ \qquad \\=\sum_{i=1}^{N}\cdot ln(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k))
+$$
+根据之前所学的知识，因为我们要求的是$\pi_k$,$u_k$,$\Sigma_k$,所以在在这一过程中，我们通常采用的方法是分别对其求偏导，并且使其为0，求得分别的在极大值时的取值。下面我将会以$\mu_k$的求取来进行一下演示：<br>但是在开始之前需要补充一些矩阵求偏导的公式：</p>
+<blockquote>
+<p>1 .若A为n阶方阵，x是n维列向量，则有：<br>   $\qquad\quad\frac{\partial(x^TAx)}{\partial x}=(A+A^T)x$<br>2 .特殊的，当A为n阶对称方阵时，则有$A=A^T$,上式可以简化为：<br>$\qquad\quad\frac{\partial(x^TAx)}{\partial x}=(A+A^T)x=2Ax$</p>
+</blockquote>
+<p>补充完上述的方法之后，我们接下来就要对$lnP$求$\mu_k$的偏导：
+$$
+\frac{\partial(lnP)}{\partial \mu_k}=\frac{\partial(\sum_{i=1}^{N}\cdot ln(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)))}{\partial \mu_k}\\\qquad \\=\frac{\sum_{i=1}^{N}\cdot\partial( ln(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)))}{\partial \mu_k}\\\qquad \\=\sum_{i=1}^N\left[\frac{1}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k))}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{1}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\pi_1 N(\vec{x_i}|\vec{\mu_1},\Sigma_1)+\pi_2 N(\vec{x_i}|\vec{\mu_2},\Sigma_2)+……+\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)+……+\pi_KN(\vec{x_i}|\vec{\mu_K},\Sigma_K))}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{1}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k))}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{\pi_k}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(N(\vec{x_i}|\vec{\mu_k},\Sigma_k))}{\partial \mu_k}\right]
+$$
+到这里之后我们需要将$N(\vec{x_i}|\vec{\mu_k},\Sigma_k))$的具体公式带入计算，其结果及运算过程如下所示:
+$$
+上式=\sum_{i=1}^N\left[\frac{\pi_k}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma_k\mid}^{\frac{1}{2}}}\cdot e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}})}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{\pi_k \cdot\frac{1}{(2\pi)^{\frac{D}{2}}\cdot\mid\Sigma_k\mid^{\frac{1}{2}}}}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial( e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}})}{\partial \mu_k}\right]\\\qquad\\=\sum_{i=1}^N\left[\frac{\pi_k \cdot\frac{1}{(2\pi)^{\frac{D}{2}}\cdot\mid\Sigma_k\mid^{\frac{1}{2}}}}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}}\cdot\frac{\partial( {-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}})}{\partial \mu_k}\right]
+$$
+到了这里下一步的计算就需要用到我们在本节开头的地方补充的向量求偏导的方法：
+$$
+上式=\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(-\frac{1}{2})\cdot 2\cdot\Sigma_k^{-1}(\vec{x_i}-\vec{\mu_k})\cdot\frac{\partial(\vec{x_i}-\vec{\mu_k})}{\partial \mu_k}\right]\\\qquad\\=\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(-\frac{1}{2})\cdot 2\cdot\Sigma_k^{-1}(\vec{x_i}-\vec{\mu_k})\cdot(-1)\right]\\\qquad\\=\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\Sigma_k^{-1}(\vec{x_i}-\vec{\mu_k})\right]\\\qquad\\=\Sigma_k^{-1}\cdot\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(\vec{x_i}-\vec{\mu_k})\right]\\\qquad\Downarrow \\\qquad\qquad 令上式=0
+$$
+对于上边等式的求解，因为$\Sigma_k^{-1}$是第k个混合成分的协方差矩阵的逆，其一定为一个非奇异矩阵，又由线性代数知识，如果n阶方阵A为可逆矩阵，x为n维列向量，那么Ax=0有且仅有零解，即x=0。<br>对于我们的此处的计算，则会有如下等式：
+$$
+\Sigma_k^{-1}\cdot\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(\vec{x_i}-\vec{\mu_k})\right]=0\\\qquad \qquad \\\Downarrow \\\qquad \\ 令h_{ik}=\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\\\qquad \qquad \\\Downarrow 简化为\\\qquad \\ \Sigma_k^{-1}\cdot\sum_{i=1}^N\left[h_{ik}\cdot(\vec{x_i}-\vec{\mu_k})\right]=0\\\qquad \qquad \\\Downarrow 解得\\\qquad \\ \vec{\mu_k}=\frac{\sum_{i=1}^Nh_{ik}\cdot \vec{x_i}}{\sum_{i=1}^Nh_{ik}}\\\qquad \qquad \\\Downarrow 代入\\\qquad \\ \vec{\mu_k}=\frac{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot \vec{x_i}}{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}}
+$$
+所以这就是我们最后需要证的结果：
+$$
+\vec{\mu_k}=\frac{\sum_{i=1}^Nh_{ik}\cdot \vec{x_i}}{\sum_{i=1}^Nh_{ik}}=\frac{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot \vec{x_i}}{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}}
+$$
+此处我只展示了$\vec{\mu_k}$的求解过程，对于$\vec{\Sigma_k}$的求解未展开，不过其计算原理一样，到最后其计算结果为：
+$$
+\vec{\Sigma_k}=\frac{\sum_{i=1}^Nh_{ik}(\vec{x_i}-\vec{\mu_k})\cdot(\vec{x_i}-\vec{\mu_k})^T}{\sum_{i=1}^Nh_{ik}}=\frac{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}(\vec{x_i}-\vec{\mu_k})\cdot(\vec{x_i}-\vec{\mu_k})^T}{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}}
+$$
+</p>
+<h1 id="5-心得"><a href="#5-心得" class="headerlink" title="5.心得"></a>5.心得</h1><p>推导虽然不容易，但自己推导一遍还是方便理解的。加油~~</p>
+]]></content>
+      <categories>
+        <category>语音识别</category>
+      </categories>
+  </entry>
+  <entry>
     <title>多维高斯分布</title>
     <url>/2019/12/12/%E5%A4%9A%E7%BB%B4%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/</url>
     <content><![CDATA[<h1 id="1-一维高斯分布"><a href="#1-一维高斯分布" class="headerlink" title="1.一维高斯分布"></a>1.一维高斯分布</h1><p>$\qquad$在介绍二维高斯分布之前我们先介绍一下一维高斯分布的函数图像，如下所示：

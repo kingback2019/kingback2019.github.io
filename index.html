@@ -274,6 +274,204 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/12/20/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%A6%E7%BB%86%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/20/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%A6%E7%BB%86%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/" itemprop="url">高斯混合模型GMM的推导</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-20T14:54:41+08:00">
+                2019-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">语音识别</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-多维高斯分布回顾"><a href="#1-多维高斯分布回顾" class="headerlink" title="1.多维高斯分布回顾"></a>1.多维高斯分布回顾</h1><p>在上一篇文章中介绍了高斯混合模型的公式，但是在实际应用中每次迭代的公式又是如何出来的呢，抱着这个疑问，我也就写出了这篇博客，希望可以记录一下，如下所示，是多维高斯分布的分布公式：
+$$
+N(\vec{X}\mid\vec{\mu},{\Sigma})=\frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma\mid}^{\frac{1}{2}}}\cdot e^{-\frac{({\vec{X}-\vec{\mu})}^T\cdot{\sum^{-1}}\cdot{({\vec{X}-\vec{\mu})}}}{2}}
+$$
+</p>
+<h1 id="2-极大似然估计"><a href="#2-极大似然估计" class="headerlink" title="2.极大似然估计"></a>2.极大似然估计</h1><p>求解高斯混合模型的过程就是，就是求解所有模型参数的过程，也就是通过不断的迭代求取$\pi_k$,$\mu_i$,$\sigma^2_i$这三个参数，并且使其趋于稳定从而得到稳定后的模型分布参数。<br>对于混合模型进行参数估计，首先都会想到极大似然估计，于是我们首先使用极大似然估计来进行参数的估计,其推导公式也即如下所示：
+$$
+P=\prod_{i=1}^{N}p(\vec{x_i}|\pi_k,\vec{{\mu_k)}},{\Sigma}_k)\\ \qquad \\\qquad =\prod_{i=1}^{N}\cdot\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)\\ \qquad \\=\prod_{i=1}^{N}\cdot\sum_{k=1}^K\pi_k \frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma_k\mid}^{\frac{1}{2}}}\cdot e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{X_i}-\vec{\mu_k})}}}{2}}\\\qquad \\=\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k)\cdot \sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k)\cdot\cdot\cdot\cdot\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k)
+$$
+
+</p>
+<h1 id="3-EM算法的E步"><a href="#3-EM算法的E步" class="headerlink" title="3.EM算法的E步"></a>3.EM算法的E步</h1><p>在理想情况下，每个样本应该只由一个混合成分生成，这个混合成分对应的就是被样本分配到的簇，这样样本$x_i$只由第$k$个混合成分组成，也就是说$p(z_i=k\mid x_i)=1$，并且$p(z_n=k\mid x_n)=0$,此时$n\neq i$,但是由于我们之前不知道这样的理想的高斯分布是怎样的，我们只能根据已经观察到的数据集，来获取每个样本由每个混合成分生成的概率，这个概率就是公式所表达的值，如下所示：
+$$
+E(h_{ik}\mid x_i)=0\cdot p(h_{ik}=0\mid x_i))+1\cdot p(h_{ik}=1\mid x_i))\\ \qquad \\=p(h_{ik}=1\mid x_i))\\ \qquad \\=p(z_i=k\mid x_i)\\ \qquad \\=\frac{\pi_k \cdot p(x_i\mid \mu_k,\Sigma_k)}{\sum_{k=1}^{K}\pi_k \cdot p(x_i\mid \mu_k,\Sigma_k)}
+$$
+对上边的公式进行一下解释，</p>
+<blockquote>
+<p>1.随机变量$h_{ik}$表示样本$x_i$是否由第$k$个混合成分生成<br>2.随机变量$h_{ik}$也就是EM算法的隐变量</p>
+</blockquote>
+<p>如果随机变量$h_{ik}$表示样本$x_i$是否由第$k$个混合成分生成，则$h_{ik}$记为1，否则记为0。根据这个定义我们知道，$h_{i1}，h_{i2}，h_{i3}，……,h_{iK}$,这K个数中，只有一个为1，说明$x_i$只由一个混合成分生成，其余所有数都为0，以下列出了其分布列：<br>$h_{ik}$| 0|1<br>———— | ——-|——-<br>概率| $p(h_{ik}=0\mid x_i)$|$p(h_{ik}=1\mid x_i)$<br>上边的公式就是根据隐变量的分布列，来求取其期望的公式。</p>
+<h1 id="4-EM算法的M步"><a href="#4-EM算法的M步" class="headerlink" title="4.EM算法的M步"></a>4.EM算法的M步</h1><p>EM算法的M步骤，就是对于先对数化似然函数，然后求取其极大值 ，对上式展开并且带入$N(\vec{x_i}|\vec{\mu_k},\Sigma_k)$公式可得
+$$
+lnP=ln(\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k)\cdot \sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k)\cdot\cdot\cdot\cdot\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k))\\\qquad \\=ln(\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k))+ln(\sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k))+\cdot\cdot\cdot\cdot+ln(\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k))\\ \qquad \\=\sum_{i=1}^{N}\cdot ln(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k))
+$$
+根据之前所学的知识，因为我们要求的是$\pi_k$,$u_k$,$\Sigma_k$,所以在在这一过程中，我们通常采用的方法是分别对其求偏导，并且使其为0，求得分别的在极大值时的取值。下面我将会以$\mu_k$的求取来进行一下演示：<br>但是在开始之前需要补充一些矩阵求偏导的公式：</p>
+<blockquote>
+<p>1 .若A为n阶方阵，x是n维列向量，则有：<br>   $\qquad\quad\frac{\partial(x^TAx)}{\partial x}=(A+A^T)x$<br>2 .特殊的，当A为n阶对称方阵时，则有$A=A^T$,上式可以简化为：<br>$\qquad\quad\frac{\partial(x^TAx)}{\partial x}=(A+A^T)x=2Ax$</p>
+</blockquote>
+<p>补充完上述的方法之后，我们接下来就要对$lnP$求$\mu_k$的偏导：
+$$
+\frac{\partial(lnP)}{\partial \mu_k}=\frac{\partial(\sum_{i=1}^{N}\cdot ln(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)))}{\partial \mu_k}\\\qquad \\=\frac{\sum_{i=1}^{N}\cdot\partial( ln(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)))}{\partial \mu_k}\\\qquad \\=\sum_{i=1}^N\left[\frac{1}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k))}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{1}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\pi_1 N(\vec{x_i}|\vec{\mu_1},\Sigma_1)+\pi_2 N(\vec{x_i}|\vec{\mu_2},\Sigma_2)+……+\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)+……+\pi_KN(\vec{x_i}|\vec{\mu_K},\Sigma_K))}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{1}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k))}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{\pi_k}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(N(\vec{x_i}|\vec{\mu_k},\Sigma_k))}{\partial \mu_k}\right]
+$$
+到这里之后我们需要将$N(\vec{x_i}|\vec{\mu_k},\Sigma_k))$的具体公式带入计算，其结果及运算过程如下所示:
+$$
+上式=\sum_{i=1}^N\left[\frac{\pi_k}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma_k\mid}^{\frac{1}{2}}}\cdot e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}})}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{\pi_k \cdot\frac{1}{(2\pi)^{\frac{D}{2}}\cdot\mid\Sigma_k\mid^{\frac{1}{2}}}}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial( e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}})}{\partial \mu_k}\right]\\\qquad\\=\sum_{i=1}^N\left[\frac{\pi_k \cdot\frac{1}{(2\pi)^{\frac{D}{2}}\cdot\mid\Sigma_k\mid^{\frac{1}{2}}}}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}}\cdot\frac{\partial( {-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}})}{\partial \mu_k}\right]
+$$
+到了这里下一步的计算就需要用到我们在本节开头的地方补充的向量求偏导的方法：
+$$
+上式=\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(-\frac{1}{2})\cdot 2\cdot\Sigma_k^{-1}(\vec{x_i}-\vec{\mu_k})\cdot\frac{\partial(\vec{x_i}-\vec{\mu_k})}{\partial \mu_k}\right]\\\qquad\\=\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(-\frac{1}{2})\cdot 2\cdot\Sigma_k^{-1}(\vec{x_i}-\vec{\mu_k})\cdot(-1)\right]\\\qquad\\=\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\Sigma_k^{-1}(\vec{x_i}-\vec{\mu_k})\right]\\\qquad\\=\Sigma_k^{-1}\cdot\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(\vec{x_i}-\vec{\mu_k})\right]\\\qquad\Downarrow \\\qquad\qquad 令上式=0
+$$
+对于上边等式的求解，因为$\Sigma_k^{-1}$是第k个混合成分的协方差矩阵的逆，其一定为一个非奇异矩阵，又由线性代数知识，如果n阶方阵A为可逆矩阵，x为n维列向量，那么Ax=0有且仅有零解，即x=0。<br>对于我们的此处的计算，则会有如下等式：
+$$
+\Sigma_k^{-1}\cdot\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(\vec{x_i}-\vec{\mu_k})\right]=0\\\qquad \qquad \\\Downarrow \\\qquad \\ 令h_{ik}=\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\\\qquad \qquad \\\Downarrow 简化为\\\qquad \\ \Sigma_k^{-1}\cdot\sum_{i=1}^N\left[h_{ik}\cdot(\vec{x_i}-\vec{\mu_k})\right]=0\\\qquad \qquad \\\Downarrow 解得\\\qquad \\ \vec{\mu_k}=\frac{\sum_{i=1}^Nh_{ik}\cdot \vec{x_i}}{\sum_{i=1}^Nh_{ik}}\\\qquad \qquad \\\Downarrow 代入\\\qquad \\ \vec{\mu_k}=\frac{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot \vec{x_i}}{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}}
+$$
+所以这就是我们最后需要证的结果：
+$$
+\vec{\mu_k}=\frac{\sum_{i=1}^Nh_{ik}\cdot \vec{x_i}}{\sum_{i=1}^Nh_{ik}}=\frac{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot \vec{x_i}}{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}}
+$$
+此处我只展示了$\vec{\mu_k}$的求解过程，对于$\vec{\Sigma_k}$的求解未展开，不过其计算原理一样，到最后其计算结果为：
+$$
+\vec{\Sigma_k}=\frac{\sum_{i=1}^Nh_{ik}(\vec{x_i}-\vec{\mu_k})\cdot(\vec{x_i}-\vec{\mu_k})^T}{\sum_{i=1}^Nh_{ik}}=\frac{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}(\vec{x_i}-\vec{\mu_k})\cdot(\vec{x_i}-\vec{\mu_k})^T}{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}}
+$$
+</p>
+<h1 id="5-心得"><a href="#5-心得" class="headerlink" title="5.心得"></a>5.心得</h1><p>推导虽然不容易，但自己推导一遍还是方便理解的。加油~~</p>
+
+          
+        
+      
+    </div>
+	<div>
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/12/12/%E5%A4%9A%E7%BB%B4%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1769,166 +1967,6 @@ g(h_i|\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(h_i-\mu)^2}{2\sigma^2}}<
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/25/java%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%9C%AF%E8%AE%AD%E7%BB%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kingback">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/isme.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王延凯的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/25/java%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%9C%AF%E8%AE%AD%E7%BB%83/" itemprop="url">Java基本算术训练</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-25T17:04:10+08:00">
-                2019-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="编程实现1-2-3-、、、-100"><a href="#编程实现1-2-3-、、、-100" class="headerlink" title="编程实现1+2+3+、、、+100"></a>编程实现1+2+3+、、、+100</h2><p>废话不多说直接上代码，这里直接展示代码实现部分和代码运行结果。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建输出函数快捷键sout</span></span><br><span class="line">int sum1 = <span class="number">0</span>, sum2 = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//编程实现1+2+3+...+100</span></span><br><span class="line"><span class="keyword">for</span> (int i =<span class="number">1</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">    sum1 += i;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">"\nthe Sum of nature numbers within 100 is :"</span> + sum1);</span><br></pre></td></tr></table></figure></p>
-<h2 id="编程实现1-3-5-7-、、、-101"><a href="#编程实现1-3-5-7-、、、-101" class="headerlink" title="编程实现1+3+5+7+、、、+101"></a>编程实现1+3+5+7+、、、+101</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编程实现1+3+5+7+9+...+101</span></span><br><span class="line">int c = <span class="number">1</span>;<span class="comment">//c用来存储奇数</span></span><br><span class="line"><span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= <span class="number">50</span>; i++) &#123;</span><br><span class="line">    sum2 += c;</span><br><span class="line">    c += <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">"\nthe Sum of odd numbers within 101 is :"</span> + sum2);</span><br></pre></td></tr></table></figure>
-<h2 id="编程实现输出十个随机整数，值在0-100之间"><a href="#编程实现输出十个随机整数，值在0-100之间" class="headerlink" title="编程实现输出十个随机整数，值在0-100之间"></a>编程实现输出十个随机整数，值在0-100之间</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编程实现输出10个随机整数，值在0-100之间</span></span><br><span class="line">Random r = <span class="keyword">new</span> Random(<span class="number">30</span>);<span class="comment">//创建一个新的伪随机数生成器</span></span><br><span class="line"><span class="comment">//定义一个数组来承接生成的随机数</span></span><br><span class="line">int[] ran = <span class="keyword">new</span> int[<span class="number">10</span>];</span><br><span class="line">System.out.println(<span class="string">"\n生成的随机数为："</span>);</span><br><span class="line"><span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    int t1 = r.nextInt(<span class="number">100</span>);</span><br><span class="line">    ran[i] = t1;</span><br><span class="line">    System.out.printf(t1 + <span class="string">"   "</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="对以上生成的十个随机整数进行排序"><a href="#对以上生成的十个随机整数进行排序" class="headerlink" title="对以上生成的十个随机整数进行排序"></a>对以上生成的十个随机整数进行排序</h2><p>在此处进行排序我使用了两种方式分别实现了对于十个数字的排序功能，分别为==选择法==和==冒泡排序法==。两种排序方式都可以，故我使用这两种方式一个实现正序排列一个实现了倒序排列。在具体应用中两种都可以。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建方法使用快捷键 Alt+Insert</span></span><br><span class="line"><span class="comment">//方法一，选择法，第一次循环都和第一个比较，把最小的放在最前边</span></span><br><span class="line">public <span class="keyword">static</span> int[] sort(int[] a) &#123;</span><br><span class="line">    int[] b=<span class="keyword">new</span> int[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (int j = i+<span class="number">1</span>; j &lt;<span class="number">10</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i]&gt;a[j])&#123;</span><br><span class="line">                int temp=a[i];</span><br><span class="line">                a[i]=a[j];</span><br><span class="line">                a[j]=temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//方法二：冒泡排序法，相邻两个进行比较，将最大的放到最后边</span></span><br><span class="line">public <span class="keyword">static</span> int[] sort1(int[] a) &#123;</span><br><span class="line">    <span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">0</span>;j&lt;<span class="number">10</span>-i<span class="number">-1</span>;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[j]&gt;a[j+<span class="number">1</span>])&#123;</span><br><span class="line">                int temp=a[j];</span><br><span class="line">                a[j]=a[j+<span class="number">1</span>];</span><br><span class="line">                a[j+<span class="number">1</span>]=temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="设有两字符串A、B构成的集合，字符串内容值为以下所示："><a href="#设有两字符串A、B构成的集合，字符串内容值为以下所示：" class="headerlink" title="设有两字符串A、B构成的集合，字符串内容值为以下所示："></a>设有两字符串A、B构成的集合，字符串内容值为以下所示：</h2><p><kbd>A:{a,b,c,d,e,f,g,in,off,about,get}<br>B:{f,g,a,come,get,go}
-</kbd></p>
-<p><strong>试求出</strong></p>
-<ol>
-<li>求出集合A、B的交集；</li>
-<li>只在集合A中出现的字符串集合；</li>
-<li>集合A、B的并集。</li>
-</ol>
-<p>以下则分别实现三个功能，首先实现要求1，求出==AB集合的交集==<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">      <span class="comment">//返回集合A和集合B交集</span></span><br><span class="line">public <span class="keyword">static</span> <span class="built_in">String</span>[] samestr(<span class="built_in">String</span>[] a,<span class="built_in">String</span>[] b) &#123;</span><br><span class="line">    <span class="built_in">String</span>[] aa=<span class="keyword">new</span> <span class="built_in">String</span>[<span class="number">20</span>];</span><br><span class="line">    int k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (int i=<span class="number">0</span>;i&lt;a.length;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(int j=<span class="number">0</span>;j&lt;b.length;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i]==b[j])&#123;</span><br><span class="line">                aa[k]=a[i];</span><br><span class="line">                k++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> aa;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>接下来实现要求2，求出==只在A中出现的字符串集合==：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回字符串a独有的集合</span></span><br><span class="line">public <span class="keyword">static</span> ArrayList diffstr(<span class="built_in">String</span>[] a, <span class="built_in">String</span>[] b) &#123;</span><br><span class="line">    ArrayList aa=<span class="keyword">new</span> ArrayList();<span class="comment">//用来存储字符串a</span></span><br><span class="line">    ArrayList bb=<span class="keyword">new</span> ArrayList();<span class="comment">//用来存储字符串b</span></span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">        aa.add(a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; b.length; i++) &#123;</span><br><span class="line">        bb.add(b[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//移除aa中包含的bb</span></span><br><span class="line">    aa.removeAll(bb);</span><br><span class="line">    <span class="keyword">return</span> aa;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>最后再来实现要求3，求==A、B集合的并集==<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回AB集合并集</span></span><br><span class="line">public <span class="keyword">static</span> ArrayList gatherstr(<span class="built_in">String</span>[] a,<span class="built_in">String</span>[] b) &#123;</span><br><span class="line">    ArrayList aa=<span class="keyword">new</span> ArrayList();</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">        aa.add(a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; b.length; i++) &#123;</span><br><span class="line">        aa.add(b[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> aa;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="程序运行截图"><a href="#程序运行截图" class="headerlink" title="程序运行截图"></a>程序运行截图</h2><p>以下我展示出程序运行后的结果：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190827233132400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="全部的java代码"><a href="#全部的java代码" class="headerlink" title="全部的java代码"></a>全部的java代码</h2><p>最后我还提供出此次练习的全部java源码，供大家一起学习讨论。代码中有什么不足之处，欢迎大家斧正。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line">package main.java.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created with IntelliJ IDEA.</span></span><br><span class="line"><span class="comment"> * User: kingback</span></span><br><span class="line"><span class="comment"> * Author:king@王延凯</span></span><br><span class="line"><span class="comment"> * Date: 2019/4/6</span></span><br><span class="line"><span class="comment"> * Time: 20:39</span></span><br><span class="line"><span class="comment"> * Description: No Description</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="comment">//创建main函数快捷键psvm</span></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建输出函数快捷键sout</span></span><br><span class="line">        int sum1 = <span class="number">0</span>, sum2 = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//编程实现1+2+3+...+100</span></span><br><span class="line">        <span class="keyword">for</span> (int i =<span class="number">1</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">            sum1 += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\nthe Sum of nature numbers within 100 is :"</span> + sum1);</span><br><span class="line">        <span class="comment">//编程实现1+3+5+7+9+...+101</span></span><br><span class="line">        int c = <span class="number">1</span>;<span class="comment">//c用来存储奇数</span></span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= <span class="number">50</span>; i++) &#123;</span><br><span class="line">            sum2 += c;</span><br><span class="line">            c += <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\nthe Sum of odd numbers within 101 is :"</span> + sum2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//编程实现输出10个随机整数，值在0-100之间</span></span><br><span class="line">        Random r = <span class="keyword">new</span> Random(<span class="number">30</span>);<span class="comment">//创建一个新的伪随机数生成器</span></span><br><span class="line">        <span class="comment">//定义一个数组来承接生成的随机数</span></span><br><span class="line">        int[] ran = <span class="keyword">new</span> int[<span class="number">10</span>];</span><br><span class="line">        System.out.println(<span class="string">"\n生成的随机数为："</span>);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            int t1 = r.nextInt(<span class="number">100</span>);</span><br><span class="line">            ran[i] = t1;</span><br><span class="line">            System.out.printf(t1 + <span class="string">"   "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int[] aa = <span class="keyword">new</span> int[<span class="number">10</span>];</span><br><span class="line">        aa = sort(ran);</span><br><span class="line">        System.out.println(<span class="string">"\n\n排序后的结果为："</span>);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.print(aa[i] + <span class="string">"   "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//多行注释ctrl+shift+/</span></span><br><span class="line">       <span class="comment">/* for(int i=0;i&lt;10;i++)&#123;</span></span><br><span class="line"><span class="comment">            System.out.println(ran[i]);</span></span><br><span class="line"><span class="comment">        &#125;*/</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//设有两字符串构成的集合，字符串内容如下所示</span></span><br><span class="line">        <span class="built_in">String</span>[] str = &#123;<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>, <span class="string">"f"</span>, <span class="string">"g"</span>, <span class="string">"in"</span>, <span class="string">"off"</span>, <span class="string">"about"</span>, <span class="string">"get"</span>&#125;;</span><br><span class="line">        <span class="built_in">String</span>[] str1 = &#123;<span class="string">"f"</span>, <span class="string">"g"</span>, <span class="string">"a"</span>, <span class="string">"come"</span>, <span class="string">"get"</span>, <span class="string">"go"</span>&#125;;</span><br><span class="line">        <span class="built_in">String</span>[] togather = <span class="keyword">new</span> <span class="built_in">String</span>[<span class="number">20</span>];</span><br><span class="line">        <span class="built_in">String</span>[] diff = <span class="keyword">new</span> <span class="built_in">String</span>[<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//要求找出两个集合的交集,并集</span></span><br><span class="line">        togather = samestr(str, str1);</span><br><span class="line">        <span class="comment">//输出AB的交集</span></span><br><span class="line">        System.out.print(<span class="string">"\n\nAB的交集: "</span>);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; togather.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (togather[i] != <span class="literal">null</span>) &#123;</span><br><span class="line">                System.out.print(togather[i] + <span class="string">"   "</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//输出只在A中出现的字符串</span></span><br><span class="line">        System.out.println(<span class="string">"\n\n只在A中出现的集合： "</span>);</span><br><span class="line">        ArrayList aaa = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        aaa = diffstr(str, str1);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; aaa.size(); i++) &#123;</span><br><span class="line">            System.out.printf(<span class="string">" "</span> + aaa.get(i) + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//输出AB集合并集</span></span><br><span class="line">        ArrayList bbb=gatherstr(str,str1);</span><br><span class="line">        System.out.println(<span class="string">"\n\nAB的并集为： "</span>);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; bbb.size(); i++) &#123;</span><br><span class="line">            System.out.print(<span class="string">" "</span>+bbb.get(i)+<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//创建方法使用快捷键 Alt+Insert</span></span><br><span class="line">    <span class="comment">//方法一，选择法，第一次循环都和第一个比较，把最小的放在最前边</span></span><br><span class="line">    public <span class="keyword">static</span> int[] sort(int[] a) &#123;</span><br><span class="line">        int[] b=<span class="keyword">new</span> int[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (int j = i+<span class="number">1</span>; j &lt;<span class="number">10</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(a[i]&gt;a[j])&#123;</span><br><span class="line">                    int temp=a[i];</span><br><span class="line">                    a[i]=a[j];</span><br><span class="line">                    a[j]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//方法二：冒泡排序法，相邻两个进行比较，将最大的放到最后边</span></span><br><span class="line">    public <span class="keyword">static</span> int[] sort1(int[] a) &#123;</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(int j=<span class="number">0</span>;j&lt;<span class="number">10</span>-i<span class="number">-1</span>;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(a[j]&gt;a[j+<span class="number">1</span>])&#123;</span><br><span class="line">                    int temp=a[j];</span><br><span class="line">                    a[j]=a[j+<span class="number">1</span>];</span><br><span class="line">                    a[j+<span class="number">1</span>]=temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回集合A和集合B交集</span></span><br><span class="line">    public <span class="keyword">static</span> <span class="built_in">String</span>[] samestr(<span class="built_in">String</span>[] a,<span class="built_in">String</span>[] b) &#123;</span><br><span class="line">        <span class="built_in">String</span>[] aa=<span class="keyword">new</span> <span class="built_in">String</span>[<span class="number">20</span>];</span><br><span class="line">        int k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (int i=<span class="number">0</span>;i&lt;a.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(int j=<span class="number">0</span>;j&lt;b.length;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(a[i]==b[j])&#123;</span><br><span class="line">                    aa[k]=a[i];</span><br><span class="line">                    k++;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> aa;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回字符串a独有的集合</span></span><br><span class="line">    public <span class="keyword">static</span> ArrayList diffstr(<span class="built_in">String</span>[] a, <span class="built_in">String</span>[] b) &#123;</span><br><span class="line">        ArrayList aa=<span class="keyword">new</span> ArrayList();<span class="comment">//用来存储字符串a</span></span><br><span class="line">        ArrayList bb=<span class="keyword">new</span> ArrayList();<span class="comment">//用来存储字符串b</span></span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            aa.add(a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; b.length; i++) &#123;</span><br><span class="line">            bb.add(b[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//移除aa中包含的bb</span></span><br><span class="line">        aa.removeAll(bb);</span><br><span class="line">        <span class="keyword">return</span> aa;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回AB集合并集</span></span><br><span class="line">    public <span class="keyword">static</span> ArrayList gatherstr(<span class="built_in">String</span>[] a,<span class="built_in">String</span>[] b) &#123;</span><br><span class="line">        ArrayList aa=<span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            aa.add(a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; b.length; i++) &#123;</span><br><span class="line">            aa.add(b[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> aa;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-	<div>
-		
-	</div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1983,7 +2021,7 @@ g(h_i|\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(h_i-\mu)^2}{2\sigma^2}}<
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

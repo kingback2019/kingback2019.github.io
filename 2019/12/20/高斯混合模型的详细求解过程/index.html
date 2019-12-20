@@ -79,25 +79,15 @@
 
 
 
-<meta name="description" content="1.gnuplot的原理及用途$\qquad$它是一个小巧实用的数据处理工具，主要用来绘制2D&#x2F;3D的数据或者函数图像，但是也包含数学计算、拟合等功能。虽然它的名字里边有个“gnu”,但是它和大名鼎鼎的GNU没有什么关系，使用的授权协议也不是GNU GPL,所以这里的“gnu”是小写，全名应该读作“new plot”。所有主流的Linux版本都包含gnuplot,因此在Linux上安装很简单，只要">
+<meta name="description" content="1.多维高斯分布回顾在上一篇文章中介绍了高斯混合模型的公式，但是在实际应用中每次迭代的公式又是如何出来的呢，抱着这个疑问，我也就写出了这篇博客，希望可以记录一下，如下所示，是多维高斯分布的分布公式： $$ N(\vec{X}\mid\vec{\mu},{\Sigma})=\frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma\mid}^{\frac{1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="windows上gunplot的安装和使用">
-<meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;11&#x2F;19&#x2F;window%E4%B8%8Agnuplot%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E3%80%901%E3%80%91&#x2F;index.html">
+<meta property="og:title" content="高斯混合模型GMM的推导">
+<meta property="og:url" content="https:&#x2F;&#x2F;kingback2019.github.io&#x2F;2019&#x2F;12&#x2F;20&#x2F;%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%A6%E7%BB%86%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B&#x2F;index.html">
 <meta property="og:site_name" content="王延凯的博客">
-<meta property="og:description" content="1.gnuplot的原理及用途$\qquad$它是一个小巧实用的数据处理工具，主要用来绘制2D&#x2F;3D的数据或者函数图像，但是也包含数学计算、拟合等功能。虽然它的名字里边有个“gnu”,但是它和大名鼎鼎的GNU没有什么关系，使用的授权协议也不是GNU GPL,所以这里的“gnu”是小写，全名应该读作“new plot”。所有主流的Linux版本都包含gnuplot,因此在Linux上安装很简单，只要">
+<meta property="og:description" content="1.多维高斯分布回顾在上一篇文章中介绍了高斯混合模型的公式，但是在实际应用中每次迭代的公式又是如何出来的呢，抱着这个疑问，我也就写出了这篇博客，希望可以记录一下，如下所示，是多维高斯分布的分布公式： $$ N(\vec{X}\mid\vec{\mu},{\Sigma})=\frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma\mid}^{\frac{1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920151746978.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920151852296.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920151914519.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152029658.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152115895.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152140951.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152336186.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152428672.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920152543860.gif">
-<meta property="og:updated_time" content="2019-11-21T08:07:46.260Z">
+<meta property="og:updated_time" content="2019-12-20T07:01:57.421Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190920151746978.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center">
 
 
 
@@ -127,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="https://kingback2019.github.io/2019/11/19/window上gnuplot的安装和使用【1】/"/>
+  <link rel="canonical" href="https://kingback2019.github.io/2019/12/20/高斯混合模型的详细求解过程/"/>
 
 
 
 
 
-  <title>windows上gunplot的安装和使用 | 王延凯的博客</title>
+  <title>高斯混合模型GMM的推导 | 王延凯的博客</title>
   
 
 
@@ -284,7 +274,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/19/window%E4%B8%8Agnuplot%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E3%80%901%E3%80%91/">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/12/20/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%A6%E7%BB%86%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="kingback">
@@ -301,7 +291,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">windows上gunplot的安装和使用</h1>
+          <h1 class="post-title" itemprop="name headline">高斯混合模型GMM的推导</h1>
         
 
         <div class="post-meta">
@@ -313,8 +303,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-19T09:05:10+08:00">
-                2019-11-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-20T14:54:41+08:00">
+                2019-12-20
               </time>
             
 
@@ -336,8 +326,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E8%AF%AD%E8%A8%80%E7%94%BB%E5%9B%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">c语言画图</span>
+                  <a href="/categories/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">语音识别</span>
                   </a>
                 </span>
 
@@ -378,22 +368,60 @@
       
 
       
-        <h2 id="1-gnuplot的原理及用途"><a href="#1-gnuplot的原理及用途" class="headerlink" title="1.gnuplot的原理及用途"></a>1.gnuplot的原理及用途</h2><p>$\qquad$它是一个小巧实用的数据处理工具，主要用来绘制2D/3D的数据或者函数图像，但是也包含数学计算、拟合等功能。虽然它的名字里边有个“gnu”,但是它和大名鼎鼎的<a href="http://www.gnu.org/" target="_blank" rel="noopener">GNU</a>没有什么关系，使用的授权协议也不是GNU GPL,所以这里的“gnu”是小写，全名应该读作“new plot”。<br>所有主流的Linux版本都包含gnuplot,因此在Linux上安装很简单，只要用各相应发行版的软件安装工具直接安装就可以了。<br>$\qquad$在苹果电脑的安装也并不复杂，<a href="https://www.macports.org/" target="_blank" rel="noopener">MacPorts</a>项目把很多Linux上的应用程序移植到了苹果系统上，其中就包括gnuplot.只要在苹果电脑上安装MacPorts,之后就可以使用port命令进行安装了。<br>$\qquad$在windows下，可以直接到<a href="http://www.gnuplot.info/" target="_blank" rel="noopener">gnuplot</a>在<a href="https://sourceforge.net/projects/gnuplot/files/gnuplot/" target="_blank" rel="noopener">sourceforge</a>的下载页面进行下载，解压之后，直接安装即可使用了。</p>
-<h2 id="2-gnuplot的下载及安装"><a href="#2-gnuplot的下载及安装" class="headerlink" title="2.gnuplot的下载及安装"></a>2.gnuplot的下载及安装</h2><p>$\qquad$首先在官网下载gnuplot的最新版本，<a href="https://www.typora.io/#windows" target="_blank" rel="noopener">下载地址</a>，之后按照提示，更改安装位置即可。<br><img src="https://img-blog.csdnimg.cn/20190920151746978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$之后在软件安装页面找到并运行  <strong>gnuplot 5.2 patchlevel 7</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20190920151852296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$在这里我们不妨先实验一下画图效果，以下我们显示画出<strong>sinx</strong>和<strong>cosx</strong>的图像</p>
-<p><img src="https://img-blog.csdnimg.cn/20190920151914519.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190920152029658.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$到这里我们的gnuplot的安装大功告成了。</p>
-<h2 id="3-使用gcc编译c语言程序"><a href="#3-使用gcc编译c语言程序" class="headerlink" title="3.使用gcc编译c语言程序"></a>3.使用gcc编译c语言程序</h2><p>$\qquad$在编译之前，我们先创建一个c语言文件，主要实现生成画图所需要的离散变量数组。以下我们以产生<strong>sinc</strong>函数为例，并将该函数命名为<strong>test.c</strong>。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.1415926</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	 <span class="comment">//获取负半轴部分数据</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1600</span>; i &gt;<span class="number">0</span>; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">double</span> t;</span><br><span class="line">		t=i/<span class="number">16.0</span>;<span class="comment">//设置采集时间=采样点数/采样频率</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%.2f %.2f\n"</span>,(<span class="keyword">float</span>)(-t),(<span class="built_in">sin</span>(t)/t));</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//获取正半轴部分数据</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">1600</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">double</span> t;</span><br><span class="line">		t=i/<span class="number">16.0</span>;<span class="comment">//设置采集时间=采样点数/采样频率</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%.2f %.2f\n"</span>,(<span class="keyword">float</span>)(t),(<span class="built_in">sin</span>(t)/t));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对其使用<strong>gcc</strong>进行编译则有:<br><img src="https://img-blog.csdnimg.cn/20190920152115895.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>编译完成之后,我们就会发现多了一个<strong>test.exe</strong>文件，接下来我们要运行该可执行文件，并且将它<strong>printf</strong>的结果重定向到<strong>sinc.bat</strong>文件。</p>
-<p><img src="https://img-blog.csdnimg.cn/20190920152140951.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>如果我们此时使用记事本打开sinc.bat文件我们就会发现，整个函数的输出结果全被保存到这里。<br><img src="https://img-blog.csdnimg.cn/20190920152336186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="4-使用gnuplot调用c语言程序所产生的数据并且画出图像"><a href="#4-使用gnuplot调用c语言程序所产生的数据并且画出图像" class="headerlink" title="4.使用gnuplot调用c语言程序所产生的数据并且画出图像"></a>4.使用gnuplot调用c语言程序所产生的数据并且画出图像</h2><p>$\qquad$在做这一步之前我们需要做的一点就是，需要先将<strong>gnuplot.exe</strong>所在的路径，存入环境变量<strong>path</strong>中，这里我的路径是：<br><img src="https://img-blog.csdnimg.cn/20190920152428672.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>$\qquad$添加完成之后点击确定即可。然后在含有<strong>sinc.bat</strong>文件的文件夹下进入cmd命令行窗口,之后输入<strong>gnuplot</strong>,调用该画图函数。然后再在新出来的窗口输入命令.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot [<span class="number">-16</span>:<span class="number">16</span>] [<span class="number">-0.3</span>:<span class="number">1</span>] <span class="string">"sinc.bat"</span>  u <span class="number">1</span>:<span class="number">2</span> w l lt <span class="number">1</span> lw <span class="number">1</span></span><br></pre></td></tr></table></figure><br>$\qquad$具体操作以及结果如下所示：<br><img src="https://img-blog.csdnimg.cn/20190920152543860.gif" alt="在这里插入图片描述"></p>
-<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><blockquote>
-<p>史上最完美的Typora快捷键大全：<a href="https://blog.csdn.net/cris_zz/article/details/82919401" target="_blank" rel="noopener">https://blog.csdn.net/cris_zz/article/details/82919401</a></p>
-<p>c语言及gnuplot任意波形产生以及作图-三角波：<a href="https://blog.csdn.net/shaoyubin999/article/details/82819974" target="_blank" rel="noopener">https://blog.csdn.net/shaoyubin999/article/details/82819974</a></p>
-<p>gnuplot使用说明：<a href="https://www.cnblogs.com/waterystone/p/5085801.html" target="_blank" rel="noopener">https://www.cnblogs.com/waterystone/p/5085801.html</a></p>
-<p>gnuplot介绍：<a href="https://www.xuebuyuan.com/572269.html" target="_blank" rel="noopener">https://www.xuebuyuan.com/572269.html</a></p>
+        <h1 id="1-多维高斯分布回顾"><a href="#1-多维高斯分布回顾" class="headerlink" title="1.多维高斯分布回顾"></a>1.多维高斯分布回顾</h1><p>在上一篇文章中介绍了高斯混合模型的公式，但是在实际应用中每次迭代的公式又是如何出来的呢，抱着这个疑问，我也就写出了这篇博客，希望可以记录一下，如下所示，是多维高斯分布的分布公式：
+$$
+N(\vec{X}\mid\vec{\mu},{\Sigma})=\frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma\mid}^{\frac{1}{2}}}\cdot e^{-\frac{({\vec{X}-\vec{\mu})}^T\cdot{\sum^{-1}}\cdot{({\vec{X}-\vec{\mu})}}}{2}}
+$$
+</p>
+<h1 id="2-极大似然估计"><a href="#2-极大似然估计" class="headerlink" title="2.极大似然估计"></a>2.极大似然估计</h1><p>求解高斯混合模型的过程就是，就是求解所有模型参数的过程，也就是通过不断的迭代求取$\pi_k$,$\mu_i$,$\sigma^2_i$这三个参数，并且使其趋于稳定从而得到稳定后的模型分布参数。<br>对于混合模型进行参数估计，首先都会想到极大似然估计，于是我们首先使用极大似然估计来进行参数的估计,其推导公式也即如下所示：
+$$
+P=\prod_{i=1}^{N}p(\vec{x_i}|\pi_k,\vec{{\mu_k)}},{\Sigma}_k)\\ \qquad \\\qquad =\prod_{i=1}^{N}\cdot\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)\\ \qquad \\=\prod_{i=1}^{N}\cdot\sum_{k=1}^K\pi_k \frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma_k\mid}^{\frac{1}{2}}}\cdot e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{X_i}-\vec{\mu_k})}}}{2}}\\\qquad \\=\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k)\cdot \sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k)\cdot\cdot\cdot\cdot\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k)
+$$
+
+</p>
+<h1 id="3-EM算法的E步"><a href="#3-EM算法的E步" class="headerlink" title="3.EM算法的E步"></a>3.EM算法的E步</h1><p>在理想情况下，每个样本应该只由一个混合成分生成，这个混合成分对应的就是被样本分配到的簇，这样样本$x_i$只由第$k$个混合成分组成，也就是说$p(z_i=k\mid x_i)=1$，并且$p(z_n=k\mid x_n)=0$,此时$n\neq i$,但是由于我们之前不知道这样的理想的高斯分布是怎样的，我们只能根据已经观察到的数据集，来获取每个样本由每个混合成分生成的概率，这个概率就是公式所表达的值，如下所示：
+$$
+E(h_{ik}\mid x_i)=0\cdot p(h_{ik}=0\mid x_i))+1\cdot p(h_{ik}=1\mid x_i))\\ \qquad \\=p(h_{ik}=1\mid x_i))\\ \qquad \\=p(z_i=k\mid x_i)\\ \qquad \\=\frac{\pi_k \cdot p(x_i\mid \mu_k,\Sigma_k)}{\sum_{k=1}^{K}\pi_k \cdot p(x_i\mid \mu_k,\Sigma_k)}
+$$
+对上边的公式进行一下解释，</p>
+<blockquote>
+<p>1.随机变量$h_{ik}$表示样本$x_i$是否由第$k$个混合成分生成<br>2.随机变量$h_{ik}$也就是EM算法的隐变量</p>
 </blockquote>
+<p>如果随机变量$h_{ik}$表示样本$x_i$是否由第$k$个混合成分生成，则$h_{ik}$记为1，否则记为0。根据这个定义我们知道，$h_{i1}，h_{i2}，h_{i3}，……,h_{iK}$,这K个数中，只有一个为1，说明$x_i$只由一个混合成分生成，其余所有数都为0，以下列出了其分布列：<br>$h_{ik}$| 0|1<br>———— | ——-|——-<br>概率| $p(h_{ik}=0\mid x_i)$|$p(h_{ik}=1\mid x_i)$<br>上边的公式就是根据隐变量的分布列，来求取其期望的公式。</p>
+<h1 id="4-EM算法的M步"><a href="#4-EM算法的M步" class="headerlink" title="4.EM算法的M步"></a>4.EM算法的M步</h1><p>EM算法的M步骤，就是对于先对数化似然函数，然后求取其极大值 ，对上式展开并且带入$N(\vec{x_i}|\vec{\mu_k},\Sigma_k)$公式可得
+$$
+lnP=ln(\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k)\cdot \sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k)\cdot\cdot\cdot\cdot\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k))\\\qquad \\=ln(\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k))+ln(\sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k))+\cdot\cdot\cdot\cdot+ln(\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k))\\ \qquad \\=\sum_{i=1}^{N}\cdot ln(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k))
+$$
+根据之前所学的知识，因为我们要求的是$\pi_k$,$u_k$,$\Sigma_k$,所以在在这一过程中，我们通常采用的方法是分别对其求偏导，并且使其为0，求得分别的在极大值时的取值。下面我将会以$\mu_k$的求取来进行一下演示：<br>但是在开始之前需要补充一些矩阵求偏导的公式：</p>
+<blockquote>
+<p>1 .若A为n阶方阵，x是n维列向量，则有：<br>   $\qquad\quad\frac{\partial(x^TAx)}{\partial x}=(A+A^T)x$<br>2 .特殊的，当A为n阶对称方阵时，则有$A=A^T$,上式可以简化为：<br>$\qquad\quad\frac{\partial(x^TAx)}{\partial x}=(A+A^T)x=2Ax$</p>
+</blockquote>
+<p>补充完上述的方法之后，我们接下来就要对$lnP$求$\mu_k$的偏导：
+$$
+\frac{\partial(lnP)}{\partial \mu_k}=\frac{\partial(\sum_{i=1}^{N}\cdot ln(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)))}{\partial \mu_k}\\\qquad \\=\frac{\sum_{i=1}^{N}\cdot\partial( ln(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)))}{\partial \mu_k}\\\qquad \\=\sum_{i=1}^N\left[\frac{1}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k))}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{1}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\pi_1 N(\vec{x_i}|\vec{\mu_1},\Sigma_1)+\pi_2 N(\vec{x_i}|\vec{\mu_2},\Sigma_2)+……+\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)+……+\pi_KN(\vec{x_i}|\vec{\mu_K},\Sigma_K))}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{1}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k))}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{\pi_k}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(N(\vec{x_i}|\vec{\mu_k},\Sigma_k))}{\partial \mu_k}\right]
+$$
+到这里之后我们需要将$N(\vec{x_i}|\vec{\mu_k},\Sigma_k))$的具体公式带入计算，其结果及运算过程如下所示:
+$$
+上式=\sum_{i=1}^N\left[\frac{\pi_k}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial(\frac{1}{{(2\pi)}^{\frac{D}{2}}\cdot {\mid  \Sigma_k\mid}^{\frac{1}{2}}}\cdot e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}})}{\partial \mu_k}\right]\\\qquad \\=\sum_{i=1}^N\left[\frac{\pi_k \cdot\frac{1}{(2\pi)^{\frac{D}{2}}\cdot\mid\Sigma_k\mid^{\frac{1}{2}}}}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\frac{\partial( e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}})}{\partial \mu_k}\right]\\\qquad\\=\sum_{i=1}^N\left[\frac{\pi_k \cdot\frac{1}{(2\pi)^{\frac{D}{2}}\cdot\mid\Sigma_k\mid^{\frac{1}{2}}}}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot e^{-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}}\cdot\frac{\partial( {-\frac{({\vec{x_i}-\vec{\mu_k})}^T\cdot{\Sigma_k^{-1}}\cdot{({\vec{x_i}-\vec{\mu_k})}}}{2}})}{\partial \mu_k}\right]
+$$
+到了这里下一步的计算就需要用到我们在本节开头的地方补充的向量求偏导的方法：
+$$
+上式=\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(-\frac{1}{2})\cdot 2\cdot\Sigma_k^{-1}(\vec{x_i}-\vec{\mu_k})\cdot\frac{\partial(\vec{x_i}-\vec{\mu_k})}{\partial \mu_k}\right]\\\qquad\\=\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(-\frac{1}{2})\cdot 2\cdot\Sigma_k^{-1}(\vec{x_i}-\vec{\mu_k})\cdot(-1)\right]\\\qquad\\=\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot\Sigma_k^{-1}(\vec{x_i}-\vec{\mu_k})\right]\\\qquad\\=\Sigma_k^{-1}\cdot\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(\vec{x_i}-\vec{\mu_k})\right]\\\qquad\Downarrow \\\qquad\qquad 令上式=0
+$$
+对于上边等式的求解，因为$\Sigma_k^{-1}$是第k个混合成分的协方差矩阵的逆，其一定为一个非奇异矩阵，又由线性代数知识，如果n阶方阵A为可逆矩阵，x为n维列向量，那么Ax=0有且仅有零解，即x=0。<br>对于我们的此处的计算，则会有如下等式：
+$$
+\Sigma_k^{-1}\cdot\sum_{i=1}^N\left[\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot(\vec{x_i}-\vec{\mu_k})\right]=0\\\qquad \qquad \\\Downarrow \\\qquad \\ 令h_{ik}=\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\\\qquad \qquad \\\Downarrow 简化为\\\qquad \\ \Sigma_k^{-1}\cdot\sum_{i=1}^N\left[h_{ik}\cdot(\vec{x_i}-\vec{\mu_k})\right]=0\\\qquad \qquad \\\Downarrow 解得\\\qquad \\ \vec{\mu_k}=\frac{\sum_{i=1}^Nh_{ik}\cdot \vec{x_i}}{\sum_{i=1}^Nh_{ik}}\\\qquad \qquad \\\Downarrow 代入\\\qquad \\ \vec{\mu_k}=\frac{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot \vec{x_i}}{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}}
+$$
+所以这就是我们最后需要证的结果：
+$$
+\vec{\mu_k}=\frac{\sum_{i=1}^Nh_{ik}\cdot \vec{x_i}}{\sum_{i=1}^Nh_{ik}}=\frac{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}\cdot \vec{x_i}}{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}}
+$$
+此处我只展示了$\vec{\mu_k}$的求解过程，对于$\vec{\Sigma_k}$的求解未展开，不过其计算原理一样，到最后其计算结果为：
+$$
+\vec{\Sigma_k}=\frac{\sum_{i=1}^Nh_{ik}(\vec{x_i}-\vec{\mu_k})\cdot(\vec{x_i}-\vec{\mu_k})^T}{\sum_{i=1}^Nh_{ik}}=\frac{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}(\vec{x_i}-\vec{\mu_k})\cdot(\vec{x_i}-\vec{\mu_k})^T}{\sum_{i=1}^N\frac{\pi_k\cdot N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}{\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k)}}
+$$
+</p>
+<h1 id="5-心得"><a href="#5-心得" class="headerlink" title="5.心得"></a>5.心得</h1><p>推导虽然不容易，但自己推导一遍还是方便理解的。加油~~</p>
 
       
     </div>
@@ -427,8 +455,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/19/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84gnuplot%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E3%80%902%E3%80%91/" rel="next" title="超详细的gunplot使用教程">
-                <i class="fa fa-chevron-left"></i> 超详细的gunplot使用教程
+              <a href="/2019/12/12/%E5%A4%9A%E7%BB%B4%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="next" title="多维高斯分布">
+                <i class="fa fa-chevron-left"></i> 多维高斯分布
               </a>
             
           </div>
@@ -436,10 +464,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%901%E3%80%91%E5%BC%B9/" rel="prev" title="数字信号处理matlab训练第【1弹】">
-                数字信号处理matlab训练第【1弹】 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -588,7 +612,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-gnuplot的原理及用途"><span class="nav-number">1.</span> <span class="nav-text">1.gnuplot的原理及用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-gnuplot的下载及安装"><span class="nav-number">2.</span> <span class="nav-text">2.gnuplot的下载及安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用gcc编译c语言程序"><span class="nav-number">3.</span> <span class="nav-text">3.使用gcc编译c语言程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-使用gnuplot调用c语言程序所产生的数据并且画出图像"><span class="nav-number">4.</span> <span class="nav-text">4.使用gnuplot调用c语言程序所产生的数据并且画出图像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-参考文章"><span class="nav-number">5.</span> <span class="nav-text">5.参考文章</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-多维高斯分布回顾"><span class="nav-number">1.</span> <span class="nav-text">1.多维高斯分布回顾</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-极大似然估计"><span class="nav-number">2.</span> <span class="nav-text">2.极大似然估计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-EM算法的E步"><span class="nav-number">3.</span> <span class="nav-text">3.EM算法的E步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-EM算法的M步"><span class="nav-number">4.</span> <span class="nav-text">4.EM算法的M步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-心得"><span class="nav-number">5.</span> <span class="nav-text">5.心得</span></a></li></ol></div>
             
 
           </div>
@@ -1133,6 +1157,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
