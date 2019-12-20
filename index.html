@@ -386,7 +386,8 @@ $$
 <blockquote>
 <p>1.随机变量$h_{ik}$表示样本$x_i$是否由第$k$个混合成分生成<br>2.随机变量$h_{ik}$也就是EM算法的隐变量</p>
 </blockquote>
-<p>如果随机变量$h_{ik}$表示样本$x_i$是否由第$k$个混合成分生成，则$h_{ik}$记为1，否则记为0。根据这个定义我们知道，$h_{i1}，h_{i2}，h_{i3}，……,h_{iK}$,这K个数中，只有一个为1，说明$x_i$只由一个混合成分生成，其余所有数都为0，以下列出了其分布列：<br>$h_{ik}$| 0|1<br>———— | ——-|——-<br>概率| $p(h_{ik}=0\mid x_i)$|$p(h_{ik}=1\mid x_i)$<br>上边的公式就是根据隐变量的分布列，来求取其期望的公式。</p>
+<p>如果随机变量$h_{ik}$表示样本$x_i$是否由第$k$个混合成分生成，则$h_{ik}$记为1，否则记为0。根据这个定义我们知道，$h_{i1}，h_{i2}，h_{i3}，……,h_{iK}$,这K个数中，只有一个为1，说明$x_i$只由一个混合成分生成，其余所有数都为0，以下列出了其分布列：</p>
+<p><img src="https://img-blog.csdnimg.cn/20191220150845470.png" alt=""><br>上边的公式就是根据隐变量的分布列，来求取其期望的公式。</p>
 <h1 id="4-EM算法的M步"><a href="#4-EM算法的M步" class="headerlink" title="4.EM算法的M步"></a>4.EM算法的M步</h1><p>EM算法的M步骤，就是对于先对数化似然函数，然后求取其极大值 ，对上式展开并且带入$N(\vec{x_i}|\vec{\mu_k},\Sigma_k)$公式可得
 $$
 lnP=ln(\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k)\cdot \sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k)\cdot\cdot\cdot\cdot\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k))\\\qquad \\=ln(\sum_{k=1}^K\pi_k N(\vec{x_1}|\vec{\mu_k},\Sigma_k))+ln(\sum_{k=1}^K\pi_kN(\vec{x_2}|\vec{\mu_k},\Sigma_k))+\cdot\cdot\cdot\cdot+ln(\sum_{k=1}^K\pi_k N(\vec{x_N}|\vec{\mu_k},\Sigma_k))\\ \qquad \\=\sum_{i=1}^{N}\cdot ln(\sum_{k=1}^K\pi_k N(\vec{x_i}|\vec{\mu_k},\Sigma_k))
