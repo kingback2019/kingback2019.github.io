@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Github快速搜索语句</title>
+    <url>/2020/01/03/Github%E5%BF%AB%E9%80%9F%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<p>大家想必都经常会用到github下载一些源码，或者在github上找一些开源的项目，但是又比较受欢迎的呢，接下来教大家一种语法，其语法的使用结构如下所示：<br><img src="https://img-blog.csdnimg.cn/20200103201223495.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例如：我要在github中搜索spring项目，但是项目太多又无从下手，于是我们可以尝试使用上边的语法，例如我们要搜索spring开源项目其需要满足如下条件：</p>
+<blockquote>
+<p>1.标星数目stars大于1000<br>2.floks大于100，<br>3.使用语言为java,<br>开源时间截止到2019年12月31。</p>
+</blockquote>
+<p>根据需求我们可以写出如下命令：<br><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">in:name spring language:java pushed:&lt;<span class="number">2019</span><span class="number">-12</span><span class="number">-31</span> stars:&gt;<span class="number">1000</span> forks:&gt;<span class="number">100</span></span><br></pre></td></tr></table></figure><br>搜索以后其结果就如下所示：<br><img src="https://img-blog.csdnimg.cn/20200103200736476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>具体大家不一定都要按照这个来进行筛选，我这里只是提供了一个例子，具体的筛选语句，大家还可以参看第一个流程图得出。</p>
+<p>哈勒，此次就分享到这里啦~~~~，大家一起加油鸭~！！！</p>
+]]></content>
+      <categories>
+        <category>工具类</category>
+      </categories>
+  </entry>
+  <entry>
     <title>高斯混合模型GMM的推导</title>
     <url>/2019/12/20/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%A6%E7%BB%86%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="1-多维高斯分布回顾"><a href="#1-多维高斯分布回顾" class="headerlink" title="1.多维高斯分布回顾"></a>1.多维高斯分布回顾</h1><p>在上一篇文章中介绍了高斯混合模型的公式，但是在实际应用中每次迭代的公式又是如何出来的呢，抱着这个疑问，我也就写出了这篇博客，希望可以记录一下，如下所示，是多维高斯分布的分布公式：
