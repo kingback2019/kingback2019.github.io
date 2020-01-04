@@ -2459,18 +2459,18 @@ i=1，2，3，...,301 \quad; \quad j=1,2,3...,13</script><p>按照上边的公�
   
   <script type="text/javascript">
     var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick,mail';
     guest = guest.split(',').filter(item=>{
       return GUEST.indexOf(item)>-1;
     });
     new Valine({
         el: '#comments' ,
-        verify: true,
+        verify: false,
         notify: false,
         appId: 'yXD39D9lJyqurT59z8iWEmG8-gzGzoHsz',
         appKey: '6U3JUQ3RK2yDE8WHRkGSRIzq',
-        placeholder: '有什么问题可以在下方留言，也可以联系我！大家一起加油啊~~ 注意修改一下自己的名字哦！！！# comment box placeholder',
-        avatar:'robohash',
+        placeholder: '有什么问题可以在下方留言，也可以联系我！大家一起加油啊~~ 注意修改一下自己的名字哦！！！',
+        avatar:'monsterid',
         guest_info:guest,
         pageSize:'5' || 10,
     });
