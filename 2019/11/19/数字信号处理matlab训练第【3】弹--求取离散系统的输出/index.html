@@ -344,6 +344,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%903%E3%80%91%E5%BC%B9--%E6%B1%82%E5%8F%96%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BE%93%E5%87%BA/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%903%E3%80%91%E5%BC%B9--%E6%B1%82%E5%8F%96%E7%A6%BB%E6%95%A3%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BE%93%E5%87%BA/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -472,6 +482,9 @@ H(z)=\frac{0.001836+0.007344z^{-1}+0.011016z^{-2}+0.007374z^{-3}+0.001836z^{-4}}
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -807,6 +820,28 @@ H(z)=\frac{0.001836+0.007344z^{-1}+0.011016z^{-2}+0.007374z^{-3}+0.001836z^{-4}}
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'yXD39D9lJyqurT59z8iWEmG8-gzGzoHsz',
+        appKey: '6U3JUQ3RK2yDE8WHRkGSRIzq',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'5' || 10,
+    });
+  </script>
 
 
 

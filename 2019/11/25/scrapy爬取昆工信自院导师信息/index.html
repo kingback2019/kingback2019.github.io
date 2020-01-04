@@ -343,6 +343,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/25/scrapy%E7%88%AC%E5%8F%96%E6%98%86%E5%B7%A5%E4%BF%A1%E8%87%AA%E9%99%A2%E5%AF%BC%E5%B8%88%E4%BF%A1%E6%81%AF/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/25/scrapy%E7%88%AC%E5%8F%96%E6%98%86%E5%B7%A5%E4%BF%A1%E8%87%AA%E9%99%A2%E5%AF%BC%E5%B8%88%E4%BF%A1%E6%81%AF/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -508,6 +518,9 @@
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -843,6 +856,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'yXD39D9lJyqurT59z8iWEmG8-gzGzoHsz',
+        appKey: '6U3JUQ3RK2yDE8WHRkGSRIzq',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'5' || 10,
+    });
+  </script>
 
 
 

@@ -349,6 +349,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/19/matlab%E5%92%8Cc%E8%AF%AD%E8%A8%80%E5%9C%A8%E4%B8%8D%E8%B0%83%E7%94%A8%E5%8C%85%EF%BC%88%E5%BA%93%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%AE%9E%E7%8E%B0%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/19/matlab%E5%92%8Cc%E8%AF%AD%E8%A8%80%E5%9C%A8%E4%B8%8D%E8%B0%83%E7%94%A8%E5%8C%85%EF%BC%88%E5%BA%93%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%AE%9E%E7%8E%B0%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -475,6 +485,9 @@ y[n]=\sum_{k=-\infty}^{\infty}{x[k]h[n-k]}=x[n]*h[n]\\s(t)=f_1(t)*f_2(t)=\int_{-
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -810,6 +823,28 @@ y[n]=\sum_{k=-\infty}^{\infty}{x[k]h[n-k]}=x[n]*h[n]\\s(t)=f_1(t)*f_2(t)=\int_{-
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'yXD39D9lJyqurT59z8iWEmG8-gzGzoHsz',
+        appKey: '6U3JUQ3RK2yDE8WHRkGSRIzq',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'5' || 10,
+    });
+  </script>
 
 
 

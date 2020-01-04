@@ -349,6 +349,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/19/MFCC%E7%AE%97%E6%B3%95%E8%AE%B2%E8%A7%A3%E5%8F%8A%E5%AE%9E%E7%8E%B0%EF%BC%88matlab%EF%BC%89/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/19/MFCC%E7%AE%97%E6%B3%95%E8%AE%B2%E8%A7%A3%E5%8F%8A%E5%AE%9E%E7%8E%B0%EF%BC%88matlab%EF%BC%89/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -500,6 +510,9 @@ i=1，2，3，...,301 \quad; \quad j=1,2,3...,13</script><p>按照上边的公�
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -835,6 +848,28 @@ i=1，2，3，...,301 \quad; \quad j=1,2,3...,13</script><p>按照上边的公�
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'yXD39D9lJyqurT59z8iWEmG8-gzGzoHsz',
+        appKey: '6U3JUQ3RK2yDE8WHRkGSRIzq',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'5' || 10,
+    });
+  </script>
 
 
 
