@@ -274,6 +274,148 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2020/02/01/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B9%8BSpeechRecognition%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/01/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B9%8BSpeechRecognition%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/" itemprop="url">从零开始语音识别之SpeechRecognition模块安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-01T14:57:13+08:00">
+                2020-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/02/01/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B9%8BSpeechRecognition%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/01/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B9%8BSpeechRecognition%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title: Python安装SpeechRecognition语音识别模块<br>categories: 语音识别</p>
+<hr>
+<p>﻿# 1.python安装SpeechRecognition语音识别模块</p>
+<p>在使用python进行语音识别的时候，SpeechRecognition函数库也是一个经常会被用到的一个函数库，下面演示我在安装这个库时遇到的问题，以及解决方案。希望可以帮助大家。<br><img src="https://img-blog.csdnimg.cn/20200131205410106.png" alt="在这里插入图片描述"><br>出现问题，网络连接443，采用离线下载再使用pip安装的方式,网络443问题如下所示：<br><img src="https://img-blog.csdnimg.cn/20200131212542251.png" alt="在这里插入图片描述">该文件的官方参考网址及下载网址在这里：<br><a href="https://pypi.org/project/SpeechRecognition/#files" target="_blank" rel="noopener">SpeechRecognition下载地址</a><br>下载完成后使用如下命令进行离线安装，另外有什么问题我们也可以参看一下官方文档的使用说明。</p>
+<p>当然也可以在本站下载：</p>
+<p><a href="/download/SpeechRecognition-3.8.1-py2.py3-none-any.whl&quot;">点击下载</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install D:\Google下载的文件\SpeechRecognition<span class="number">-3.8</span><span class="number">.1</span>-py2.py3-none-any.whl</span><br><span class="line">#这里的地址就是刚刚下载的SpeechRecognition文件的路径</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200131212238858.png" alt="在这里插入图片描述"><br>再次打开我们的jupyter 就可以看到可以引入我们刚刚下载的SpeechRecognition函数库:<br><img src="https://img-blog.csdnimg.cn/20200131212709121.png" alt="在这里插入图片描述"></p>
+<h1 id="2-思考"><a href="#2-思考" class="headerlink" title="2.思考"></a>2.思考</h1><p>鉴于上边问题的问题及解决方案，我们大可以将此方法拓展至所有的python包的安装，有时候我们的网络或许会因为这样那样的原因，导致下载某些包的文件不是那么顺畅，于是皆可采用此方法来安装。</p>
+
+          
+        
+      
+    </div>
+	<div>
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2020/01/03/Github%E5%BF%AB%E9%80%9F%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1916,163 +2058,6 @@ g(h_i|\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(h_i-\mu)^2}{2\sigma^2}}<
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/25/Python%E5%B0%86txt%E6%96%87%E6%9C%AC%E5%AD%98%E5%85%A5MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kingback">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/isme.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王延凯的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/25/Python%E5%B0%86txt%E6%96%87%E6%9C%AC%E5%AD%98%E5%85%A5MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url">Python将txt文本存入Mysql数据库</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-25T17:12:00+08:00">
-                2019-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/11/25/Python%E5%B0%86txt%E6%96%87%E6%9C%AC%E5%AD%98%E5%85%A5MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/25/Python%E5%B0%86txt%E6%96%87%E6%9C%AC%E5%AD%98%E5%85%A5MYSQL%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-创建表格"><a href="#1-创建表格" class="headerlink" title="1.创建表格"></a>1.创建表格</h1><p>对于mysql数据表格的创建，我使用的使navicat(一个小型化的数据库可视化操作软件)。<br><img src="https://img-blog.csdnimg.cn/20190831133321945.png#pic_center" alt="在这里插入图片描述"><br>根据要存入的txt格式，我定义新建表格的字段名称，如下所示：<br><img src="https://img-blog.csdnimg.cn/20190831133244810.png#pic_center" alt="在这里插入图片描述"></p>
-<h1 id="2-书写python程序将txt文本存入MYSQL数据库"><a href="#2-书写python程序将txt文本存入MYSQL数据库" class="headerlink" title="2.书写python程序将txt文本存入MYSQL数据库"></a>2.书写python程序将txt文本存入MYSQL数据库</h1><p>创建好表格后，就是调用python程序对txt文件的存取工作了：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#该文件主要实现将txt文件传入mysql数据库</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">#变量初始化</span><br><span class="line">con=pymysql.connect(</span><br><span class="line">    host=<span class="string">'localhost'</span>,</span><br><span class="line">    port=<span class="number">3306</span>,</span><br><span class="line">    user=<span class="string">'root'</span>,</span><br><span class="line">    passwd=<span class="string">'123456'</span>,</span><br><span class="line">    db=<span class="string">'test'</span>,</span><br><span class="line">    charset=<span class="string">'utf8'</span>,</span><br><span class="line">    )</span><br><span class="line">def insert(con,English,Chinese):</span><br><span class="line">    #数据库游标！</span><br><span class="line">    cue = con.cursor()</span><br><span class="line">    # print("mysql connect succes")  # 测试语句，这在程序执行时非常有效的理解程序是否执行到这一步</span><br><span class="line">    #try-except捕获执行异常</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cue.execute(</span><br><span class="line">            <span class="string">"insert into words (English,Chinese) values(%s,%s)"</span>,</span><br><span class="line">            [English,Chinese,])</span><br><span class="line">        #执行sql语句</span><br><span class="line">        # print("insert success")  # 测试语句</span><br><span class="line">    except Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">'Insert error:'</span>, e)</span><br><span class="line">        con.rollback()</span><br><span class="line">        #报错反馈</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        con.commit()</span><br><span class="line">        #真正的执行语句</span><br><span class="line">def read():</span><br><span class="line">    filename=r<span class="string">'C:\Users\kingback\Desktop\龙华老师资料\上交资料\第六次上交材料\words.txt'</span></span><br><span class="line">    #按行读取txt文本文档</span><br><span class="line">    <span class="keyword">with</span> open(filename, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        datas = f.readlines()</span><br><span class="line">    #遍历文件</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> datas:</span><br><span class="line">        txt=re.split(r<span class="string">'\t|\n'</span>,data)</span><br><span class="line">        english=txt[<span class="number">0</span>]</span><br><span class="line">        chinese=txt[<span class="number">1</span>]</span><br><span class="line">        insert(con, english, chinese)</span><br><span class="line">        #调用insert方法</span><br><span class="line">    print(<span class="string">"数据插入完成！"</span>)</span><br><span class="line">read()</span><br><span class="line">#执行read函数</span><br><span class="line">con.close()</span><br><span class="line">#关闭连接</span><br></pre></td></tr></table></figure></p>
-<h1 id="3-运行结果"><a href="#3-运行结果" class="headerlink" title="3.运行结果"></a>3.运行结果</h1><p>$\qquad$当程序执行完成之后，则会提示数据插入成功：<br><img src="https://img-blog.csdnimg.cn/20190831133811638.png#pic_center" alt="在这里插入图片描述"><br>$\qquad$当我们再次查询刚刚新建的表格的时候，我们会发现，表格内已经存入了我们需要的内容，其结果如下所示：<br><img src="https://img-blog.csdnimg.cn/20190831133742839.png#pic_center" alt="在这里插入图片描述"></p>
-
-          
-        
-      
-    </div>
-	<div>
-		
-	</div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2127,7 +2112,7 @@ g(h_i|\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(h_i-\mu)^2}{2\sigma^2}}<
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

@@ -274,6 +274,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%902%E3%80%91%E5%BC%B9--%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%88DTFT%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kingback">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/isme.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王延凯的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%902%E3%80%91%E5%BC%B9--%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%88DTFT%EF%BC%89/" itemprop="url">数字信号处理matlab训练第【2】弹</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-19T11:57:14+08:00">
+                2019-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">数字信号处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%902%E3%80%91%E5%BC%B9--%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%88DTFT%EF%BC%89/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%902%E3%80%91%E5%BC%B9--%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%88DTFT%EF%BC%89/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-实验要求"><a href="#1-实验要求" class="headerlink" title="1.实验要求"></a>1.实验要求</h1><p>已知函数$x(t)=sinc(t)，-2\pi \leq t \leq2\pi$,求其时域抽样函数$x(n)$,并且画出$x(n)$的离散时间序列的傅里叶变换(DTFT)下的幅频响应和相频响应。最后根据所画图形，得出结论。</p>
+<h1 id="2-实现原理"><a href="#2-实现原理" class="headerlink" title="2.实现原理"></a>2.实现原理</h1><p>根据离散序列的傅里叶变换公式：</p>
+<script type="math/tex; mode=display">
+X(e^{j\omega})=\sum_{n=-\infty}^{\infty}x(n)e^{-j\omega n}</script><p>其中$\omega \in[-2\pi,2\pi]$,并以$\pi/100$作为取样间隔。</p>
+<h1 id="3-matlab实现"><a href="#3-matlab实现" class="headerlink" title="3.matlab实现"></a>3.matlab实现</h1><p>我们依据对上边的式子的理解，使用matlab来编写，首先我们先画出该函数的原始图像，第二个图显示的是其抽样图像，第三个第四个分别为其DTFT变换后的幅频特性图和相频特性图。<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%%开始实现离散时间序列DTFT，以sinc函数为例。</span></span><br><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line"><span class="comment">%清除指令和变量</span></span><br><span class="line">set(gcf,<span class="string">'position'</span>,[<span class="number">180</span>,<span class="number">160</span>,<span class="number">900</span>,<span class="number">550</span>]);</span><br><span class="line"><span class="comment">%设置图片显示位置为（180，160）</span></span><br><span class="line"><span class="comment">%设置图片大小为（900，550）</span></span><br><span class="line">subplot(<span class="number">221</span>)</span><br><span class="line">N1=<span class="number">200</span>;</span><br><span class="line">step=<span class="number">4</span>*<span class="built_in">pi</span>/N1;</span><br><span class="line">t=<span class="number">-2</span>*<span class="built_in">pi</span>:step:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line"><span class="comment">%对t在-2pi到2pi之间平分为100份</span></span><br><span class="line">y=sinc(t);</span><br><span class="line"><span class="built_in">plot</span>(t,y)</span><br><span class="line"><span class="comment">%定义函数并且画出sinc函数</span></span><br><span class="line">grid on;</span><br><span class="line"><span class="comment">%显示表格</span></span><br><span class="line">title(<span class="string">'sinc(t)在-2\pi到2\pi之间的图像'</span>);</span><br><span class="line">xlabel(<span class="string">'t'</span>);</span><br><span class="line">ylabel(<span class="string">'y(t)'</span>);</span><br><span class="line">axis([<span class="number">-7</span> <span class="number">7</span> <span class="number">-0.3</span> <span class="number">1.2</span>])</span><br><span class="line"><span class="comment">%设置横纵坐标轴</span></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">222</span>)</span><br><span class="line">ts=<span class="number">0.1</span>;<span class="comment">%取样时间</span></span><br><span class="line">fs=<span class="number">1</span>/ts;<span class="comment">%周期</span></span><br><span class="line">N2=<span class="number">31</span>;<span class="comment">%取样总数</span></span><br><span class="line">n=<span class="number">-15</span>:<span class="number">15</span>;</span><br><span class="line">xn=sinc(<span class="number">4</span>*<span class="built_in">pi</span>*n/N2);<span class="comment">%取离散信号数据</span></span><br><span class="line">stem(n,xn,<span class="string">'filled'</span>,<span class="string">'r'</span>);<span class="comment">%绘制时域取样图</span></span><br><span class="line">grid on;</span><br><span class="line"><span class="comment">%显示方格</span></span><br><span class="line">title(<span class="string">'sinc(t)在-2\pi到2\pi之间的抽样'</span>);</span><br><span class="line">xlabel(<span class="string">'n'</span>);</span><br><span class="line">ylabel(<span class="string">'sinc(n)'</span>);</span><br><span class="line">axis([<span class="number">-16</span> <span class="number">16</span> <span class="number">-0.4</span> <span class="number">1.5</span>])</span><br><span class="line"><span class="comment">%设置横纵坐标轴</span></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">223</span>)</span><br><span class="line">k=<span class="number">-200</span>:<span class="number">200</span>;</span><br><span class="line">w=(<span class="built_in">pi</span>/<span class="number">100</span>)*k;<span class="comment">%其原始式子为w=(4*pi)*k/400</span></span><br><span class="line"><span class="comment">%将w针对不同的k的取值，区间变为[-2*pi,2*pi]</span></span><br><span class="line">wn=<span class="built_in">exp</span>(-<span class="built_in">j</span>*<span class="built_in">pi</span>/<span class="number">100</span>);</span><br><span class="line"><span class="comment">%得到公式中的 e的-j*omiga, 该量是个常数</span></span><br><span class="line">nk=n'*k;</span><br><span class="line"><span class="comment">%n的转置与k相乘</span></span><br><span class="line"><span class="comment">%nk为取样矩阵，相当于先是循环n次再是循环k次得到</span></span><br><span class="line">xk=wn.^nk;</span><br><span class="line"><span class="comment">%得到公式中的复变量e的-j*omiga*n</span></span><br><span class="line">X=xn*xk;</span><br><span class="line"><span class="comment">%得到离散序列的傅里叶变换</span></span><br><span class="line">magX=<span class="built_in">abs</span>(X);</span><br><span class="line"><span class="comment">%求取该DTFT的模，其作用相当于|X|</span></span><br><span class="line"><span class="built_in">plot</span>(w,magX,<span class="string">'g'</span>)</span><br><span class="line"><span class="comment">%在频率[-2pi,2pi]范围内画出幅频响应</span></span><br><span class="line">axis([<span class="number">-2</span>*<span class="built_in">pi</span> <span class="number">2</span>*<span class="built_in">pi</span> <span class="number">0</span> <span class="number">3</span>])</span><br><span class="line">title(<span class="string">'幅频特性'</span>);</span><br><span class="line">xlabel(<span class="string">'w/圆周频率'</span>);</span><br><span class="line">ylabel(<span class="string">'|X|'</span>);</span><br><span class="line"><span class="comment">%设置横纵坐标轴</span></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">224</span>)</span><br><span class="line">angX=<span class="built_in">angle</span>(X);</span><br><span class="line"><span class="comment">%求取该DTFT的相位</span></span><br><span class="line"><span class="built_in">plot</span>(w,angX)</span><br><span class="line"><span class="comment">%在频率[-2pi,2pi]范围内画出相频响应</span></span><br><span class="line">title(<span class="string">'相频特性'</span>);</span><br><span class="line">xlabel(<span class="string">'w/圆周频率'</span>);</span><br><span class="line">ylabel(<span class="string">'相位'</span>);</span><br><span class="line">axis([<span class="number">-2</span>*<span class="built_in">pi</span> <span class="number">2</span>*<span class="built_in">pi</span> <span class="number">-4</span> <span class="number">4</span>])</span><br><span class="line"><span class="comment">%设置横纵坐标轴</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="4-结果显示"><a href="#4-结果显示" class="headerlink" title="4.结果显示"></a>4.结果显示</h1><p><img src="https://img-blog.csdnimg.cn/201910061609077.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="5-小结"><a href="#5-小结" class="headerlink" title="5.小结"></a>5.小结</h1><p>通过上边显示的图片我们可以看到并总结出如下结论。<br><strong>1.$X(e^{j\omega})$不仅是$\omega$的周期函数，而且是共轭对称的，因此对于实值序列，我们只画出其$[0,2\pi]$,画出其傅里叶变换的幅度和相位即可。<br>2.$x(n)$为在时域方面是离散的非周期信号，而通过DTFT变换之后，在频域方面是连续周期的。</strong></p>
+<h1 id="6-参考文章"><a href="#6-参考文章" class="headerlink" title="6.参考文章"></a>6.参考文章</h1><blockquote>
+<p>傅里叶变换matlab实现： <a href="https://blog.csdn.net/seek97/article/details/82813515" target="_blank" rel="noopener">https://blog.csdn.net/seek97/article/details/82813515</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+	<div>
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/19/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86matlab%E8%AE%AD%E7%BB%83%E7%AC%AC%E3%80%901%E3%80%91%E5%BC%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1980,162 +2144,6 @@ i=1，2，3，...,301 \quad; \quad j=1,2,3...,13</script><p>按照上边的公�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kingback2019.github.io/2019/11/18/IDM%E7%9A%84%E5%AE%89%E8%A3%85%20(1)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kingback">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/isme.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王延凯的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/18/IDM%E7%9A%84%E5%AE%89%E8%A3%85%20(1)/" itemprop="url">IDM的安装</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-18T21:13:46+08:00">
-                2019-11-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/" itemprop="url" rel="index">
-                    <span itemprop="name">工具类</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/11/18/IDM%E7%9A%84%E5%AE%89%E8%A3%85%20(1)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/18/IDM%E7%9A%84%E5%AE%89%E8%A3%85%20(1)/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-下载IDM并且安装"><a href="#1-下载IDM并且安装" class="headerlink" title="1.下载IDM并且安装"></a>1.下载IDM并且安装</h1><p><a href="https://pan.baidu.com/s/137pe08DLglCUqnZ0e0TTzA" target="_blank" rel="noopener">网盘链接：</a><br>链接：<a href="https://pan.baidu.com/s/137pe08DLglCUqnZ0e0TTzA" target="_blank" rel="noopener">https://pan.baidu.com/s/137pe08DLglCUqnZ0e0TTzA</a><br>提取码：zwm8<br>1.运行该文件，并且进行安装<br><img src="https://img-blog.csdnimg.cn/20191028194014891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2.安装完成之后，进入标中的文件夹<br>运行该文件<br><img src="https://img-blog.csdnimg.cn/20191028194141729.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>运行注册机<br><img src="https://img-blog.csdnimg.cn/20191028194226862.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择是<br><img src="https://img-blog.csdnimg.cn/20191028194257996.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后找到刚刚idm安装的那个路径，我的是安装在 下<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Internet Download Manager</span><br></pre></td></tr></table></figure><br>然后选择IDMan.exe,之后会提示你输入一个first name 和Last name ，那里随便输入几个字母就可以了。之后即可完成激活<br><img src="https://img-blog.csdnimg.cn/20191028194358483.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQ2ODA3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="2-chrome浏览器安装IDM-Integration-Module"><a href="#2-chrome浏览器安装IDM-Integration-Module" class="headerlink" title="2.chrome浏览器安装IDM Integration Module"></a>2.chrome浏览器安装IDM Integration Module</h1><p>其链接地址<br><a href="https://pan.baidu.com/s/17pLGOBHcUoPrzvVuv0Xb-g" target="_blank" rel="noopener">地址：</a><br>链接：<a href="https://pan.baidu.com/s/17pLGOBHcUoPrzvVuv0Xb-g" target="_blank" rel="noopener">https://pan.baidu.com/s/17pLGOBHcUoPrzvVuv0Xb-g</a><br>提取码：g4gh<br>之后将其拖入Chrome的扩展程序中即可。<br>好了，到了这里IDM以及部署完毕辣。尽情享受吧。</p>
-
-          
-        
-      
-    </div>
-	<div>
-		
-	</div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2190,7 +2198,7 @@ i=1，2，3，...,301 \quad; \quad j=1,2,3...,13</script><p>按照上边的公�
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
